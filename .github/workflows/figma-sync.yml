@@ -31,7 +31,7 @@ jobs:
       - name: Create Pull Request if Changes Detected
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
           commit-message: "chore(design-system): sync updated tokens from Figma"
           branch: figma-sync/daily-update
           title: "🎨 Figma Design System Sync Update"
