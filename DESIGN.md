@@ -125,3 +125,25 @@ All components intended for Webflow Custom Code Embeds must follow these rules:
    - Use semantic landmarks (`role="region"`, `aria-label`).
    - Real interactive elements (`<button>`, `<a>`) with visible focus outlines (`--capte-border-focus`).
    - Motion safety: Disable transitions under `@media (prefers-reduced-motion: reduce)`.
+
+---
+
+## 5. Bidirectional Synchronization Protocol (Figma ⟷ Webflow via GitHub)
+
+All AI agents and designers must maintain 1:1 synchronization between Figma and Webflow using GitHub as the central hub:
+
+### A. Forward Pipeline (Figma → GitHub → Webflow)
+- **Token Source**: Figma Design System (`oFZw7IVtiURZG2x5XhAKyD`).
+- **Automated Token Extraction**: Daily GitHub Actions workflow (`.github/workflows/figma-sync.yml`) runs daily at 9:00 AM UTC and creates a PR on `figma-sync/daily-update`.
+- **Token Distribution**: Updates `design-system/tokens.json` and `design-system/tokens.css`.
+- **Embed Authoring**: Web components consume token variables and are deployed to Webflow embeds.
+
+### B. Reverse Pipeline ("Web Ahead of Design" Protocol: Webflow → GitHub → Figma)
+When custom engineering in Webflow outpaces visual design in Figma:
+1. **Capture & Standardize**: Write the component into `components/<component-name>/<component-name>.html` with Client-First classes and token variables.
+2. **Author `FIGMA_SPEC.md`**: Create `components/<component-name>/FIGMA_SPEC.md` detailing the exact:
+   - Component Properties & Variant Matrix (`Device`, `State`, Boolean toggles).
+   - 1:1 Variable Bindings (Colors, Spacing, Radii, Shadows).
+   - Auto Layout Frame Hierarchy (Padding, gaps, sizing modes, absolute overlays).
+3. **Provide 1-Click Figma Console Snippet**: Generate a self-contained JavaScript snippet using the Figma Plugin API (`figma.createComponent()`, `figma.createFrame()`) so designers can paste into Figma Console (`Cmd+Option+I`) and instantiate the component on canvas instantly.
+4. **Backport to Figma**: Merge into `Capte — Design System` components library to maintain complete zero-drift parity.

@@ -28,7 +28,46 @@ Authority is strictly scoped to domain functions. Timestamp recency does not aut
 
 ---
 
-## 3. Brand Tokens & Design System Baseline
+## 3. Bidirectional System Architecture: Figma ⟷ GitHub ⟷ Webflow
+
+GitHub is our central single source of truth connecting visual design in Figma to live production in Webflow.
+
+```text
+       ┌────────────────────────┐
+       │   Figma Design System  │ (File: oFZw7IVtiURZG2x5XhAKyD)
+       └──────────┬───▲─────────┘
+   1. Daily Token │   │ 4. Reverse Backport
+   Sync via CI/CD │   │    (FIGMA_SPEC.md + JS Snippet)
+                  ▼   │
+       ┌──────────┴───┴─────────┐
+       │  GitHub Repository     │ (Single Source of Truth)
+       │  - design-system/      │   - tokens.json & tokens.css
+       │  - components/<name>/  │   - .html, README, FIGMA_SPEC, CHANGELOG
+       └──────────┬───▲─────────┘
+  2. Reviewed PR  │   │ 3. Extract & Codify
+  & Embed Deploy  │   │    ("Web Ahead of Design")
+                  ▼   │
+       ┌──────────┴───┴─────────┐
+       │   Webflow Production   │ (capte.co / Custom Embeds)
+       └────────────────────────┘
+```
+
+### A. Forward Flow (Design → GitHub → Webflow)
+1. **Figma Authoring**: Visual tokens (colors, spacing, radii) and UI components are authored in Figma.
+2. **Automated CI/CD Sync**: Daily GitHub Actions workflow (`.github/workflows/figma-sync.yml`) queries the Figma REST API, parses variables into `design-system/tokens.json` & `design-system/tokens.css`, and opens a PR (`figma-sync/daily-update`).
+3. **Embed Engineering**: Codebase components in `components/<name>/` consume token CSS variables (`var(--capte-...)`) and follow Client-First structure.
+4. **Webflow Deployment**: Reviewed and approved `.html` files are pasted into Webflow custom code embeds and published.
+
+### B. Reverse Flow (Webflow → GitHub → Figma: "Web Ahead of Design")
+When web implementation or custom code gets ahead of Figma:
+1. **Capture & Standardize**: Extract the component into `components/<name>/<name>.html`, converting all styles to Client-First classes and 1:1 `var(--capte-...)` design tokens.
+2. **Generate Figma Specification**: Author `components/<name>/FIGMA_SPEC.md` containing the complete Auto Layout hierarchy, padding, sizing modes, variant matrix, and variable bindings.
+3. **Figma Canvas Generation**: Provide a 1-click JavaScript snippet for the Figma Developer Console (`Cmd+Option+I`) to automatically construct the component on the Figma canvas.
+4. **Design System Integration**: Backport the generated component into `Capte — Design System` (`oFZw7IVtiURZG2x5XhAKyD`), achieving 1:1 parity with zero design drift.
+
+---
+
+## 4. Brand Tokens & Design System Baseline
 
 The full codified design system with 217 variables is housed in **[`design-system/`](design-system/README.md)** (CSS custom properties in [`design-system/tokens.css`](design-system/tokens.css) and JSON in [`design-system/tokens.json`](design-system/tokens.json)).
 
@@ -49,7 +88,7 @@ Key baseline highlights:
 
 ---
 
-## 4. Web Component Architecture Standards
+## 5. Web Component Architecture Standards
 
 Every component built for Webflow embeds must adhere to these standards:
 
@@ -61,7 +100,7 @@ Every component built for Webflow embeds must adhere to these standards:
 
 ---
 
-## 5. Repository Structure & Versioning Conventions
+## 6. Repository Structure & Versioning Conventions
 
 ```text
 web-components/
@@ -77,6 +116,7 @@ web-components/
     └── <component-name>/
         ├── <component-name>.html  # Production Webflow embed code
         ├── README.md              # Component documentation & QA checklist
+        ├── FIGMA_SPEC.md          # 1:1 Auto Layout & variable specification
         ├── CHANGELOG.md           # Mechanism versioning (SemVer)
         └── campaigns.md           # (Optional) Ledger of live campaign launches
 ```

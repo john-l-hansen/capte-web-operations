@@ -101,6 +101,7 @@ Every component adheres to five architectural pillars:
    Create `components/<component-name>/` with:
    - `<component-name>.html`
    - `README.md` (purpose, config schema, QA checklist)
+   - `FIGMA_SPEC.md` (1:1 Auto Layout and variable binding spec)
    - `CHANGELOG.md` (mechanism version history)
    - `campaigns.md` (launch ledger, if reusable/campaign-driven)
 2. **Implement & QA Locally**:
@@ -122,6 +123,13 @@ Every component adheres to five architectural pillars:
      ```
    - Add a row to `components/<component-name>/campaigns.md` detailing the live config, publish timestamp, and author.
 
+### 2.4 The Reverse Sync Lifecycle ("Web Ahead of Design")
+When live web development gets ahead of Figma visual designs:
+1. **Deconstruct Live Embed**: Analyze the live component DOM and CSS, stripping arbitrary values and remapping them to design system variables (`var(--capte-...)`).
+2. **Codify in Repo**: Package the standard `.html` embed and write `components/<name>/FIGMA_SPEC.md` defining Auto Layout directions, paddings, sizing modes, and variant properties.
+3. **Automate Figma Canvas Assembly**: Write an executable Figma Plugin API JavaScript snippet for the Figma Developer Console (`Cmd+Option+I`) to generate the component on the Figma canvas.
+4. **Commit & Close Loop**: Push `FIGMA_SPEC.md` to GitHub and backport the generated node into `Capte — Design System` (`oFZw7IVtiURZG2x5XhAKyD`).
+
 ---
 
 ## Part 3: Governance & Multi-Agent Adapters
@@ -131,3 +139,4 @@ Every component adheres to five architectural pillars:
 - **Adapters**:
   - `CLAUDE.md`: Thin entry point for Claude.
   - `.agent/rules/shared-contract.md`: Workspace rule for Antigravity.
+  - `.agents/rules/shared-contract.md`: Alternative path symlink.
