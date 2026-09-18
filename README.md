@@ -89,3 +89,13 @@ components/
 - **[docs/agent-workflow.md](docs/agent-workflow.md)** — Multi-agent operating model, startup/handoff protocols, and conflict resolution.
 - **[CLAUDE.md](CLAUDE.md)** — Adapter for Claude projects.
 - **[.agent/rules/shared-contract.md](.agent/rules/shared-contract.md)** — Adapter for Antigravity workspace rules.
+
+---
+
+## 📬 Reporting Issues & Support
+
+For bug reports, design token discrepancies, security flags, or technical inquiries regarding Capte's web components and design system integrations:
+
+- **Lead Contact & Authority**: **John Hansen** ([john@capte.co](mailto:john@capte.co))
+- **Issue Tracking**: Submit a [GitHub Issue](https://github.com/john-l-hansen/capte-web-operations/issues) or Pull Request for code/token revisions.
+

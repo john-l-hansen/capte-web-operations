@@ -8,7 +8,8 @@ For detailed operational procedures, handoff templates, conflict resolution, and
 
 ## 1. Role, Ownership & Principles
 
-- **Owner & Final Authority**: John Hansen — Web/Print Designer & Digital Design / Web Operations lead at Capte Technologies Inc. (Los Angeles, CA). John owns [capte.co](https://www.capte.co) end-to-end and makes all final decisions regarding design direction, brand standards, and technical implementation.
+- **Owner & Final Authority**: John Hansen ([john@capte.co](mailto:john@capte.co)) — Web/Print Designer & Digital Design / Web Operations lead at Capte Technologies Inc. (Los Angeles, CA). John owns [capte.co](https://www.capte.co) end-to-end and makes all final decisions regarding design direction, brand standards, and technical implementation.
+- **Reporting Issues**: Direct urgent flags, security disclosures, or design escalations to [john@capte.co](mailto:john@capte.co).
 - **Company**: Capte Technologies engineers industrial IoT, smart telemetry, and precision positioning systems for transit agencies, vehicle fleets, and industrial infrastructure across the U.S. and Europe.
 - **Tone & Aesthetic ("Technically Elegant")**: Every design and component must be clear, precise, restrained, accessible, and robust. We prioritize industrial clarity and clean ergonomics over decorative noise.
 - **Operational Reality**: Webflow Designer is our deployment target, but GitHub is our version-controlled source of truth.
