@@ -1,6 +1,10 @@
 {
-  "name": "capte-web-operations",
-  "components": [
-    "components/**/*.webflow.tsx"
-  ]
+  "library": {
+    "id": "capte-web-operations",
+    "name": "Capte Web Operations",
+    "description": "Capte Technologies — Webflow Code Components & Design System",
+    "components": [
+      "components/**/*.webflow.tsx"
+    ]
+  }
 }

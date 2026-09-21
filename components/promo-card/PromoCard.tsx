@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './PromoCard.module.css';
+import * as styles from './PromoCard.module.css';
 
 export interface PromoCardProps {
   campaignId: string;
@@ -10,7 +10,7 @@ export interface PromoCardProps {
   heading: string;
   description?: string;
   ctaLabel: string;
-  ctaLink?: { type: string; url: string };
+  ctaLink?: { href: string; target?: string; preload?: string };
   showMedia?: boolean;
   mediaImage?: { src: string; alt?: string };
 }
@@ -24,7 +24,7 @@ export const PromoCard: React.FC<PromoCardProps> = ({
   heading = 'Join Capte at APTA Expo 2026',
   description = 'Connect with our team October 5-7, 2026 to see advanced transit positioning & IoT in action.',
   ctaLabel = 'Request a meeting',
-  ctaLink = { type: 'url', url: '/events/apta-expo-2026' },
+  ctaLink = { href: '/events/apta-expo-2026' },
   showMedia = false,
   mediaImage,
 }) => {
@@ -136,7 +136,7 @@ export const PromoCard: React.FC<PromoCardProps> = ({
         {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
         {heading && <h4 className={styles.heading}>{heading}</h4>}
         {description && <p className={styles.description}>{description}</p>}
-        <a className={styles.cta} href={ctaLink?.url || '#'}>
+        <a className={styles.cta} href={ctaLink?.href || '/events/apta-expo-2026'} target={ctaLink?.target || '_self'}>
           <span>{ctaLabel}</span>
           <svg className={styles.ctaIcon} width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
             <path

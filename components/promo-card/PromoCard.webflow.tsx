@@ -10,22 +10,22 @@ export default declareComponent(PromoCard, {
     // 1. Campaign Identity & Geo-gating
     campaignId: props.Text({
       name: 'Campaign ID',
-      description: 'Unique identifier for dismissal memory in sessionStorage',
+      tooltip: 'Unique identifier for dismissal memory in sessionStorage',
       defaultValue: 'apta-2026-transform-expo',
     }),
     countries: props.Text({
       name: 'Eligible Countries (ISO-2)',
-      description: 'Comma-separated ISO country codes (e.g. US, CA, GB)',
+      tooltip: 'Comma-separated ISO country codes (e.g. US, CA, GB)',
       defaultValue: 'US, CA',
     }),
     startISO: props.Text({
       name: 'Start Date (UTC ISO)',
-      description: 'Campaign start timestamp in UTC (e.g. 2026-09-21T05:00:00Z)',
+      tooltip: 'Campaign start timestamp in UTC (e.g. 2026-09-21T05:00:00Z)',
       defaultValue: '2026-09-21T05:00:00Z',
     }),
     endISO: props.Text({
       name: 'End Date (UTC ISO)',
-      description: 'Campaign end timestamp in UTC (e.g. 2026-10-09T04:59:59Z)',
+      tooltip: 'Campaign end timestamp in UTC (e.g. 2026-10-09T04:59:59Z)',
       defaultValue: '2026-10-09T04:59:59Z',
     }),
 
@@ -50,10 +50,7 @@ export default declareComponent(PromoCard, {
     }),
     ctaLink: props.Link({
       name: 'CTA Destination Link',
-      defaultValue: {
-        type: 'url',
-        url: '/events/apta-expo-2026',
-      },
+      tooltip: 'Link target for the primary action button',
     }),
 
     // 4. Media Options

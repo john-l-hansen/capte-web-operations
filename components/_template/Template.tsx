@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Template.module.css';
+import * as styles from './Template.module.css';
 
 export interface TemplateProps {
   title?: string;

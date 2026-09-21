@@ -4,20 +4,22 @@
   "description": "Capte Technologies — Webflow Code Components, Design System & Multi-Agent Operations",
   "private": true,
   "scripts": {
-    "webflow:dev": "webflow code-components dev",
-    "webflow:bundle": "webflow code-components bundle",
-    "webflow:push": "webflow code-components push",
+    "webflow:dev": "webflow devlink bundle --dev",
+    "webflow:bundle": "webflow devlink bundle",
+    "webflow:push": "webflow devlink import",
+    "webflow:import": "webflow devlink import",
     "figma:sync": "node scripts/figma-sync.js"
   },
   "dependencies": {
-    "@webflow/data-types": "^1.0.0",
-    "@webflow/react": "^1.0.0",
+    "@webflow/data-types": "^2.4.0",
+    "@webflow/react": "^2.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@webflow/webflow-cli": "^2.8.0",
     "typescript": "^5.6.3"
   },
   "repository": {
