@@ -315,22 +315,26 @@
   var CONFIG = {
     // Unique per campaign. Changing this is what makes a new campaign show
     // again for someone who dismissed a previous one.
-    id: "example-campaign-2026",
+    id: "apta-2026-transform-expo",
 
     // ISO 3166-1 alpha-2 country codes eligible to see the card.
     countries: ["US", "CA"],
 
     // Campaign window, in UTC ("Z") to sidestep daylight-saving edge cases.
-    // Comment the local-time equivalent so the team can sanity-check it.
-    startISO: "2026-10-01T00:00:00Z", // e.g. 2026-09-30 8:00 PM ET
-    endISO: "2026-10-15T03:59:59Z",   // e.g. 2026-10-14 11:59 PM ET
+    // Event is Oct 5-7, 2026, Chicago (America/Chicago = CDT, UTC-5 on these
+    // dates). Window = ~2 weeks lead before the event starts, through the
+    // day after it ends, per John's spec (2026-09-21).
+    startISO: "2026-09-21T05:00:00Z", // 2026-09-21 12:00 AM CDT (2 weeks before Oct 5)
+    endISO: "2026-10-09T04:59:59Z",   // 2026-10-08 11:59 PM CDT (day after Oct 7 end)
 
-    href: "https://capte.co/register",
+    // Capte's own event page (a "request a meeting" form, not the
+    // external APTA registration site) — confirmed 2026-09-21.
+    href: "/events/apta-expo-2026",
 
-    eyebrow: "Live event",
-    heading: "Join us at [Event name]",
-    description: "Register now for [event name] — sessions fill up fast.",
-    ctaLabel: "Register",
+    eyebrow: "Live Event",
+    heading: "Join Capte at APTA Expo 2026",
+    description: "Connect with our team October 5-7, 2026 to see advanced transit positioning & IoT in action.",
+    ctaLabel: "Request a meeting",
 
     // Optional. Leave imageSrc empty to hide the media slot entirely.
     imageSrc: "",
