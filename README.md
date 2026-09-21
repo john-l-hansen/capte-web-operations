@@ -1,8 +1,8 @@
-# capte-web-components
+# capte-web-operations
 
-Reusable custom-code web components for [capte.co](https://www.capte.co), engineered for Webflow Custom Code Embeds.
+Webflow Code Components, custom embeds, codified design tokens, and multi-agent design engineering for [capte.co](https://www.capte.co).
 
-This repository serves as the **source of truth, version control, and multi-agent development environment** for all custom embeds powering Capte's digital presence.
+This repository serves as the **central source of truth, version control, and multi-agent development environment** connecting Figma design tokens directly to Webflow Designer and production runtime.
 
 ---
 
