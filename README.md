@@ -31,11 +31,12 @@ For full operating procedures, startup protocols, and handoff templates, see [do
 ## 🧩 2. The Components — Why & How
 
 ### Why our components are built this way
-Every component is built for frictionless deployment into Webflow:
-- **Zero-Dependency Vanilla Code**: Single-file `.html` containing semantic HTML, encapsulated CSS, and vanilla JS.
-- **Strict CSS Scoping**: Component styles (`.promo-card`, `--promo-*`) are strictly namespaced to prevent collisions with Webflow base styles.
+Every component is engineered with **Dual-Delivery Webflow Compatibility**:
+- **Visual Webflow Code Components**: Written in TypeScript + React (`@webflow/react` + `@webflow/data-types`) with visual properties (inputs, toggles, link pickers, asset uploaders) so designers can edit campaign properties directly in the Webflow Designer panel.
+- **Zero-Dependency Vanilla Code**: Self-contained `.html` embed payloads for instant copy-pasting into Webflow Custom Code Embed elements.
+- **Strict CSS Scoping**: Component styles (`.promo-card`, `--promo-*`) are strictly namespaced with 1:1 Figma design tokens (`var(--capte-...)`).
 - **Fail-Closed Robustness**: Components fail gracefully (stay hidden) if network services or geo-lookups are unavailable.
-- **Cloudflare Geo-Targeting**: Uses same-origin `/cdn-cgi/trace` on production `capte.co` (no third-party API keys or device GPS prompts) with a `?promoDebug=1` query parameter for staging QA.
+- **Cloudflare Geo-Targeting**: Uses same-origin `/cdn-cgi/trace` on production `capte.co` (no third-party API keys or device GPS prompts) with `?promoDebug=1` and `?promoCountry=<code>` query parameters for staging QA.
 - **Accessibility & Motion**: Full keyboard navigation, visible focus states, ARIA landmarks, and `prefers-reduced-motion` compliance.
 
 ### Component Structure
@@ -44,23 +45,27 @@ Each component is organized inside its own directory under `components/`:
 ```
 components/
   <component-name>/
-    ├── <component-name>.html   → Self-contained embed code (HTML + scoped CSS + JS)
-    ├── README.md               → Architecture, configuration schema, and QA checklist
-    ├── CHANGELOG.md             → Semantic version history for mechanism changes
-    └── campaigns.md            → (Optional) Ledger of live campaign launches & configs
+    ├── <ComponentName>.tsx          → React component implementation
+    ├── <ComponentName>.webflow.tsx  → Webflow Designer property definitions (declareComponent)
+    ├── <ComponentName>.module.css   → Scoped CSS with design tokens
+    ├── <component-name>.html        → Self-contained vanilla embed payload
+    ├── README.md                    → Architecture, configuration schema, and QA checklist
+    ├── FIGMA_SPEC.md                → 1:1 Auto Layout and variable binding spec
+    ├── CHANGELOG.md                 → Semantic version history for mechanism changes
+    └── campaigns.md                 → (Optional) Ledger of live campaign launches & configs
 ```
 
 ### Component Workflow
 
-1. **Build & Update**: Develop the component in `components/<component-name>/<component-name>.html`.
-2. **Mechanism Changes**: Commit code updates with conventional commits and bump the component's `CHANGELOG.md`.
-3. **Campaign Configuration Launches**: For config-driven components (like `promo-card`), update the `CONFIG` block, deploy to Webflow, tag the release:
+1. **Build & Update**: Develop the component with React/TypeScript (`<ComponentName>.tsx`) and expose visual properties (`<ComponentName>.webflow.tsx`).
+2. **Visual Webflow Push**: Run `npx webflow code-components push` to sync to the Webflow Designer workspace.
+3. **Embed Alternative**: Alternatively, paste the self-contained `<component-name>.html` directly into a Webflow Custom Code Embed.
+4. **Campaign Configuration Launches**: Tag releases upon publication:
    ```bash
    git tag <component-name>-<campaign-id>
    git push origin --tags
    ```
    and record the deployment row in that component's `campaigns.md`.
-4. **Deploy**: Paste the tested `.html` file into the targeted Webflow Embed element.
 
 ---
 

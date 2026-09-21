@@ -1,0 +1,6 @@
+{
+  "name": "capte-web-operations",
+  "components": [
+    "components/**/*.webflow.tsx"
+  ]
+}

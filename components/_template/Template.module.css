@@ -1,0 +1,25 @@
+/* ---------------------------------------------------------------------
+   Capte Component Template — Code Component Scoped Styles
+   --------------------------------------------------------------------- */
+
+.templateComponent {
+  background: var(--capte-primitive-neutral-white, #FFFFFF);
+  border: 1px solid var(--capte-primitive-neutral-200, #D0D2D9);
+  border-radius: var(--capte-radius-md, 8px);
+  padding: var(--capte-space-4, 16px);
+  font-family: "Roboto", Arial, sans-serif;
+  color: var(--capte-primitive-neutral-950, #111523);
+}
+
+.heading {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--capte-primitive-primary-700, #001384);
+  margin-bottom: 0.5rem;
+}
+
+.bodyText {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--capte-primitive-neutral-950, #0F0F11);
+}

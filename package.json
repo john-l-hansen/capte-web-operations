@@ -1,0 +1,29 @@
+{
+  "name": "capte-web-operations",
+  "version": "1.1.0",
+  "description": "Capte Technologies — Webflow Code Components, Design System & Multi-Agent Operations",
+  "private": true,
+  "scripts": {
+    "webflow:dev": "webflow code-components dev",
+    "webflow:bundle": "webflow code-components bundle",
+    "webflow:push": "webflow code-components push",
+    "figma:sync": "node scripts/figma-sync.js"
+  },
+  "dependencies": {
+    "@webflow/data-types": "^1.0.0",
+    "@webflow/react": "^1.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/john-l-hansen/capte-web-operations.git"
+  },
+  "author": "John Hansen <john@capte.co>",
+  "license": "UNLICENSED"
+}

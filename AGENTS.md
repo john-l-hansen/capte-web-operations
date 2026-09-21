@@ -89,15 +89,20 @@ Key baseline highlights:
 
 ---
 
-## 5. Web Component Architecture Standards
+## 5. Webflow Component Architecture Standards
 
-Every component built for Webflow embeds must adhere to these standards:
+Every component in this repository is built with **Dual-Delivery Webflow Compatibility**:
 
-1. **Self-Contained Vanilla Payload**: Single-file `.html` containing semantic HTML, scoped CSS, and zero-dependency vanilla JavaScript.
-2. **Strict CSS Scoping**: All classes and custom properties must be prefixed with the component name (e.g. `.promo-card`, `.promo-card_body`, `--promo-*`) to eliminate side effects on Webflow global styles.
-3. **Fail-Closed Robustness**: When external conditions (e.g. network calls, geo-detection, DOM elements) fail or cannot be determined, components must fail closed (remain hidden gracefully) rather than render broken states.
-4. **Cloudflare Geo-Targeting**: Leverage same-origin `/cdn-cgi/trace` on production `capte.co` to avoid third-party geolocation APIs, rate limits, and browser GPS prompts. Always support `?promoDebug=1` for staging QA.
-5. **Accessibility (a11y)**: Semantic HTML landmarks, clear ARIA labeling, full keyboard navigability with visible focus indicators, and `@media (prefers-reduced-motion: reduce)` transitions disabled.
+1. **Visual Code Component (`.tsx` + `.webflow.tsx`)**:
+   - Uses `@webflow/react` and `@webflow/data-types` to declare editable props (`props.Text`, `props.Link`, `props.Boolean`, `props.Image`, `props.Variant`).
+   - Designers and marketers can configure campaigns directly inside the Webflow Designer right-hand panel without writing code.
+2. **Self-Contained Vanilla Payload (`.html`)**:
+   - Single-file embed containing semantic HTML, scoped CSS (`var(--capte-...)`), and vanilla JavaScript.
+   - For direct copy-paste into Webflow Custom Code Embed elements.
+3. **Strict CSS Scoping**: All classes and custom properties must be prefixed with the component name (e.g. `.promo-card`, `.promo-card_body`, `--promo-*`) to eliminate side effects on Webflow global styles.
+4. **Fail-Closed Robustness**: When external conditions (e.g. network calls, geo-detection, DOM elements) fail or cannot be determined, components must fail closed (remain hidden gracefully) rather than render broken states.
+5. **Cloudflare Geo-Targeting**: Leverage same-origin `/cdn-cgi/trace` on production `capte.co` to avoid third-party geolocation APIs, rate limits, and browser GPS prompts. Always support `?promoDebug=1` and `?promoCountry=<code>` for staging QA.
+6. **Accessibility (a11y)**: Semantic HTML landmarks, clear ARIA labeling, full keyboard navigability with visible focus indicators, and `@media (prefers-reduced-motion: reduce)` transitions disabled.
 
 ---
 
@@ -107,26 +112,35 @@ Every component built for Webflow embeds must adhere to these standards:
 web-components/
 ├── AGENTS.md                  # Canonical shared contract (this file)
 ├── CLAUDE.md                  # Claude adapter
+├── CONSTITUTION.md            # Supreme 7-article governance contract
+├── DESIGN.md                  # Client-First & Code Component manual
 ├── README.md                  # Repository overview & quick start
 ├── CHANGELOG.md               # Repo-level and guidance changes
+├── package.json               # Webflow CLI & React tooling dependencies
+├── webflow.json               # Webflow Code Components CLI configuration
+├── tsconfig.json              # TypeScript configuration
 ├── docs/
 │   └── agent-workflow.md      # Multi-agent operating model & handoffs
 ├── .agent/rules/
 │   └── shared-contract.md     # Antigravity workspace rule adapter
 └── components/
     └── <component-name>/
-        ├── <component-name>.html  # Production Webflow embed code
-        ├── README.md              # Component documentation & QA checklist
-        ├── FIGMA_SPEC.md          # 1:1 Auto Layout & variable specification
-        ├── CHANGELOG.md           # Mechanism versioning (SemVer)
-        └── campaigns.md           # (Optional) Ledger of live campaign launches
+        ├── <ComponentName>.tsx          # React component implementation
+        ├── <ComponentName>.webflow.tsx  # Webflow Designer property definitions
+        ├── <ComponentName>.module.css   # Scoped CSS with design tokens
+        ├── <component-name>.html        # Self-contained vanilla embed payload
+        ├── README.md                    # Component documentation & QA checklist
+        ├── FIGMA_SPEC.md                # 1:1 Auto Layout & variable specification
+        ├── CHANGELOG.md                 # Mechanism versioning (SemVer)
+        └── campaigns.md                 # (Optional) Ledger of live campaign launches
 ```
 
 ### Release & Campaign Tagging
 - **Mechanism Updates**: Bumps the component version in `components/<name>/CHANGELOG.md` (e.g. `v1.1.0`).
 - **Campaign Configuration Releases**: Editing the `CONFIG` block for a specific event or campaign is tagged upon Webflow publication:
   ```bash
-  git tag <component-name>-<campaign-id>  # e.g. promo-card-apta-2026-expo
+  git tag <component-name>-<campaign-id>  # e.g. promo-card-apta-2026-transform-expo
   git push origin --tags
   ```
 - The deployment is then recorded as an entry in the component's `campaigns.md`.
+

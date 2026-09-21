@@ -86,4 +86,15 @@ Every visual asset, layout, component, and line of code must adhere to the stand
 
 ---
 
+## Article VII: Webflow Designer Compatibility & Visual Property Architecture
+
+1. **Visual Property Exposure:** All interactive components built for Webflow should expose configurable fields (campaign IDs, copy, links, dates, countries, and media) as visual properties directly editable in the Webflow Designer right-hand panel (via Webflow Code Components `@webflow/react` + `@webflow/data-types` or Webflow native component properties) so designers and marketing can manage campaigns without touching code.
+2. **Dual-Model Component Architecture:** Every custom component in the repository is maintained with:
+   - **Visual Code Component**: TypeScript + React implementation (`ComponentName.tsx` + `ComponentName.webflow.tsx`) declaring visual props for Webflow Designer CLI synchronization.
+   - **Self-Contained Fallback Embed**: Standalone `.html` payload for direct paste into Webflow Custom Code Embeds.
+3. **Property Binding Integrity:** Component properties must map directly to approved design tokens and semantic data types. Default values must align with the current active campaign ledger.
+
+---
+
 *Adopted and ratified for Capte Digital Design & Web Operations.*
+

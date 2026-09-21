@@ -147,3 +147,49 @@ When custom engineering in Webflow outpaces visual design in Figma:
    - Auto Layout Frame Hierarchy (Padding, gaps, sizing modes, absolute overlays).
 3. **Provide 1-Click Figma Console Snippet**: Generate a self-contained JavaScript snippet using the Figma Plugin API (`figma.createComponent()`, `figma.createFrame()`) so designers can paste into Figma Console (`Cmd+Option+I`) and instantiate the component on canvas instantly.
 4. **Backport to Figma**: Merge into `Capte — Design System` components library to maintain complete zero-drift parity.
+
+---
+
+## 6. Webflow Code Components & Visual Property Architecture
+
+For maximum Webflow Designer compatibility, interactive components should be engineered as **Webflow Code Components** using `@webflow/react` and `@webflow/data-types`.
+
+### A. Two-File Code Component Pattern
+Every component directory should contain:
+1. `[ComponentName].tsx`: React component with clean JSX, Client-First scoped CSS (`[ComponentName].module.css`), and token bindings.
+2. `[ComponentName].webflow.tsx`: Component Definition declaring metadata (`name`, `description`, `group`) and editable props via `declareComponent()`.
+
+### B. Webflow Data Types & Visual Control Mapping
+Map component configurations to native Webflow Designer sidebar controls:
+
+```typescript
+import { declareComponent } from '@webflow/react';
+import { props } from '@webflow/data-types';
+import { MyComponent } from './MyComponent';
+
+export default declareComponent(MyComponent, {
+  name: "My Component",
+  description: "Visual component description",
+  group: "Custom Components",
+  props: {
+    // Text input
+    title: props.Text({ name: "Title", defaultValue: "Default Heading" }),
+    // Link picker (Webflow pages, URLs, anchors)
+    ctaLink: props.Link({ name: "CTA Link", defaultValue: { type: "url", url: "https://capte.co" } }),
+    // Toggle switch
+    showBadge: props.Boolean({ name: "Show Badge", defaultValue: true }),
+    // Asset uploader
+    image: props.Image({ name: "Thumbnail Image" }),
+    // Dropdown selector
+    theme: props.Variant({ name: "Theme", options: ["Light", "Dark"], defaultValue: "Light" })
+  }
+});
+```
+
+### C. Webflow CLI Workflow
+- `npx webflow code-components dev`: Launches local development server with hot-reload inside Webflow Designer.
+- `npx webflow code-components bundle`: Bundles production assets.
+- `npx webflow code-components push`: Pushes compiled code components to the Webflow workspace.
+
+### D. Dual-Format Standard
+Maintain both the **Webflow Code Component** (`.tsx` + `.webflow.tsx`) and the **Self-Contained Vanilla Embed** (`.html`) in each component directory so teams can choose between visual CLI publishing and drop-in custom code embeds.
