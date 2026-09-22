@@ -11,6 +11,7 @@ All notable changes to the `capte-web-components` repository (new components add
 - Expanded canonical agent contract in `AGENTS.md` covering Foundation (role, tone, authority, brand tokens) and Components (standards, structure, lifecycle).
 - Antigravity workspace rule adapters in `.agent/rules/shared-contract.md` and `.agents/rules/shared-contract.md`.
 - Root `README.md` restructure into Foundation ("The Why & How") and Components ("The Why & How").
+- Added **Campaign Link & QR Generator** (`tools/campaign-qr-generator/` & `components/campaign-qr-generator/`): Zero-dependency vanilla Web Component `<campaign-qr-generator>` with ISO/IEC 18004 Reed-Solomon engine, Webflow 301 vanity redirect helper (anti-dead-print), forced UTM builder, and Vector SVG / 300-DPI PNG export suite.
 
 ### Changed
 - Streamlined `CLAUDE.md` to serve as a thin adapter pointing to `AGENTS.md` and `docs/agent-workflow.md`.

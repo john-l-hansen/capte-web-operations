@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campaign Link & QR Generator — Capte Web Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --capte-blue: #001384;
+      --capte-blue-hover: #093AEC;
+      --capte-blue-light: #EAF0FF;
+      --capte-orange: #FC5522;
+      --capte-orange-hover: #DD3603;
+      --capte-surface: #FFFFFF;
+      --capte-surface-muted: #F2F4FC;
+      --capte-border: #DDE2EE;
+      --capte-border-focus: #093AEC;
+      --capte-text: #111523;
+      --capte-text-muted: #626A7A;
+      --capte-success: #059669;
+      --capte-success-bg: #ECFDF5;
+      --capte-warning: #D97706;
+      --capte-warning-bg: #FFFBEB;
+      --capte-radius-sm: 4px;
+      --capte-radius-md: 8px;
+      --capte-radius-lg: 12px;
+      --capte-radius-full: 9999px;
+      --capte-shadow-sm: 0 2px 8px rgba(0, 19, 132, 0.04);
+      --capte-shadow-md: 0 6px 24px rgba(0, 19, 132, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--capte-text);
+      background-color: var(--capte-surface-muted);
+      line-height: 1.5;
+      padding: 36px 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--capte-blue);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .back-link:hover {
+      color: var(--capte-blue-hover);
+      text-decoration: underline;
+    }
+
+    .portal-tag {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--capte-blue);
+      background: var(--capte-blue-light);
+      padding: 4px 12px;
+      border-radius: var(--capte-radius-full);
+    }
+
+    header {
+      background: var(--capte-surface);
+      border-radius: var(--capte-radius-lg);
+      border: 1px solid var(--capte-border);
+      padding: 32px 36px;
+      box-shadow: var(--capte-shadow-md);
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    p.lead {
+      color: var(--capte-text-muted);
+      font-size: 15px;
+      max-width: 840px;
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .app-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--capte-surface);
+      border-radius: var(--capte-radius-lg);
+      border: 1px solid var(--capte-border);
+      padding: 28px;
+      box-shadow: var(--capte-shadow-sm);
+      margin-bottom: 24px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--capte-border);
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-badge {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: var(--capte-radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-recommend {
+      background: var(--capte-success-bg);
+      color: var(--capte-success);
+      border: 1px solid #A7F3D0;
+    }
+
+    .badge-neutral {
+      background: var(--capte-surface-muted);
+      color: var(--capte-text-muted);
+      border: 1px solid var(--capte-border);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--capte-text);
+      margin-bottom: 6px;
+    }
+
+    .label-hint {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--capte-text-muted);
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    select {
+      width: 100%;
+      height: 40px;
+      padding: 0 12px;
+      font-size: 14px;
+      font-family: 'Roboto', sans-serif;
+      color: var(--capte-text);
+      background: #FFFFFF;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-sm);
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="url"]:focus,
+    select:focus {
+      border-color: var(--capte-border-focus);
+      box-shadow: 0 0 0 3px rgba(9, 58, 236, 0.12);
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .input-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .strategy-card {
+      background: var(--capte-surface-muted);
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .strategy-toggle-wrapper {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .strategy-toggle-wrapper input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--capte-blue);
+      cursor: pointer;
+    }
+
+    .strategy-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      margin-bottom: 2px;
+    }
+
+    .strategy-desc {
+      font-size: 12px;
+      color: var(--capte-text-muted);
+      line-height: 1.4;
+    }
+
+    .webflow-box {
+      background: #0F1322;
+      color: #E2E8F0;
+      border-radius: var(--capte-radius-md);
+      padding: 16px 18px;
+      margin-top: 14px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+    }
+
+    .webflow-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #2D3748;
+      font-size: 11px;
+      color: #94A3B8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .webflow-code-line {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+      word-break: break-all;
+    }
+
+    .webflow-code-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .code-tag {
+      color: #38BDF8;
+      font-weight: 600;
+      min-width: 90px;
+    }
+
+    .code-val {
+      color: #FCD34D;
+    }
+
+    .btn-copy-mini {
+      background: #1E293B;
+      color: #E2E8F0;
+      border: 1px solid #475569;
+      font-size: 11px;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: var(--capte-radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-copy-mini:hover {
+      background: #334155;
+      color: #FFFFFF;
+    }
+
+    .preset-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .chip {
+      font-size: 11px;
+      font-family: 'Roboto Mono', monospace;
+      background: var(--capte-surface-muted);
+      border: 1px solid var(--capte-border);
+      color: var(--capte-text-muted);
+      padding: 3px 8px;
+      border-radius: var(--capte-radius-sm);
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .chip:hover {
+      background: var(--capte-blue-light);
+      color: var(--capte-blue);
+      border-color: #BAC7F5;
+    }
+
+    .chip.active {
+      background: var(--capte-blue);
+      color: #FFFFFF;
+      border-color: var(--capte-blue);
+    }
+
+    .pill-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .pill-label {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--capte-surface-muted);
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-sm);
+      padding: 8px 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+
+    .pill-label input[type="radio"] {
+      display: none;
+    }
+
+    .pill-label:hover {
+      border-color: #BAC7F5;
+    }
+
+    .pill-label.active {
+      background: var(--capte-blue-light);
+      border-color: var(--capte-blue);
+      color: var(--capte-blue);
+      font-weight: 700;
+    }
+
+    .pill-sub {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--capte-text-muted);
+      margin-top: 2px;
+    }
+
+    .color-swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .color-card {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--capte-surface-muted);
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-sm);
+      padding: 6px 10px;
+      font-size: 11px;
+      font-family: 'Roboto Mono', monospace;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .color-card:hover {
+      border-color: #BAC7F5;
+    }
+
+    .color-card.active {
+      border-color: var(--capte-blue);
+      background: var(--capte-blue-light);
+      color: var(--capte-blue);
+      font-weight: 600;
+    }
+
+    .swatch-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+
+    .preview-sidebar {
+      position: sticky;
+      top: 24px;
+    }
+
+    .preview-card {
+      background: var(--capte-surface);
+      border-radius: var(--capte-radius-lg);
+      border: 1px solid var(--capte-border);
+      padding: 28px;
+      box-shadow: var(--capte-shadow-md);
+      text-align: center;
+    }
+
+    .qr-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: #FAFAF8;
+      border-radius: var(--capte-radius-md);
+      border: 1px solid var(--capte-border);
+      margin: 16px 0;
+      min-height: 280px;
+    }
+
+    .scannability-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: var(--capte-radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .status-optimal {
+      background: var(--capte-success-bg);
+      color: var(--capte-success);
+      border: 1px solid #A7F3D0;
+    }
+
+    .status-warning {
+      background: var(--capte-warning-bg);
+      color: var(--capte-warning);
+      border: 1px solid #FDE68A;
+    }
+
+    .encoded-url-box {
+      background: var(--capte-surface-muted);
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-sm);
+      padding: 10px 12px;
+      text-align: left;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      color: var(--capte-text);
+      word-break: break-all;
+      margin-bottom: 18px;
+      max-height: 80px;
+      overflow-y: auto;
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 42px;
+      padding: 0 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--capte-radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--capte-orange);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: var(--capte-orange-hover);
+    }
+
+    .btn-secondary {
+      background: var(--capte-surface-muted);
+      color: var(--capte-text);
+      border: 1px solid var(--capte-border);
+    }
+
+    .btn-secondary:hover {
+      background: #E2E7F5;
+      color: var(--capte-blue);
+      border-color: #BAC7F5;
+    }
+
+    .btn-full {
+      grid-column: span 2;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #111523;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: var(--capte-radius-md);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--capte-shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .guide-card {
+      background: var(--capte-surface);
+      border-radius: var(--capte-radius-lg);
+      border: 1px solid var(--capte-border);
+      padding: 28px;
+      margin-top: 28px;
+      box-shadow: var(--capte-shadow-sm);
+    }
+
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 800px) {
+      .guide-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .guide-item {
+      background: var(--capte-surface-muted);
+      border-radius: var(--capte-radius-md);
+      padding: 16px;
+      border: 1px solid var(--capte-border);
+    }
+
+    .guide-item h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .guide-item p {
+      font-size: 12px;
+      color: var(--capte-text-muted);
+      line-height: 1.45;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--capte-text-muted);
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--capte-border);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-nav">
+      <a href="../../index.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
+        Back to Web Operations Portal
+      </a>
+      <span class="portal-tag">Marketing & Ops Utility v1.0.0</span>
+    </div>
+
+    <header>
+      <h1>Campaign Link & QR Generator</h1>
+      <p class="lead">
+        Engineered for marketing and event operations. Generates print-safe, high-contrast QR codes with built-in Webflow 301 vanity redirects to eliminate dead print collateral, plus forced UTM parameters to prevent attribution loss in Google Analytics.
+      </p>
+    </header>
+
+    <div class="app-grid">
+      
+      <div class="form-column">
+
+        <!-- 1. Strategy & Anti-Dead-Print Engine -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>🛡️</span> 1. Link Strategy & Anti-Dead-Print Engine
+            </div>
+            <span class="panel-badge badge-recommend">Recommended</span>
+          </div>
+
+          <div class="strategy-card">
+            <label class="strategy-toggle-wrapper">
+              <input type="checkbox" id="toggle-vanity" checked>
+              <div>
+                <div class="strategy-title">Use 301 Vanity Shortlink (Prevents Dead Prints)</div>
+                <div class="strategy-desc">
+                  Encodes a short vanity route (e.g. <code>https://capte.co/go/apta-expo-2026</code>) instead of a deep URL. You can repoint destination URLs in Webflow anytime without throwing away printed physical collateral.
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div id="vanity-config-area">
+            <div class="input-row">
+              <div class="form-group">
+                <label for="vanity-domain">Vanity Base Domain</label>
+                <select id="vanity-domain">
+                  <option value="https://capte.co" selected>https://capte.co (Production)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="vanity-slug">
+                  Event Short Slug
+                  <span class="label-hint">/go/[slug]</span>
+                </label>
+                <input type="text" id="vanity-slug" value="apta-expo-2026" placeholder="e.g. apta-expo-2026">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <label for="target-url">
+              Target Landing Page (Destination)
+              <span class="label-hint">Where users land</span>
+            </label>
+            <input type="url" id="target-url" value="https://capte.co/events/2026/apta-transform-expo" placeholder="https://capte.co/...">
+          </div>
+
+          <div id="webflow-snippet-box" class="webflow-box">
+            <div class="webflow-header">
+              <span>Webflow 301 Redirect Rule (Copy & Paste)</span>
+              <button type="button" class="btn-copy-mini" id="btn-copy-301">Copy Rule</button>
+            </div>
+            <div class="webflow-code-line">
+              <span class="code-tag">Old Path:</span>
+              <span class="code-val" id="wf-old-path">/go/apta-expo-2026</span>
+            </div>
+            <div class="webflow-code-line">
+              <span class="code-tag">Redirect To:</span>
+              <span class="code-val" id="wf-redirect-to">/events/2026/apta-transform-expo?utm_source=live_event&...</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 2. Forced UTM Attribution Builder -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>📊</span> 2. Forced UTM Attribution Builder
+            </div>
+            <span class="panel-badge badge-neutral">Analytics Guard</span>
+          </div>
+
+          <div class="input-row">
+            <div class="form-group">
+              <label for="utm-source">
+                utm_source
+                <span class="label-hint">Traffic origin</span>
+              </label>
+              <input type="text" id="utm-source" value="live_event">
+              <div class="preset-chips" id="chips-source">
+                <span class="chip active" data-val="live_event">live_event</span>
+                <span class="chip" data-val="conference">conference</span>
+                <span class="chip" data-val="trade_show">trade_show</span>
+                <span class="chip" data-val="print_flyer">print_flyer</span>
+                <span class="chip" data-val="vehicle_fleet">vehicle_fleet</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="utm-medium">
+                utm_medium
+                <span class="label-hint">Default: qr_print</span>
+              </label>
+              <input type="text" id="utm-medium" value="qr_print">
+              <div class="preset-chips" id="chips-medium">
+                <span class="chip active" data-val="qr_print">qr_print</span>
+                <span class="chip" data-val="qr_badge">qr_badge</span>
+                <span class="chip" data-val="qr_signage">qr_signage</span>
+                <span class="chip" data-val="qr_brochure">qr_brochure</span>
+                <span class="chip" data-val="qr_swag">qr_swag</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-row" style="margin-top: 14px;">
+            <div class="form-group">
+              <label for="utm-campaign">
+                utm_campaign
+                <span class="label-hint">Event / Campaign</span>
+              </label>
+              <input type="text" id="utm-campaign" value="apta_expo_2026" placeholder="e.g. apta_expo_2026">
+            </div>
+
+            <div class="form-group">
+              <label for="utm-content">
+                utm_content
+                <span class="label-hint">Specific asset/placement</span>
+              </label>
+              <input type="text" id="utm-content" value="booth_banner_main" placeholder="e.g. booth_banner_main">
+              <div class="preset-chips" id="chips-content">
+                <span class="chip active" data-val="booth_banner_main">booth_banner</span>
+                <span class="chip" data-val="badge_lanyard">badge</span>
+                <span class="chip" data-val="table_tent">table_tent</span>
+                <span class="chip" data-val="handout_a5">handout</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <label for="utm-term">
+              utm_term
+              <span class="label-hint">Optional booth # or keyword</span>
+            </label>
+            <input type="text" id="utm-term" value="booth_412" placeholder="e.g. booth_412, hall_3">
+          </div>
+        </div>
+
+        <!-- 3. Print Physics & Styling -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>📐</span> 3. Print Physics & Scannability Guardrails
+            </div>
+            <span class="panel-badge badge-recommend">ISO Standard</span>
+          </div>
+
+          <div class="form-group">
+            <label>
+              Error Correction Level (ECC)
+              <span class="label-hint">Damage recovery</span>
+            </label>
+            <div class="pill-group">
+              <label class="pill-label active" data-ecc="Q">
+                <input type="radio" name="ecc" value="Q" checked>
+                <span>Level Q (25%)</span>
+                <span class="pill-sub">Standard Print & Flyers</span>
+              </label>
+              <label class="pill-label" data-ecc="H">
+                <input type="radio" name="ecc" value="H">
+                <span>Level H (30%)</span>
+                <span class="pill-sub">Badges, Swag & Vehicle Wraps</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 16px;">
+            <label>
+              Color Scheme Preset (High Contrast)
+              <span class="label-hint">Capte Design Tokens</span>
+            </label>
+            <div class="color-swatch-grid">
+              <div class="color-card active" data-color="#001384" data-bg="#FFFFFF">
+                <div class="swatch-dot" style="background: #001384;"></div>
+                <span>Capte Blue</span>
+              </div>
+              <div class="color-card" data-color="#111215" data-bg="#FAFAF8">
+                <div class="swatch-dot" style="background: #111215;"></div>
+                <span>Industrial Ink</span>
+              </div>
+              <div class="color-card" data-color="#000000" data-bg="#FFFFFF">
+                <div class="swatch-dot" style="background: #000000;"></div>
+                <span>Pure Black</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Right Column: Sticky Live Preview & One-Click Exports -->
+      <div class="preview-sidebar">
+        <div class="preview-card">
+          <div class="panel-header" style="border:none; padding-bottom: 0; margin-bottom: 12px;">
+            <div class="panel-title">
+              <span>📱</span> Live Camera Preview
+            </div>
+            <span id="qr-version-tag" class="panel-badge badge-neutral">Version 8 (49x49)</span>
+          </div>
+
+          <div id="scannability-banner" class="scannability-status status-optimal">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+            <span id="scannability-text">Optimal Print Contrast (14.7:1 • ISO 4-Module)</span>
+          </div>
+
+          <div class="qr-container">
+            <campaign-qr-generator id="qr-preview" size="240" ecc="Q" color="#001384" bg-color="#FFFFFF" margin="4"></campaign-qr-generator>
+          </div>
+
+          <label style="text-align: left; margin-bottom: 4px;">Encoded QR Payload:</label>
+          <div class="encoded-url-box" id="encoded-url-display">https://capte.co/go/apta-expo-2026</div>
+
+          <div class="action-grid">
+            <button type="button" class="btn btn-primary btn-full" id="btn-download-svg">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              Download Vector SVG (.svg)
+            </button>
+            <button type="button" class="btn btn-secondary" id="btn-download-png">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/><path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/></svg>
+              Download 300-DPI PNG
+            </button>
+            <button type="button" class="btn btn-secondary" id="btn-copy-svg">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>
+              Copy SVG Code
+            </button>
+            <button type="button" class="btn btn-secondary btn-full" id="btn-copy-url">
+              📋 Copy Campaign URL
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="guide-card">
+      <div class="panel-title">
+        <span>🖨️</span> Print Physics & Marketing Operations Guidelines
+      </div>
+      <div class="guide-grid">
+        <div class="guide-item">
+          <h4>1. Minimum Print Dimensions</h4>
+          <p>
+            • Business cards / Badges (0.5m scan): <strong>20 × 20 mm</strong><br>
+            • Table tents & A5 flyers (1.0m scan): <strong>35 × 35 mm</strong><br>
+            • Pull-up booth banners (2.5m scan): <strong>100 × 100 mm</strong><br>
+            • Overhead backdrop signage: <strong>250+ mm</strong>
+          </p>
+        </div>
+        <div class="guide-item">
+          <h4>2. Lighting & Finish Physics</h4>
+          <p>
+            • Always enforce dark modules on light background.<br>
+            • Avoid heavy gloss laminate coatings which produce camera flash specular glare.<br>
+            • Matte, uncoated, or silk cardstock provides maximum optical scannability.
+          </p>
+        </div>
+        <div class="guide-item">
+          <h4>3. Webflow 301 Deployment</h4>
+          <p>
+            • In Webflow Designer: <em>Project Settings &rarr; Hosting &rarr; 301 Redirects</em>.<br>
+            • Paste the Old Path and Redirect To values from the rule box above.<br>
+            • Publish the site to activate the vanity redirect immediately.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Capte Technologies Inc. &bull; Digital Design & Web Operations &bull; Los Angeles, CA &bull; Contact: <a href="mailto:john@capte.co" style="color:var(--capte-blue); text-decoration:none; font-weight:500;">john@capte.co</a></p>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="#10B981"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+    <span id="toast-msg">Copied to clipboard!</span>
+  </div>
+
+  <script src="campaign-qr-generator.js"></script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const toggleVanity = document.getElementById('toggle-vanity');
+      const vanityConfigArea = document.getElementById('vanity-config-area');
+      const vanityDomain = document.getElementById('vanity-domain');
+      const vanitySlug = document.getElementById('vanity-slug');
+      const targetUrl = document.getElementById('target-url');
+      const webflowSnippetBox = document.getElementById('webflow-snippet-box');
+      const wfOldPath = document.getElementById('wf-old-path');
+      const wfRedirectTo = document.getElementById('wf-redirect-to');
+      const btnCopy301 = document.getElementById('btn-copy-301');
+
+      const utmSource = document.getElementById('utm-source');
+      const utmMedium = document.getElementById('utm-medium');
+      const utmCampaign = document.getElementById('utm-campaign');
+      const utmContent = document.getElementById('utm-content');
+      const utmTerm = document.getElementById('utm-term');
+
+      const qrPreview = document.getElementById('qr-preview');
+      const encodedUrlDisplay = document.getElementById('encoded-url-display');
+      const qrVersionTag = document.getElementById('qr-version-tag');
+      const scannabilityBanner = document.getElementById('scannability-banner');
+      const scannabilityText = document.getElementById('scannability-text');
+
+      const btnDownloadSvg = document.getElementById('btn-download-svg');
+      const btnDownloadPng = document.getElementById('btn-download-png');
+      const btnCopySvg = document.getElementById('btn-copy-svg');
+      const btnCopyUrl = document.getElementById('btn-copy-url');
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+
+      let currentEcc = 'Q';
+      let currentColor = '#001384';
+      let currentBgColor = '#FFFFFF';
+
+      function showToast(text) {
+        toastMsg.textContent = text;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2200);
+      }
+
+      function sanitizeSlug(str) {
+        return str
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9-_]/g, '-')
+          .replace(/-+/g, '-');
+      }
+
+      function buildFullDestinationUrl() {
+        let base = targetUrl.value.trim();
+        if (!base) base = 'https://capte.co';
+
+        try {
+          const urlObj = new URL(base.startsWith('http') ? base : 'https://' + base);
+          
+          if (utmSource.value.trim()) urlObj.searchParams.set('utm_source', utmSource.value.trim());
+          if (utmMedium.value.trim()) urlObj.searchParams.set('utm_medium', utmMedium.value.trim());
+          if (utmCampaign.value.trim()) urlObj.searchParams.set('utm_campaign', utmCampaign.value.trim());
+          if (utmContent.value.trim()) urlObj.searchParams.set('utm_content', utmContent.value.trim());
+          if (utmTerm.value.trim()) urlObj.searchParams.set('utm_term', utmTerm.value.trim());
+
+          return urlObj.toString();
+        } catch {
+          return base;
+        }
+      }
+
+      function updateState() {
+        const isVanity = toggleVanity.checked;
+        vanityConfigArea.style.display = isVanity ? 'block' : 'none';
+        webflowSnippetBox.style.display = isVanity ? 'block' : 'none';
+
+        const cleanSlug = sanitizeSlug(vanitySlug.value);
+        const domain = vanityDomain.value;
+        const fullDestUrl = buildFullDestinationUrl();
+
+        let qrPayloadUrl = '';
+        if (isVanity) {
+          qrPayloadUrl = `${domain}/go/${cleanSlug}`;
+          wfOldPath.textContent = `/go/${cleanSlug}`;
+          
+          try {
+            const parsedDest = new URL(fullDestUrl);
+            wfRedirectTo.textContent = parsedDest.pathname + parsedDest.search;
+          } catch {
+            wfRedirectTo.textContent = fullDestUrl;
+          }
+        } else {
+          qrPayloadUrl = fullDestUrl;
+        }
+
+        encodedUrlDisplay.textContent = qrPayloadUrl;
+
+        qrPreview.setAttribute('value', qrPayloadUrl);
+        qrPreview.setAttribute('ecc', currentEcc);
+        qrPreview.setAttribute('color', currentColor);
+        qrPreview.setAttribute('bg-color', currentBgColor);
+
+        if (window.CapteQr) {
+          const ratio = CapteQr.calculateContrastRatio(currentColor, currentBgColor);
+          const ratioDisplay = ratio.toFixed(1) + ':1';
+          if (ratio >= 7) {
+            scannabilityBanner.className = 'scannability-status status-optimal';
+            scannabilityText.textContent = `Optimal Print Contrast (${ratioDisplay} • ISO 4-Module • ECC ${currentEcc})`;
+          } else {
+            scannabilityBanner.className = 'scannability-status status-warning';
+            scannabilityText.textContent = `Warning: Low Contrast (${ratioDisplay}) — Increase Dark/Light Delta`;
+          }
+        }
+      }
+
+      qrPreview.addEventListener('qr-render', (e) => {
+        if (e.detail) {
+          qrVersionTag.textContent = `Version ${e.detail.version} (${e.detail.size}×${e.detail.size})`;
+        }
+      });
+
+      [toggleVanity, vanityDomain, vanitySlug, targetUrl, utmSource, utmMedium, utmCampaign, utmContent, utmTerm].forEach(el => {
+        el.addEventListener('input', updateState);
+        el.addEventListener('change', updateState);
+      });
+
+      vanitySlug.addEventListener('blur', () => {
+        vanitySlug.value = sanitizeSlug(vanitySlug.value);
+        updateState();
+      });
+      utmCampaign.addEventListener('blur', () => {
+        utmCampaign.value = sanitizeSlug(utmCampaign.value).replace(/-/g, '_');
+        updateState();
+      });
+
+      function setupChips(containerId, inputEl) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.addEventListener('click', (e) => {
+          const chip = e.target.closest('.chip');
+          if (!chip) return;
+          container.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          inputEl.value = chip.getAttribute('data-val');
+          updateState();
+        });
+      }
+
+      setupChips('chips-source', utmSource);
+      setupChips('chips-medium', utmMedium);
+      setupChips('chips-content', utmContent);
+
+      document.querySelectorAll('.pill-label').forEach(label => {
+        label.addEventListener('click', () => {
+          document.querySelectorAll('.pill-label').forEach(l => l.classList.remove('active'));
+          label.classList.add('active');
+          currentEcc = label.getAttribute('data-ecc');
+          updateState();
+        });
+      });
+
+      document.querySelectorAll('.color-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.color-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          currentColor = card.getAttribute('data-color');
+          currentBgColor = card.getAttribute('data-bg');
+          updateState();
+        });
+      });
+
+      btnCopy301.addEventListener('click', async () => {
+        const text = `Old Path: ${wfOldPath.textContent}  ->  Redirect To: ${wfRedirectTo.textContent}`;
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(text);
+          showToast('Webflow 301 rule copied to clipboard!');
+        }
+      });
+
+      btnDownloadSvg.addEventListener('click', () => {
+        const slug = sanitizeSlug(vanitySlug.value) || 'campaign-qr';
+        qrPreview.downloadSvg(`capte-qr-${slug}.svg`);
+        showToast('Vector SVG downloaded!');
+      });
+
+      btnDownloadPng.addEventListener('click', async () => {
+        const slug = sanitizeSlug(vanitySlug.value) || 'campaign-qr';
+        await qrPreview.downloadPng(`capte-qr-${slug}-300dpi.png`, 1024);
+        showToast('High-DPI 300 DPI PNG downloaded!');
+      });
+
+      btnCopySvg.addEventListener('click', async () => {
+        const success = await qrPreview.copySvg();
+        if (success) {
+          showToast('SVG markup copied to clipboard!');
+        }
+      });
+
+      btnCopyUrl.addEventListener('click', async () => {
+        const success = await qrPreview.copyUrl();
+        if (success) {
+          showToast('Campaign URL copied to clipboard!');
+        }
+      });
+
+      updateState();
+    })();
+  </script>
+</body>
+</html>
