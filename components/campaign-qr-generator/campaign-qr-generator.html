@@ -52,6 +52,7 @@
       margin: 0 auto;
     }
 
+    /* Top Navigation Bar */
     .top-nav {
       display: flex;
       justify-content: space-between;
@@ -87,6 +88,7 @@
       border-radius: var(--capte-radius-full);
     }
 
+    /* Header Banner */
     header {
       background: var(--capte-surface);
       border-radius: var(--capte-radius-lg);
@@ -110,6 +112,7 @@
       max-width: 840px;
     }
 
+    /* Layout Grid */
     .app-grid {
       display: grid;
       grid-template-columns: 1.4fr 1fr;
@@ -123,6 +126,7 @@
       }
     }
 
+    /* Form Panels */
     .panel {
       background: var(--capte-surface);
       border-radius: var(--capte-radius-lg);
@@ -172,6 +176,7 @@
       border: 1px solid var(--capte-border);
     }
 
+    /* Form Elements */
     .form-group {
       margin-bottom: 18px;
     }
@@ -232,6 +237,7 @@
       }
     }
 
+    /* Strategy Toggle Switch */
     .strategy-card {
       background: var(--capte-surface-muted);
       border: 1px solid var(--capte-border);
@@ -268,6 +274,7 @@
       line-height: 1.4;
     }
 
+    /* Webflow 301 Snippet Box */
     .webflow-box {
       background: #0F1322;
       color: #E2E8F0;
@@ -330,6 +337,7 @@
       color: #FFFFFF;
     }
 
+    /* Quick Preset Buttons */
     .preset-chips {
       display: flex;
       flex-wrap: wrap;
@@ -361,6 +369,7 @@
       border-color: var(--capte-blue);
     }
 
+    /* Radio Pills */
     .pill-group {
       display: flex;
       gap: 8px;
@@ -404,6 +413,7 @@
       margin-top: 2px;
     }
 
+    /* Color Swatch Selectors */
     .color-swatch-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -444,6 +454,7 @@
       flex-shrink: 0;
     }
 
+    /* Sticky Preview Sidebar */
     .preview-sidebar {
       position: sticky;
       top: 24px;
@@ -470,6 +481,7 @@
       min-height: 280px;
     }
 
+    /* Scannability Health Bar */
     .scannability-status {
       display: flex;
       align-items: center;
@@ -494,6 +506,7 @@
       border: 1px solid #FDE68A;
     }
 
+    /* Encoded URL Display */
     .encoded-url-box {
       background: var(--capte-surface-muted);
       border: 1px solid var(--capte-border);
@@ -509,6 +522,7 @@
       overflow-y: auto;
     }
 
+    /* Export Action Buttons */
     .action-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -566,6 +580,7 @@
       grid-column: span 2;
     }
 
+    /* Toast Notification */
     .toast {
       position: fixed;
       bottom: 24px;
@@ -593,7 +608,113 @@
       transform: translateY(0);
     }
 
-    /* Campaign Ledger */
+    /* Modal Backdrop & Dialog */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(17, 21, 35, 0.65);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-backdrop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--capte-surface);
+      border-radius: var(--capte-radius-lg);
+      border: 1px solid var(--capte-border);
+      width: 100%;
+      max-width: 480px;
+      padding: 28px;
+      box-shadow: var(--capte-shadow-md);
+      transform: scale(0.96) translateY(8px);
+      transition: transform 0.2s ease;
+    }
+
+    .modal-backdrop.show .modal-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .modal-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #991B1B;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: var(--capte-text-muted);
+      cursor: pointer;
+      font-size: 18px;
+      padding: 4px;
+      line-height: 1;
+    }
+
+    .modal-close-btn:hover {
+      color: var(--capte-text);
+    }
+
+    .modal-body {
+      font-size: 14px;
+      color: var(--capte-text);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .modal-slug-highlight {
+      display: inline-block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: #991B1B;
+      background: #FEE2E2;
+      padding: 2px 8px;
+      border-radius: var(--capte-radius-sm);
+      margin: 4px 0;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .btn-danger {
+      background: #DC2626;
+      color: #FFFFFF;
+    }
+
+    .btn-danger:hover {
+      background: #B91C1C;
+    }
+
+    /* =========================================================================
+       CAMPAIGN LINKS HISTORY & LEDGER SECTION
+       ========================================================================= */
     .ledger-card {
       background: var(--capte-surface);
       border-radius: var(--capte-radius-lg);
@@ -742,6 +863,7 @@
       font-size: 14px;
     }
 
+    /* Print Best Practices Card */
     .guide-card {
       background: var(--capte-surface);
       border-radius: var(--capte-radius-lg);
@@ -800,6 +922,7 @@
 <body>
 
   <div class="container">
+    <!-- Top Navigation -->
     <div class="top-nav">
       <a href="../../index.html" class="back-link">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
@@ -808,6 +931,7 @@
       <span class="portal-tag">Marketing & Ops Utility v1.1.0</span>
     </div>
 
+    <!-- Main Header -->
     <header>
       <h1>Campaign Link & QR Generator</h1>
       <p class="lead">
@@ -815,8 +939,10 @@
       </p>
     </header>
 
+    <!-- App Work Area -->
     <div class="app-grid">
       
+      <!-- Left Column: Controls & Configuration -->
       <div class="form-column">
 
         <!-- 1. Strategy & Anti-Dead-Print Engine -->
@@ -828,6 +954,7 @@
             <span class="panel-badge badge-recommend">Recommended</span>
           </div>
 
+          <!-- Vanity Shortlink Toggle Card -->
           <div class="strategy-card">
             <label class="strategy-toggle-wrapper">
               <input type="checkbox" id="toggle-vanity" checked>
@@ -840,6 +967,7 @@
             </label>
           </div>
 
+          <!-- Vanity Route Config (Shown when toggle is ON) -->
           <div id="vanity-config-area">
             <div class="input-row">
               <div class="form-group">
@@ -858,6 +986,7 @@
             </div>
           </div>
 
+          <!-- Target Landing Page -->
           <div class="form-group" style="margin-top: 14px;">
             <label for="target-url">
               Target Landing Page (Destination)
@@ -866,6 +995,7 @@
             <input type="url" id="target-url" value="https://capte.co/guides/30-questions-to-ask-your-telematics-provider" placeholder="https://capte.co/...">
           </div>
 
+          <!-- Webflow 301 Redirect Snippet Box -->
           <div id="webflow-snippet-box" class="webflow-box">
             <div class="webflow-header">
               <span>Webflow 301 Redirect Rule (Copy & Paste)</span>
@@ -893,6 +1023,7 @@
           </div>
 
           <div class="input-row">
+            <!-- UTM Source -->
             <div class="form-group">
               <label for="utm-source">
                 utm_source
@@ -908,6 +1039,7 @@
               </div>
             </div>
 
+            <!-- UTM Medium -->
             <div class="form-group">
               <label for="utm-medium">
                 utm_medium
@@ -925,6 +1057,7 @@
           </div>
 
           <div class="input-row" style="margin-top: 14px;">
+            <!-- UTM Campaign -->
             <div class="form-group">
               <label for="utm-campaign">
                 utm_campaign
@@ -933,6 +1066,7 @@
               <input type="text" id="utm-campaign" value="telematics_buyer_guide_2026" placeholder="e.g. telematics_buyer_guide_2026">
             </div>
 
+            <!-- UTM Content -->
             <div class="form-group">
               <label for="utm-content">
                 utm_content
@@ -948,6 +1082,7 @@
             </div>
           </div>
 
+          <!-- UTM Term (Optional) -->
           <div class="form-group" style="margin-top: 14px;">
             <label for="utm-term">
               utm_term
@@ -966,6 +1101,7 @@
             <span class="panel-badge badge-recommend">ISO Standard</span>
           </div>
 
+          <!-- Error Correction Level -->
           <div class="form-group">
             <label>
               Error Correction Level (ECC)
@@ -985,6 +1121,7 @@
             </div>
           </div>
 
+          <!-- Color Tokens & Contrast Presets -->
           <div class="form-group" style="margin-top: 16px;">
             <label>
               Color Scheme Preset (High Contrast)
@@ -1020,18 +1157,22 @@
             <span id="qr-version-tag" class="panel-badge badge-neutral">Version 8 (49x49)</span>
           </div>
 
+          <!-- Scannability Status Banner -->
           <div id="scannability-banner" class="scannability-status status-optimal">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
             <span id="scannability-text">Optimal Print Contrast (14.7:1 • ISO 4-Module)</span>
           </div>
 
+          <!-- Web Component Mount -->
           <div class="qr-container">
             <campaign-qr-generator id="qr-preview" size="240" ecc="Q" color="#001384" bg-color="#FFFFFF" margin="4"></campaign-qr-generator>
           </div>
 
+          <!-- Encoded URL Preview -->
           <label style="text-align: left; margin-bottom: 4px;">Encoded QR Payload:</label>
           <div class="encoded-url-box" id="encoded-url-display">https://capte.co/go/telematics-guide</div>
 
+          <!-- Export Action Buttons -->
           <div class="action-grid">
             <button type="button" class="btn btn-save btn-full" id="btn-save-ledger">
               💾 Save to Campaign Ledger
@@ -1058,7 +1199,9 @@
 
     </div>
 
-    <!-- Campaign Ledger Section -->
+    <!-- =====================================================================
+         CAMPAIGN LINKS HISTORY & LEDGER SECTION
+         ===================================================================== -->
     <div class="ledger-card" id="ledger-section">
       <div class="ledger-header">
         <div class="ledger-title-group">
@@ -1091,12 +1234,13 @@
             </tr>
           </thead>
           <tbody id="ledger-tbody">
+            <!-- Dynamically populated via JS -->
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- Guide Card -->
+    <!-- 4. Print & Marketing Operations Best Practices Guide -->
     <div class="guide-card">
       <div class="panel-title">
         <span>🖨️</span> Print Physics & Marketing Operations Guidelines
@@ -1130,18 +1274,48 @@
       </div>
     </div>
 
+    <!-- Footer -->
     <footer>
       <p>Capte Technologies Inc. &bull; Digital Design & Web Operations &bull; Los Angeles, CA &bull; Contact: <a href="mailto:john@capte.co" style="color:var(--capte-blue); text-decoration:none; font-weight:500;">john@capte.co</a></p>
     </footer>
   </div>
 
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-backdrop" id="delete-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-title">
+          <span>⚠️</span> Delete Campaign Link?
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this campaign link from your history?</p>
+        <div style="margin: 12px 0;">
+          <span class="modal-slug-highlight" id="modal-target-slug">/go/...</span>
+          <div style="font-size: 12px; color: var(--capte-text-muted); margin-top: 4px;" id="modal-target-desc">Campaign: —</div>
+        </div>
+        <p style="font-size: 12px; color: var(--capte-text-muted);">
+          This removes the entry from your local history ledger. Any existing Webflow 301 redirects and printed physical collateral remain active until repointed or deleted in Webflow Project Settings.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="btn-modal-cancel">Cancel</button>
+        <button type="button" class="btn btn-danger" id="btn-modal-confirm-delete">Delete Campaign</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Pop-up -->
   <div class="toast" id="toast">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="#10B981"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
     <span id="toast-msg">Copied to clipboard!</span>
   </div>
 
+  <!-- Include Core QR Component Script -->
   <script src="campaign-qr-generator.js"></script>
 
+  <!-- Harness & Ledger Controller Script -->
   <script>
     (function () {
       'use strict';
@@ -1223,9 +1397,18 @@
       const btnCopyMarkdown = document.getElementById('btn-copy-markdown');
       const btnExportJson = document.getElementById('btn-export-json');
 
+      // Modal Elements
+      const deleteModal = document.getElementById('delete-modal');
+      const btnModalClose = document.getElementById('btn-modal-close');
+      const btnModalCancel = document.getElementById('btn-modal-cancel');
+      const btnModalConfirmDelete = document.getElementById('btn-modal-confirm-delete');
+      const modalTargetSlug = document.getElementById('modal-target-slug');
+      const modalTargetDesc = document.getElementById('modal-target-desc');
+
       let currentEcc = 'Q';
       let currentColor = '#001384';
       let currentBgColor = '#FFFFFF';
+      let pendingDeleteId = null;
 
       function showToast(text) {
         toastMsg.textContent = text;
@@ -1508,6 +1691,45 @@
         showToast(`Saved "/go/${cleanSlug}" to Campaign Ledger!`);
       });
 
+      // Modal Dialog Functions
+      function openDeleteModal(id) {
+        const item = getCampaigns().find(i => i.id === id);
+        if (!item) return;
+        pendingDeleteId = id;
+        modalTargetSlug.textContent = item.isVanity ? `/go/${item.vanitySlug}` : item.targetUrl;
+        modalTargetDesc.textContent = `Campaign: ${item.utmCampaign || '—'} • Created: ${item.createdAt || '—'}`;
+        deleteModal.classList.add('show');
+      }
+
+      function closeDeleteModal() {
+        deleteModal.classList.remove('show');
+        pendingDeleteId = null;
+      }
+
+      btnModalClose.addEventListener('click', closeDeleteModal);
+      btnModalCancel.addEventListener('click', closeDeleteModal);
+
+      deleteModal.addEventListener('click', (e) => {
+        if (e.target === deleteModal) {
+          closeDeleteModal();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && deleteModal.classList.contains('show')) {
+          closeDeleteModal();
+        }
+      });
+
+      btnModalConfirmDelete.addEventListener('click', () => {
+        if (pendingDeleteId) {
+          const list = getCampaigns().filter(i => i.id !== pendingDeleteId);
+          saveCampaigns(list);
+          closeDeleteModal();
+          showToast('Campaign deleted from ledger.');
+        }
+      });
+
       ledgerTbody.addEventListener('click', async (e) => {
         const btnLoad = e.target.closest('.btn-load');
         const btnCopyWf = e.target.closest('.btn-copy-wf');
@@ -1558,9 +1780,7 @@
           }
         } else if (btnDel) {
           const id = btnDel.getAttribute('data-id');
-          const list = getCampaigns().filter(i => i.id !== id);
-          saveCampaigns(list);
-          showToast('Campaign deleted from ledger.');
+          openDeleteModal(id);
         }
       });
 
