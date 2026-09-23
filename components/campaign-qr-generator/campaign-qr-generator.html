@@ -541,6 +541,15 @@
       background: var(--capte-orange-hover);
     }
 
+    .btn-save {
+      background: var(--capte-blue);
+      color: #FFFFFF;
+    }
+
+    .btn-save:hover {
+      background: var(--capte-blue-hover);
+    }
+
     .btn-secondary {
       background: var(--capte-surface-muted);
       color: var(--capte-text);
@@ -582,6 +591,155 @@
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
+    }
+
+    /* Campaign Ledger */
+    .ledger-card {
+      background: var(--capte-surface);
+      border-radius: var(--capte-radius-lg);
+      border: 1px solid var(--capte-border);
+      padding: 28px;
+      margin-top: 28px;
+      box-shadow: var(--capte-shadow-md);
+    }
+
+    .ledger-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--capte-border);
+    }
+
+    .ledger-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ledger-count-badge {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      background: var(--capte-blue-light);
+      color: var(--capte-blue);
+      border-radius: var(--capte-radius-full);
+    }
+
+    .ledger-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      height: 36px;
+      padding: 0 12px;
+      font-size: 13px;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-sm);
+      min-width: 220px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+    }
+
+    .ledger-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .ledger-table th {
+      background: var(--capte-surface-muted);
+      color: var(--capte-text-muted);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--capte-border);
+      white-space: nowrap;
+    }
+
+    .ledger-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--capte-border);
+      vertical-align: middle;
+    }
+
+    .ledger-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .ledger-table tr:hover {
+      background: #FAFBFF;
+    }
+
+    .slug-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--capte-blue);
+      background: var(--capte-blue-light);
+      padding: 3px 8px;
+      border-radius: var(--capte-radius-sm);
+    }
+
+    .meta-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: var(--capte-radius-sm);
+      background: var(--capte-surface-muted);
+      color: var(--capte-text-muted);
+      border: 1px solid var(--capte-border);
+    }
+
+    .btn-tbl-action {
+      background: var(--capte-surface-muted);
+      border: 1px solid var(--capte-border);
+      color: var(--capte-text);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 8px;
+      border-radius: var(--capte-radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.12s ease;
+    }
+
+    .btn-tbl-action:hover {
+      background: #E2E7F5;
+      color: var(--capte-blue);
+      border-color: #BAC7F5;
+    }
+
+    .btn-tbl-delete:hover {
+      background: #FFF5F5;
+      color: #C53030;
+      border-color: #FEB2B2;
+    }
+
+    .empty-ledger {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--capte-text-muted);
+      font-size: 14px;
     }
 
     .guide-card {
@@ -647,7 +805,7 @@
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
         Back to Web Operations Portal
       </a>
-      <span class="portal-tag">Marketing & Ops Utility v1.0.0</span>
+      <span class="portal-tag">Marketing & Ops Utility v1.1.0</span>
     </div>
 
     <header>
@@ -676,7 +834,7 @@
               <div>
                 <div class="strategy-title">Use 301 Vanity Shortlink (Prevents Dead Prints)</div>
                 <div class="strategy-desc">
-                  Encodes a short vanity route (e.g. <code>https://capte.co/go/apta-expo-2026</code>) instead of a deep URL. You can repoint destination URLs in Webflow anytime without throwing away printed physical collateral.
+                  Encodes a short vanity route (e.g. <code>https://capte.co/go/telematics-guide</code>) instead of a deep URL. You can repoint destination URLs in Webflow anytime without throwing away printed physical collateral.
                 </div>
               </div>
             </label>
@@ -695,7 +853,7 @@
                   Event Short Slug
                   <span class="label-hint">/go/[slug]</span>
                 </label>
-                <input type="text" id="vanity-slug" value="apta-expo-2026" placeholder="e.g. apta-expo-2026">
+                <input type="text" id="vanity-slug" value="telematics-guide" placeholder="e.g. telematics-guide">
               </div>
             </div>
           </div>
@@ -705,7 +863,7 @@
               Target Landing Page (Destination)
               <span class="label-hint">Where users land</span>
             </label>
-            <input type="url" id="target-url" value="https://capte.co/events/2026/apta-transform-expo" placeholder="https://capte.co/...">
+            <input type="url" id="target-url" value="https://capte.co/guides/30-questions-to-ask-your-telematics-provider" placeholder="https://capte.co/...">
           </div>
 
           <div id="webflow-snippet-box" class="webflow-box">
@@ -715,11 +873,11 @@
             </div>
             <div class="webflow-code-line">
               <span class="code-tag">Old Path:</span>
-              <span class="code-val" id="wf-old-path">/go/apta-expo-2026</span>
+              <span class="code-val" id="wf-old-path">/go/telematics-guide</span>
             </div>
             <div class="webflow-code-line">
               <span class="code-tag">Redirect To:</span>
-              <span class="code-val" id="wf-redirect-to">/events/2026/apta-transform-expo?utm_source=live_event&...</span>
+              <span class="code-val" id="wf-redirect-to">/guides/30-questions-to-ask-your-telematics-provider?utm_source=...</span>
             </div>
           </div>
 
@@ -772,7 +930,7 @@
                 utm_campaign
                 <span class="label-hint">Event / Campaign</span>
               </label>
-              <input type="text" id="utm-campaign" value="apta_expo_2026" placeholder="e.g. apta_expo_2026">
+              <input type="text" id="utm-campaign" value="telematics_buyer_guide_2026" placeholder="e.g. telematics_buyer_guide_2026">
             </div>
 
             <div class="form-group">
@@ -872,9 +1030,12 @@
           </div>
 
           <label style="text-align: left; margin-bottom: 4px;">Encoded QR Payload:</label>
-          <div class="encoded-url-box" id="encoded-url-display">https://capte.co/go/apta-expo-2026</div>
+          <div class="encoded-url-box" id="encoded-url-display">https://capte.co/go/telematics-guide</div>
 
           <div class="action-grid">
+            <button type="button" class="btn btn-save btn-full" id="btn-save-ledger">
+              💾 Save to Campaign Ledger
+            </button>
             <button type="button" class="btn btn-primary btn-full" id="btn-download-svg">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
               Download Vector SVG (.svg)
@@ -897,6 +1058,45 @@
 
     </div>
 
+    <!-- Campaign Ledger Section -->
+    <div class="ledger-card" id="ledger-section">
+      <div class="ledger-header">
+        <div class="ledger-title-group">
+          <div class="panel-title">
+            <span>📋</span> Created Campaign Links & History
+          </div>
+          <span class="ledger-count-badge" id="ledger-count">0 Campaigns</span>
+        </div>
+        <div class="ledger-controls">
+          <input type="text" class="search-input" id="ledger-search" placeholder="Search slug, campaign...">
+          <button type="button" class="btn-tbl-action" id="btn-copy-markdown" title="Copy Markdown Table for campaigns.md in GitHub">
+            <span>📄</span> Copy Markdown
+          </button>
+          <button type="button" class="btn-tbl-action" id="btn-export-json" title="Export as JSON backup">
+            <span>📤</span> Export JSON
+          </button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="ledger-table">
+          <thead>
+            <tr>
+              <th>Vanity Shortlink</th>
+              <th>Campaign & Placement</th>
+              <th>Destination URL</th>
+              <th>Specs (ECC / DPI)</th>
+              <th>Date</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ledger-tbody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Guide Card -->
     <div class="guide-card">
       <div class="panel-title">
         <span>🖨️</span> Print Physics & Marketing Operations Guidelines
@@ -946,6 +1146,47 @@
     (function () {
       'use strict';
 
+      const STORAGE_KEY = 'capte_campaign_qr_ledger_v1';
+
+      const DEFAULT_CAMPAIGNS = [
+        {
+          id: 'camp-30-questions-2026',
+          createdAt: '2026-09-22',
+          isVanity: true,
+          vanityDomain: 'https://capte.co',
+          vanitySlug: 'telematics-guide',
+          targetUrl: 'https://capte.co/guides/30-questions-to-ask-your-telematics-provider',
+          utmSource: 'live_event',
+          utmMedium: 'qr_print',
+          utmCampaign: 'telematics_buyer_guide_2026',
+          utmContent: 'booth_banner_main',
+          utmTerm: 'booth_412',
+          ecc: 'Q',
+          color: '#001384',
+          bgColor: '#FFFFFF',
+          qrPayload: 'https://capte.co/go/telematics-guide',
+          fullDestUrl: 'https://capte.co/guides/30-questions-to-ask-your-telematics-provider?utm_source=live_event&utm_medium=qr_print&utm_campaign=telematics_buyer_guide_2026&utm_content=booth_banner_main&utm_term=booth_412'
+        },
+        {
+          id: 'camp-apta-expo-2026',
+          createdAt: '2026-09-21',
+          isVanity: true,
+          vanityDomain: 'https://capte.co',
+          vanitySlug: 'apta-expo-2026',
+          targetUrl: 'https://capte.co/events/2026/apta-transform-expo',
+          utmSource: 'trade_show',
+          utmMedium: 'qr_print',
+          utmCampaign: 'apta_expo_2026',
+          utmContent: 'badge_lanyard',
+          utmTerm: 'booth_412',
+          ecc: 'Q',
+          color: '#001384',
+          bgColor: '#FFFFFF',
+          qrPayload: 'https://capte.co/go/apta-expo-2026',
+          fullDestUrl: 'https://capte.co/events/2026/apta-transform-expo?utm_source=trade_show&utm_medium=qr_print&utm_campaign=apta_expo_2026&utm_content=badge_lanyard&utm_term=booth_412'
+        }
+      ];
+
       const toggleVanity = document.getElementById('toggle-vanity');
       const vanityConfigArea = document.getElementById('vanity-config-area');
       const vanityDomain = document.getElementById('vanity-domain');
@@ -968,12 +1209,19 @@
       const scannabilityBanner = document.getElementById('scannability-banner');
       const scannabilityText = document.getElementById('scannability-text');
 
+      const btnSaveLedger = document.getElementById('btn-save-ledger');
       const btnDownloadSvg = document.getElementById('btn-download-svg');
       const btnDownloadPng = document.getElementById('btn-download-png');
       const btnCopySvg = document.getElementById('btn-copy-svg');
       const btnCopyUrl = document.getElementById('btn-copy-url');
       const toast = document.getElementById('toast');
       const toastMsg = document.getElementById('toast-msg');
+
+      const ledgerTbody = document.getElementById('ledger-tbody');
+      const ledgerCount = document.getElementById('ledger-count');
+      const ledgerSearch = document.getElementById('ledger-search');
+      const btnCopyMarkdown = document.getElementById('btn-copy-markdown');
+      const btnExportJson = document.getElementById('btn-export-json');
 
       let currentEcc = 'Q';
       let currentColor = '#001384';
@@ -1148,7 +1396,207 @@
         }
       });
 
+      function getCampaigns() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_CAMPAIGNS));
+            return DEFAULT_CAMPAIGNS;
+          }
+          return JSON.parse(raw);
+        } catch {
+          return DEFAULT_CAMPAIGNS;
+        }
+      }
+
+      function saveCampaigns(list) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        } catch (err) {
+          console.error('Failed to save to localStorage:', err);
+        }
+        renderLedgerTable();
+      }
+
+      function renderLedgerTable(query = '') {
+        const list = getCampaigns();
+        const filtered = list.filter(item => {
+          if (!query) return true;
+          const q = query.toLowerCase();
+          return (
+            (item.vanitySlug && item.vanitySlug.toLowerCase().includes(q)) ||
+            (item.utmCampaign && item.utmCampaign.toLowerCase().includes(q)) ||
+            (item.targetUrl && item.targetUrl.toLowerCase().includes(q)) ||
+            (item.utmContent && item.utmContent.toLowerCase().includes(q))
+          );
+        });
+
+        ledgerCount.textContent = `${filtered.length} Campaign${filtered.length === 1 ? '' : 's'}`;
+
+        if (filtered.length === 0) {
+          ledgerTbody.innerHTML = `
+            <tr>
+              <td colspan="6" class="empty-ledger">
+                No campaigns found. Save your current configuration above to start tracking.
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        ledgerTbody.innerHTML = filtered.map(item => {
+          const vanityDisplay = item.isVanity ? `/go/${item.vanitySlug}` : 'Direct URL';
+          return `
+            <tr data-id="${item.id}">
+              <td>
+                <span class="slug-badge">${vanityDisplay}</span>
+              </td>
+              <td>
+                <strong>${item.utmCampaign || '—'}</strong><br>
+                <span class="meta-tag">${item.utmSource || 'source'}</span>
+                <span class="meta-tag">${item.utmMedium || 'medium'}</span>
+                ${item.utmContent ? `<span class="meta-tag">${item.utmContent}</span>` : ''}
+              </td>
+              <td style="max-width: 260px; word-break: break-all; font-family: 'Roboto Mono', monospace; font-size: 11px;">
+                ${item.targetUrl}
+              </td>
+              <td>
+                <span class="meta-tag">ECC ${item.ecc || 'Q'}</span>
+                <span class="meta-tag">300 DPI</span>
+              </td>
+              <td style="font-size: 11px; color: var(--capte-text-muted); white-space: nowrap;">
+                ${item.createdAt || '—'}
+              </td>
+              <td style="text-align: right; white-space: nowrap;">
+                <button type="button" class="btn-tbl-action btn-load" data-id="${item.id}" title="Load into Editor">⚡ Load</button>
+                <button type="button" class="btn-tbl-action btn-copy-wf" data-id="${item.id}" title="Copy Webflow 301 Rule">📋 301</button>
+                <button type="button" class="btn-tbl-action btn-del btn-tbl-delete" data-id="${item.id}" title="Delete">🗑️</button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      btnSaveLedger.addEventListener('click', () => {
+        const isVanity = toggleVanity.checked;
+        const cleanSlug = sanitizeSlug(vanitySlug.value);
+        const fullDestUrl = buildFullDestinationUrl();
+        const qrPayloadUrl = isVanity ? `${vanityDomain.value}/go/${cleanSlug}` : fullDestUrl;
+
+        const newEntry = {
+          id: 'camp-' + Date.now(),
+          createdAt: new Date().toISOString().split('T')[0],
+          isVanity,
+          vanityDomain: vanityDomain.value,
+          vanitySlug: cleanSlug,
+          targetUrl: targetUrl.value.trim(),
+          utmSource: utmSource.value.trim(),
+          utmMedium: utmMedium.value.trim(),
+          utmCampaign: utmCampaign.value.trim(),
+          utmContent: utmContent.value.trim(),
+          utmTerm: utmTerm.value.trim(),
+          ecc: currentEcc,
+          color: currentColor,
+          bgColor: currentBgColor,
+          qrPayload: qrPayloadUrl,
+          fullDestUrl
+        };
+
+        const list = getCampaigns();
+        const updated = [newEntry, ...list.filter(i => !(i.isVanity && i.vanitySlug === cleanSlug))];
+        saveCampaigns(updated);
+        showToast(`Saved "/go/${cleanSlug}" to Campaign Ledger!`);
+      });
+
+      ledgerTbody.addEventListener('click', async (e) => {
+        const btnLoad = e.target.closest('.btn-load');
+        const btnCopyWf = e.target.closest('.btn-copy-wf');
+        const btnDel = e.target.closest('.btn-del');
+
+        if (btnLoad) {
+          const id = btnLoad.getAttribute('data-id');
+          const item = getCampaigns().find(i => i.id === id);
+          if (item) {
+            toggleVanity.checked = item.isVanity;
+            vanityDomain.value = item.vanityDomain || 'https://capte.co';
+            vanitySlug.value = item.vanitySlug || '';
+            targetUrl.value = item.targetUrl || '';
+            utmSource.value = item.utmSource || '';
+            utmMedium.value = item.utmMedium || '';
+            utmCampaign.value = item.utmCampaign || '';
+            utmContent.value = item.utmContent || '';
+            utmTerm.value = item.utmTerm || '';
+            currentEcc = item.ecc || 'Q';
+            currentColor = item.color || '#001384';
+            currentBgColor = item.bgColor || '#FFFFFF';
+
+            document.querySelectorAll('.pill-label').forEach(l => {
+              l.classList.toggle('active', l.getAttribute('data-ecc') === currentEcc);
+            });
+            document.querySelectorAll('.color-card').forEach(c => {
+              c.classList.toggle('active', c.getAttribute('data-color') === currentColor);
+            });
+
+            updateState();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            showToast(`Loaded "${item.vanitySlug}" into editor!`);
+          }
+        } else if (btnCopyWf) {
+          const id = btnCopyWf.getAttribute('data-id');
+          const item = getCampaigns().find(i => i.id === id);
+          if (item) {
+            let destPath = item.fullDestUrl;
+            try {
+              const u = new URL(item.fullDestUrl);
+              destPath = u.pathname + u.search;
+            } catch {}
+            const text = `Old Path: /go/${item.vanitySlug}  ->  Redirect To: ${destPath}`;
+            if (navigator.clipboard) {
+              await navigator.clipboard.writeText(text);
+              showToast('Webflow 301 rule copied!');
+            }
+          }
+        } else if (btnDel) {
+          const id = btnDel.getAttribute('data-id');
+          const list = getCampaigns().filter(i => i.id !== id);
+          saveCampaigns(list);
+          showToast('Campaign deleted from ledger.');
+        }
+      });
+
+      ledgerSearch.addEventListener('input', (e) => {
+        renderLedgerTable(e.target.value.trim());
+      });
+
+      btnCopyMarkdown.addEventListener('click', async () => {
+        const list = getCampaigns();
+        let md = `| Date | Vanity Route | Campaign Slug | Channel / Placement | Target Destination | ECC |\n`;
+        md += `| :--- | :--- | :--- | :--- | :--- | :--- |\n`;
+        list.forEach(i => {
+          const route = i.isVanity ? `\`/go/${i.vanitySlug}\`` : 'Direct';
+          md += `| ${i.createdAt} | ${route} | \`${i.utmCampaign}\` | \`${i.utmSource} / ${i.utmContent}\` | [${i.targetUrl}](${i.fullDestUrl}) | Level ${i.ecc} |\n`;
+        });
+
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(md);
+          showToast('Markdown table copied for campaigns.md!');
+        }
+      });
+
+      btnExportJson.addEventListener('click', () => {
+        const list = getCampaigns();
+        const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(list, null, 2));
+        const a = document.createElement('a');
+        a.href = dataStr;
+        a.download = `capte-campaign-ledger-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Campaign ledger JSON exported!');
+      });
+
       updateState();
+      renderLedgerTable();
     })();
   </script>
 </body>
