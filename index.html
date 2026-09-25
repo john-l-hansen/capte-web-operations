@@ -37,13 +37,29 @@
       color: var(--capte-text);
       background-color: var(--capte-surface-muted);
       line-height: 1.6;
-      padding: 48px 24px;
+      margin: 0;
+      padding: 0 24px 48px;
+      position: relative;
+      min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 240px;
+      background-color: var(--capte-blue);
+      z-index: 0;
     }
 
     .container {
       max-width: 960px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      padding-top: 64px;
     }
 
     header {
@@ -51,8 +67,8 @@
       border-radius: var(--capte-radius-lg);
       border: 1px solid var(--capte-border);
       padding: 40px;
-      box-shadow: var(--capte-shadow-md);
-      margin-bottom: 32px;
+      box-shadow: 0 10px 30px rgba(0, 19, 132, 0.08);
+      margin-bottom: 36px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -285,9 +301,24 @@
       padding-top: 24px;
       border-top: 1px solid var(--capte-border);
     }
+
+    @media (max-width: 768px) {
+      .hero-bg {
+        height: 180px;
+      }
+      .container {
+        padding-top: 32px;
+      }
+      header {
+        padding: 24px;
+        margin-bottom: 28px;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <div class="hero-bg"></div>
 
   <div class="container">
     <header>
