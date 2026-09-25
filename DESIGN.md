@@ -11,6 +11,7 @@
 - **ZERO Arbitrary Values:** NEVER write raw hex color codes (e.g. `#172b4d`) or arbitrary pixel values for padding, margin, or gaps (e.g. `padding: 18px`). ALL visual values MUST use CSS Custom Properties (`var(--capte-...)` or component-level variables with token fallbacks).
 - **Semantic Markup:** Use clean HTML5 tags (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`, `<button>`, `<a>`). Avoid unnecessary nested `<div>` containers.
 - **Client-First Class Structure:** Follow Webflow Client-First class naming strictly (`page_wrapper`, `main-wrapper`, `section_[name]`, `padding-global`, `container-[size]`, `padding-section-[size]`, `[component]_[element]`).
+- **Webflow Native Migration Intent:** All components, utilities, and interactive experiences must be designed and coded with the strategic roadmap of migrating them into the Webflow site (`capte.co`) when able. Keep DOM structures clean, modular, and token-bound so they can convert effortlessly to native Webflow elements, CMS structures, and Code Components (`@webflow/react`).
 
 ---
 

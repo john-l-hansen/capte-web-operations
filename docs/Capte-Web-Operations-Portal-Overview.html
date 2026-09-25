@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capte Technologies — Design & Web Operations Portal Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --capte-blue: #001384;
+      --capte-blue-accent: #093AEC;
+      --capte-orange: #FC5522;
+      --capte-dark: #111523;
+      --capte-muted: #5F6775;
+      --capte-bg: #F5F7FC;
+      --capte-surface: #FFFFFF;
+      --capte-border: #DCE2EE;
+      --capte-border-light: #EBF0F8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--capte-dark);
+      background-color: var(--capte-bg);
+      line-height: 1.65;
+      padding: 40px 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .doc-container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--capte-surface);
+      padding: 56px 64px;
+      border-radius: 12px;
+      border: 1px solid var(--capte-border);
+      box-shadow: 0 4px 20px rgba(0, 19, 132, 0.05);
+    }
+
+    .header {
+      border-bottom: 2px solid var(--capte-border-light);
+      padding-bottom: 28px;
+      margin-bottom: 32px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--capte-blue);
+      background: #EAF0FF;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--capte-muted);
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .metadata-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 24px;
+      background: #F8FAFD;
+      border: 1px solid var(--capte-border-light);
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-size: 13px;
+    }
+
+    .meta-item strong {
+      color: var(--capte-blue);
+      font-weight: 600;
+    }
+
+    .meta-item a {
+      color: var(--capte-blue-accent);
+      text-decoration: none;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      margin-top: 36px;
+      margin-bottom: 16px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--capte-border-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--capte-dark);
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 14.5px;
+      color: var(--capte-dark);
+      margin-bottom: 16px;
+    }
+
+    ul, ol {
+      margin-left: 24px;
+      margin-bottom: 16px;
+      font-size: 14.5px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0 28px 0;
+      font-size: 13.5px;
+    }
+
+    th {
+      background: #F2F5FC;
+      color: var(--capte-blue);
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+      border: 1px solid var(--capte-border);
+    }
+
+    td {
+      padding: 10px 14px;
+      border: 1px solid var(--capte-border);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td {
+      background: #FAFBFE;
+    }
+
+    .diagram {
+      background: #0F1424;
+      color: #E2E8F0;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11.5px;
+      line-height: 1.5;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 20px 0;
+      white-space: pre;
+    }
+
+    .callout {
+      background: #F4F7FE;
+      border-left: 4px solid var(--capte-blue);
+      padding: 14px 18px;
+      border-radius: 0 6px 6px 0;
+      margin: 20px 0;
+      font-size: 13.5px;
+    }
+
+    .callout strong {
+      color: var(--capte-blue);
+    }
+
+    code {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12.5px;
+      background: #EEF2FA;
+      color: var(--capte-blue);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--capte-border-light);
+      font-size: 12px;
+      color: var(--capte-muted);
+      text-align: center;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .doc-container {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .diagram {
+        background: #f4f6fb;
+        color: #111523;
+        border: 1px solid #dce2ee;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="doc-container">
+    <div class="header">
+      <span class="badge">Capte Technologies Inc. — Operations Document</span>
+      <h1>Design & Web Operations Portal</h1>
+      <div class="subtitle">Executive Overview, System Architecture & Operational Directory</div>
+
+      <div class="metadata-grid">
+        <div class="meta-item"><strong>Document Owner:</strong> John Hansen (<a href="mailto:john@capte.co">john@capte.co</a>)</div>
+        <div class="meta-item"><strong>Entity:</strong> Capte Technologies Inc. (Los Angeles, CA)</div>
+        <div class="meta-item"><strong>Production Runtime:</strong> <a href="https://capte.co" target="_blank">capte.co</a> (Webflow Enterprise)</div>
+        <div class="meta-item"><strong>Repository:</strong> <a href="https://github.com/john-l-hansen/capte-web-operations" target="_blank">john-l-hansen/capte-web-operations</a></div>
+        <div class="meta-item"><strong>Figma Design System:</strong> File ID <code>oFZw7IVtiURZG2x5XhAKyD</code></div>
+        <div class="meta-item"><strong>Classification:</strong> Internal Operations / Share Drive File</div>
+      </div>
+    </div>
+
+    <h2>1. Executive Summary & Business Mission</h2>
+    <p>
+      Capte Technologies engineers industrial IoT, smart telemetry, and precision positioning systems for transit agencies, municipal vehicle fleets, and industrial infrastructure across North America and Europe.
+    </p>
+    <p>
+      The <strong>Capte Design & Web Operations Portal</strong> is the central operational nervous system connecting brand design in Figma, version-controlled engineering in GitHub, live production in Webflow, and internal field tools for sales and marketing.
+    </p>
+
+    <div class="callout">
+      <strong>Strategic Convergence Intent:</strong> The explicit roadmap for all components, tools, and digital experiences across this repository is <strong>progressive migration and native integration into the primary Webflow site (<code>capte.co</code>) when able</strong>. All architecture and DOM structures are engineered for migration readiness into native Webflow elements, CMS bindings, and visual Code Components (<code>@webflow/react</code>).
+    </div>
+
+    <div class="diagram">       ┌────────────────────────────────────────────────────────┐
+       │                 Figma Design System                    │
+       │         (Visual Tokens, Layouts & Variants)            │
+       └───────────────────────────┬────────────────────────────┘
+                                   │ Daily Automated Sync
+                                   ▼ (GitHub Actions CI/CD)
+ ┌──────────────────────────────────────────────────────────────────────────────────┐
+ │                      GitHub Repository: capte-web-operations                     │
+ │  ┌─────────────────────────┐  ┌────────────────────────┐  ┌───────────────────┐  │
+ │  │ design-system/          │  │ components/            │  │ tools/            │  │
+ │  │ tokens.json, tokens.css │  │ Embeds & React (.tsx)  │  │ Marketing Apps    │  │
+ │  └─────────────────────────┘  └────────────────────────┘  └───────────────────┘  │
+ └─────────────────────────┬──────────────────────────────────────┬─────────────────┘
+                           │ Reviewed PR Deploy                   │ Internal Utilities
+                           ▼                                      ▼
+       ┌──────────────────────────────────────┐     ┌───────────────────────────────┐
+       │          Webflow Production          │ ◄───│  Progressive Native Migration │
+       │     (capte.co Live Site Embeds)      │     │  (Components, Tools, CMS)     │
+       └──────────────────────────────────────┘     └───────────────────────────────┘</div>
+
+    <h2>2. Cross-Platform Source Authority</h2>
+    <p>Operational authority is partitioned strictly across four primary systems:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Authoritative Scope</th>
+          <th>Carried into Production</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Google Drive</strong></td>
+          <td>Business strategy, sales collateral requirements, legal and marketing copy.</td>
+          <td>Approved doc URLs, stakeholder decisions, revision dates.</td>
+        </tr>
+        <tr>
+          <td><strong>Figma</strong></td>
+          <td>Visual design intent, UI layouts, interactive component states, design tokens.</td>
+          <td>Design system node URLs, responsive breakpoint specifications.</td>
+        </tr>
+        <tr>
+          <td><strong>GitHub</strong></td>
+          <td>Implementation code, version history, CI/CD pipelines, token build outputs.</td>
+          <td>Source of truth commit SHAs, PR reviews, release tags.</td>
+        </tr>
+        <tr>
+          <td><strong>Webflow</strong></td>
+          <td>Live deployed production state, CMS collections, page templates, 301 redirects, and ultimate convergence destination.</td>
+          <td>Published embeds, vanity routes, live runtime DOM.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>3. Portal Inventory & Capabilities</h2>
+
+    <h3>Section A: Internal Marketing & Operations Utilities</h3>
+    <ul>
+      <li>
+        <strong>Campaign Link & QR Generator (<code>tools/campaign-qr-generator/</code>)</strong>:
+        Eliminates "dead prints" and attribution loss. Automatically pairs physical marketing collateral (booths, banners, vehicle wraps, handouts) with Webflow 301 vanity routes (<code>/go/[slug]</code>) and forced UTM schemas. Features native Reed-Solomon error correction and exports high-DPI vector SVG and 300-DPI PNGs.
+      </li>
+      <li>
+        <strong>Blog Section-Anchor Extractor (<code>tools/blog-section-anchors/</code>)</strong>:
+        One-click bookmarklet enabling team members to extract deep anchor links (H2/H3 headers) from any live article on <code>capte.co</code> for precise social media threads and sales follow-ups.
+      </li>
+      <li>
+        <strong>Internal Email Signature Generator (<code>tools/email-signature/</code>)</strong>:
+        Word-engine-compliant Outlook email signature builder for Los Angeles, Versailles, and Amsterdam personnel with 1-click rich HTML and plain-text clipboard copy.
+      </li>
+    </ul>
+
+    <h3>Section B: Active Web Components (Webflow Embeds)</h3>
+    <ul>
+      <li>
+        <strong>Promo Card (<code>components/promo-card/</code>)</strong>:
+        Region-gated, campaign-driven promotional floating card (desktop) and bottom sheet (mobile) for industry event promotions. Utilizes Cloudflare same-origin <code>/cdn-cgi/trace</code> edge geo-detection with zero third-party tracking APIs or latency.
+      </li>
+      <li>
+        <strong>Dual-Delivery Architecture</strong>:
+        Every web component is authored both as a visual React Code Component (with Webflow Designer properties) and as a self-contained vanilla HTML embed.
+      </li>
+    </ul>
+
+    <h3>Section C: Codified Brand Design System & Tokens</h3>
+    <ul>
+      <li><strong>217 Codified Variables</strong>: Systematized colors, typography scales, spacing units, radii, and elevations.</li>
+      <li><strong>Automated Daily CI/CD</strong>: Synced directly from Figma REST API via GitHub Actions into <code>tokens.css</code> and <code>tokens.json</code>.</li>
+      <li><strong>Baseline Palette</strong>: Primary Deep Blue (<code>#001384</code>), Accent Blue (<code>#093AEC</code>), Accent Orange (<code>#FC5522</code>), Surface Tint (<code>#F2F4FC</code>).</li>
+    </ul>
+
+    <h2>4. Governance & Engineering Principles</h2>
+    <div class="callout">
+      <strong>Core Standard:</strong> All components adhere to the supreme laws in <code>CONSTITUTION.md</code>:
+      <ul style="margin-top: 8px; margin-bottom: 0;">
+        <li><strong>Strict CSS Scoping:</strong> Component-specific prefixes (e.g. <code>.promo-card_*</code>) prevent global styling collisions.</li>
+        <li><strong>Fail-Closed Design:</strong> Components fail silently rather than showing broken UI states.</li>
+        <li><strong>Zero Client Secrets & No Third-Party Trackers:</strong> First-party edge APIs only; zero API keys exposed in frontend code.</li>
+      </ul>
+    </div>
+
+    <h2>5. Change Management & Release Protocol</h2>
+    <p>
+      Mechanisms are versioned via Semantic Versioning in <code>CHANGELOG.md</code>. Live marketing campaigns (e.g., APTA Expo 2026) are tagged in Git upon publication:
+    </p>
+    <div class="diagram">git tag &lt;component-name&gt;-&lt;campaign-id&gt;   # e.g., promo-card-apta-2026-transform-expo
+git push origin --tags</div>
+    <p>All active and historic campaign configurations are tracked in each component's <code>campaigns.md</code> ledger.</p>
+
+    <h2>6. Support & Escalations</h2>
+    <p>
+      For questions, token updates, security disclosures, or component requests, contact <strong>John Hansen</strong> at <a href="mailto:john@capte.co" style="color:var(--capte-blue); font-weight:600;">john@capte.co</a> or submit an issue via <a href="https://github.com/john-l-hansen/capte-web-operations/issues" target="_blank" style="color:var(--capte-blue); font-weight:600;">GitHub Issues</a>.
+    </p>
+
+    <div class="footer">
+      Capte Technologies Inc. &bull; Digital Design & Web Operations &bull; Los Angeles, CA &bull; <a href="https://capte.co" target="_blank" style="color:var(--capte-blue); text-decoration:none;">capte.co</a>
+    </div>
+  </div>
+
+</body>
+</html>

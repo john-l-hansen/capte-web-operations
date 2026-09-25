@@ -9,9 +9,9 @@ This repository serves as the **central source of truth, version control, and mu
 ## 🏛️ 1. The Foundation — Why & How
 
 ### Why this repository exists
-Capte's public marketing website is hosted on Webflow. While Webflow provides visual page design, custom interactive UI, dynamic region gating, and specialized brand features require custom code embeds. 
-- **Webflow Designer is our deployment target, not our archive.** Code pasted directly into Webflow lacks version history, pull request reviews, and historical diffing.
-- This repository houses the canonical source code, design token baselines, and campaign release history.
+Capte's public marketing website is hosted on Webflow. While Webflow provides visual page design, custom interactive UI, dynamic region gating, specialized utilities, and brand experiences are developed, tested, and maintained in this environment.
+- **Webflow Designer is our deployment target and ultimate migration destination.** The explicit strategic intent for all components, utilities, and digital experiences across this repository is progressive migration into the primary Webflow site (`capte.co`) when able.
+- **GitHub is our version-controlled source of truth.** Code pasted directly into Webflow lacks version history, PR reviews, and historical diffing. This repository houses the canonical source code, design token baselines, and campaign release history.
 
 ### The Multi-Agent Operating Model
 We operate across specialized AI agents (Claude, ChatGPT / Codex, Antigravity) with **John Hansen** as the lead designer, web ops owner, and final authority.
@@ -20,7 +20,7 @@ We operate across specialized AI agents (Claude, ChatGPT / Codex, Antigravity) w
   - 📄 **Google Drive**: Strategic requirements, sales copy, approved business decisions.
   - 🎨 **Figma**: Visual design intent, interactive UI states, layout tokens (synced daily via GitHub Actions).
   - 💻 **GitHub**: Implementation code, pull request reviews, technical documentation.
-  - 🌐 **Webflow**: Live production runtime and published embed delivery.
+  - 🌐 **Webflow**: Live production runtime, published embed delivery, and ultimate convergence destination.
 
 - **Automated Cloud Sync**: A daily GitHub Actions workflow ([`.github/workflows/figma-sync.yml`](.github/workflows/figma-sync.yml)) queries Figma for token/component changes and automatically opens a Pull Request for John Hansen.
 
@@ -31,7 +31,8 @@ For full operating procedures, startup protocols, and handoff templates, see [do
 ## 🧩 2. The Components — Why & How
 
 ### Why our components are built this way
-Every component is engineered with **Dual-Delivery Webflow Compatibility**:
+Every component is engineered with **Dual-Delivery Webflow Compatibility & Future Migration Readiness**:
+- **Progressive Webflow Convergence**: Built with clean semantic markup, modular boundaries, and token variables so experiences can transition smoothly to native Webflow components, CMS bindings, and page embeds as platform capabilities permit.
 - **Visual Webflow Code Components**: Written in TypeScript + React (`@webflow/react` + `@webflow/data-types`) with visual properties (inputs, toggles, link pickers, asset uploaders) so designers can edit campaign properties directly in the Webflow Designer panel.
 - **Zero-Dependency Vanilla Code**: Self-contained `.html` embed payloads for instant copy-pasting into Webflow Custom Code Embed elements.
 - **Strict CSS Scoping**: Component styles (`.promo-card`, `--promo-*`) are strictly namespaced with 1:1 Figma design tokens (`var(--capte-...)`).

@@ -60,14 +60,15 @@ Rollback Reference:
 
 ## Part 2: The Components — The Why & How
 
-### 2.1 Why Custom Webflow Components Exist
-Capte's public website ([capte.co](https://www.capte.co)) is hosted on Webflow. While Webflow provides visual layout tools, complex interactive behaviors, dynamic geo-gated promotions, and specialized UI integrations require custom code embeds.
+### 2.1 Why Custom Webflow Components Exist & The Migration Intent
+Capte's public website ([capte.co](https://www.capte.co)) is hosted on Webflow. While Webflow provides visual layout tools, complex interactive behaviors, dynamic geo-gated promotions, specialized utilities, and brand experiences require specialized code engineering.
 
-**The Problem**: Webflow Embed elements have no built-in version history, no code diffing, and no automated rollback tracking.
-**The Solution**: Every custom embed is authored, reviewed, versioned, and documented in `capte-web-components/components/` first. Webflow is our deployment target; GitHub is our archive and source of truth.
+- **The Problem**: Webflow Embed elements have no built-in version history, no code diffing, and no automated rollback tracking.
+- **The Solution**: Every custom embed is authored, reviewed, versioned, and documented in `components/` first. Webflow is our deployment target; GitHub is our archive and source of truth.
+- **The Long-Term Intent**: The explicit architectural goal for all components, utilities, and digital experiences across this repository is **progressive migration and native integration into the Webflow site (`capte.co`) when able**, whether as native Webflow components, CMS-driven experiences, Webflow Apps, or visual Code Components.
 
 ### 2.2 Component Standards & Architecture
-Every component adheres to five architectural pillars:
+Every component adheres to six architectural pillars:
 
 1. **Single-File Embed Payload (`<component-name>.html`)**:
    - Contains semantic HTML, encapsulated `<style>`, and self-executing vanilla `<script>`.
@@ -85,6 +86,8 @@ Every component adheres to five architectural pillars:
    - Use semantic landmarks (`role="region"`, `aria-label`).
    - Ensure all controls are native accessible buttons/links with visible focus rings.
    - Respect user motion preferences via `@media (prefers-reduced-motion: reduce)`.
+6. **Webflow Native Migration Readiness**:
+   - Code and DOM structure must be structured for straightforward translation into Webflow native elements, CMS collection bindings, and visual Code Components (`@webflow/react`) as platform features expand.
 
 ### 2.3 Component Lifecycle: From Idea to Live Production
 

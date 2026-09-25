@@ -12,7 +12,7 @@ For detailed operational procedures, handoff templates, conflict resolution, and
 - **Reporting Issues**: Direct urgent flags, security disclosures, or design escalations to [john@capte.co](mailto:john@capte.co).
 - **Company**: Capte Technologies engineers industrial IoT, smart telemetry, and precision positioning systems for transit agencies, vehicle fleets, and industrial infrastructure across the U.S. and Europe.
 - **Tone & Aesthetic ("Technically Elegant")**: Every design and component must be clear, precise, restrained, accessible, and robust. We prioritize industrial clarity and clean ergonomics over decorative noise.
-- **Operational Reality**: Webflow Designer is our deployment target, but GitHub is our version-controlled source of truth.
+- **Operational Reality**: Webflow Designer is our production deployment target and the ultimate migration destination for all components and experiences when able; GitHub is our canonical version-controlled source of truth.
 
 ---
 
@@ -91,7 +91,7 @@ Key baseline highlights:
 
 ## 5. Webflow Component Architecture Standards
 
-Every component in this repository is built with **Dual-Delivery Webflow Compatibility**:
+Every component in this repository is built with **Dual-Delivery Webflow Compatibility & Migration Readiness**:
 
 1. **Visual Code Component (`.tsx` + `.webflow.tsx`)**:
    - Uses `@webflow/react` and `@webflow/data-types` to declare editable props (`props.Text`, `props.Link`, `props.Boolean`, `props.Image`, `props.Variant`).
@@ -103,6 +103,7 @@ Every component in this repository is built with **Dual-Delivery Webflow Compati
 4. **Fail-Closed Robustness**: When external conditions (e.g. network calls, geo-detection, DOM elements) fail or cannot be determined, components must fail closed (remain hidden gracefully) rather than render broken states.
 5. **Cloudflare Geo-Targeting**: Leverage same-origin `/cdn-cgi/trace` on production `capte.co` to avoid third-party geolocation APIs, rate limits, and browser GPS prompts. Always support `?promoDebug=1` and `?promoCountry=<code>` for staging QA.
 6. **Accessibility (a11y)**: Semantic HTML landmarks, clear ARIA labeling, full keyboard navigability with visible focus indicators, and `@media (prefers-reduced-motion: reduce)` transitions disabled.
+7. **Webflow Migration Intent**: The explicit roadmap intent for all components, utilities, and interactive experiences is progressive migration into the primary Webflow site (`capte.co`) when able. Architecture and markup must facilitate seamless transition to native Webflow components, CMS bindings, and page embeds.
 
 ---
 

@@ -30,7 +30,7 @@ Authority is strictly partitioned by functional domain. Recency of timestamp or 
 1. **Google Drive (Strategy & Copy):** Authoritative for business requirements, sales specifications, marketing approvals, executive decisions, and final copy.
 2. **Figma (Visual Design & Tokens):** Authoritative for approved visual design intent, component layouts, interactive states, design tokens, and spacing metrics.
 3. **GitHub (Implementation & Versioning):** Authoritative for source code, version history, code reviews, technical documentation, and deployment archives.
-4. **Webflow (Live Production Runtime):** Authoritative for the active runtime DOM, published site state, and embed delivery. Webflow is our deployment target, never our code archive.
+4. **Webflow (Live Production Runtime & Migration Destination):** Authoritative for the active runtime DOM, published site state, and embed delivery. Webflow is our production deployment target and the ultimate destination for all components and experiences when able; GitHub is our canonical source of truth and code archive.
 
 ---
 
@@ -93,6 +93,7 @@ Every visual asset, layout, component, and line of code must adhere to the stand
    - **Visual Code Component**: TypeScript + React implementation (`ComponentName.tsx` + `ComponentName.webflow.tsx`) declaring visual props for Webflow Designer CLI synchronization.
    - **Self-Contained Fallback Embed**: Standalone `.html` payload for direct paste into Webflow Custom Code Embeds.
 3. **Property Binding Integrity:** Component properties must map directly to approved design tokens and semantic data types. Default values must align with the current active campaign ledger.
+4. **Webflow Migration & Convergence Mandate:** The explicit architectural intent for all custom components, marketing utilities, interactive tools, and digital experiences developed in this repository is progressive migration and native integration into the Webflow site (`capte.co`) as platform capabilities, Code Components (`@webflow/react`), Webflow Apps, and site architecture allow. All components must be built with future Webflow native migration readiness in mind.
 
 ---
 
