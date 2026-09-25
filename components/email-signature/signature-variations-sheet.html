@@ -52,20 +52,6 @@
       margin-bottom: 32px;
     }
 
-    .badge {
-      display: inline-block;
-      font-family: 'Roboto Mono', monospace;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--capte-blue);
-      background: #EAF0FF;
-      padding: 4px 10px;
-      border-radius: 4px;
-      margin-bottom: 12px;
-    }
-
     h1 {
       font-size: 26px;
       font-weight: 700;
@@ -128,16 +114,6 @@
       color: var(--capte-blue);
     }
 
-    .card-tag {
-      font-family: 'Roboto Mono', monospace;
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--capte-text-muted);
-      background: #E6E8EC;
-      padding: 2px 6px;
-      border-radius: 3px;
-    }
-
     .card-body {
       padding: 24px;
       flex-grow: 1;
@@ -170,21 +146,19 @@
 
   <div class="container">
     <header>
-      <span class="badge">Team Review Sheet</span>
       <h1>Capte Technologies — Email Signature System Variations</h1>
       <p class="lead">
         Visual reference sheet displaying official Outlook-compliant HTML signatures with the official Capte brand logo tile (189×92 display size, 22px clear space) across Los Angeles, Versailles, and Amsterdam offices, plus Reply variants and plain text fallbacks.
       </p>
     </header>
 
-    <!-- Section 1: Standard New Email Signatures (Domestic Default) -->
-    <h2 class="section-title">1. New Email Signatures (Default Domestic Office Formats)</h2>
+    <!-- Section 1: Standard New Email Signatures -->
+    <h2 class="section-title">New Email Signatures</h2>
     <div class="grid-3">
       <!-- Los Angeles -->
       <div class="sheet-card">
         <div class="card-header">
-          <span class="card-title">Los Angeles, CA</span>
-          <span class="card-tag">EN • Domestic</span>
+          <span class="card-title">Los Angeles</span>
         </div>
         <div class="card-body">
           <table role="presentation" lang="en" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
@@ -219,8 +193,7 @@
       <!-- Versailles -->
       <div class="sheet-card">
         <div class="card-header">
-          <span class="card-title">Versailles, France</span>
-          <span class="card-tag">FR • Domestic</span>
+          <span class="card-title">Versailles</span>
         </div>
         <div class="card-body">
           <table role="presentation" lang="fr" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
@@ -255,8 +228,7 @@
       <!-- Amsterdam -->
       <div class="sheet-card">
         <div class="card-header">
-          <span class="card-title">Amsterdam, Netherlands</span>
-          <span class="card-tag">NL • Domestic</span>
+          <span class="card-title">Amsterdam</span>
         </div>
         <div class="card-body">
           <table role="presentation" lang="nl" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
@@ -290,13 +262,12 @@
     </div>
 
     <!-- Section 2: Reply Variant & Plain Text Format -->
-    <h2 class="section-title">2. Replies / Forwards Variant & Plain Text Fallback</h2>
+    <h2 class="section-title">Replies & Plain Text</h2>
     <div class="grid-2">
       <!-- Reply Variant -->
       <div class="sheet-card">
         <div class="card-header">
-          <span class="card-title">Replies & Forwards Variant</span>
-          <span class="card-tag">Compact • 0px Indent</span>
+          <span class="card-title">Replies & Forwards</span>
         </div>
         <div class="card-body">
           <table role="presentation" lang="en" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
@@ -315,8 +286,7 @@
       <!-- Plain Text Variant -->
       <div class="sheet-card">
         <div class="card-header">
-          <span class="card-title">Plain Text Variant</span>
-          <span class="card-tag">Outlook Mobile / Text</span>
+          <span class="card-title">Plain Text</span>
         </div>
         <div class="card-body">
           <div class="plain-text-box">Sarah Chen (she/her)
