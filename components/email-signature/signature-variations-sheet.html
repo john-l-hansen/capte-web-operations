@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capte Technologies — Email Signature Variations Review Sheet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --capte-blue: #001384;
+      --capte-blue-hover: #093AEC;
+      --capte-surface: #FFFFFF;
+      --capte-surface-muted: #F2F4FC;
+      --capte-border: #DDE2EE;
+      --capte-text: #0F0F11;
+      --capte-text-muted: #5C6470;
+      --capte-radius-sm: 4px;
+      --capte-radius-md: 8px;
+      --capte-radius-lg: 12px;
+      --capte-shadow-sm: 0 2px 8px rgba(0, 19, 132, 0.04);
+      --capte-shadow-md: 0 6px 24px rgba(0, 19, 132, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--capte-text);
+      background-color: var(--capte-surface-muted);
+      padding: 40px 24px 80px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--capte-surface);
+      border-radius: var(--capte-radius-lg);
+      border: 1px solid var(--capte-border);
+      padding: 32px 36px;
+      box-shadow: var(--capte-shadow-md);
+      margin-bottom: 32px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--capte-blue);
+      background: #EAF0FF;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      margin-bottom: 8px;
+    }
+
+    p.lead {
+      color: var(--capte-text-muted);
+      font-size: 15px;
+      max-width: 860px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      margin: 32px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .sheet-card {
+      background: var(--capte-surface);
+      border-radius: var(--capte-radius-md);
+      border: 1px solid var(--capte-border);
+      box-shadow: var(--capte-shadow-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      padding: 14px 20px;
+      background: #FAFBFF;
+      border-bottom: 1px solid var(--capte-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--capte-blue);
+    }
+
+    .card-tag {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--capte-text-muted);
+      background: #E6E8EC;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .card-body {
+      padding: 24px;
+      flex-grow: 1;
+      overflow-x: auto;
+    }
+
+    .plain-text-box {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      color: #282D37;
+      background: #F2F3F6;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-sm);
+      padding: 16px;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--capte-text-muted);
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--capte-border);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge">Team Review Sheet</span>
+      <h1>Capte Technologies — Email Signature System Variations</h1>
+      <p class="lead">
+        Visual reference sheet displaying official Outlook-compliant HTML signatures with the official Capte brand logo tile (189×92 display size, 22px clear space) across Los Angeles, Versailles, and Amsterdam offices, plus Reply variants and plain text fallbacks.
+      </p>
+    </header>
+
+    <!-- Section 1: Standard New Email Signatures (Domestic Default) -->
+    <h2 class="section-title">1. New Email Signatures (Default Domestic Office Formats)</h2>
+    <div class="grid-3">
+      <!-- Los Angeles -->
+      <div class="sheet-card">
+        <div class="card-header">
+          <span class="card-title">Los Angeles, CA</span>
+          <span class="card-tag">EN • Domestic</span>
+        </div>
+        <div class="card-body">
+          <table role="presentation" lang="en" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
+            <tr><td style="padding:0;">
+              <a href="https://www.capte.co/?utm_source=email-signature&utm_medium=email&utm_campaign=employee-signature&utm_content=office-la" style="text-decoration:none;"><img src="capte-email-signature-logo@2x.png" width="189" height="92" alt="Capte Technologies" style="display:block;border:0;outline:none;width:189px;height:92px;"></a>
+            </td></tr>
+            <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#001384;padding:2px 0 0 22px;">John Hansen</td></tr>
+            <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#0F0F11;padding:0 0 10px 22px;">Lead Web/Print Designer & Web Operations</td></tr>
+            <tr><td style="padding:0 0 0 22px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+                <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">Mobile</td>
+                <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:+18582312916" style="color:#0F0F11;text-decoration:none;">+1 858 231 2916</a></td>
+              </tr></table>
+            </td></tr>
+            <tr><td style="padding:0 0 0 22px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+                <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">Email</td>
+                <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="mailto:john@capte.co" style="color:#0F0F11;text-decoration:none;">john@capte.co</a></td>
+              </tr></table>
+            </td></tr>
+            <tr><td style="padding:0 0 0 22px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+                <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">Web</td>
+                <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="https://www.capte.co/?utm_source=email-signature&utm_medium=email&utm_campaign=employee-signature&utm_content=office-la" style="color:#001384;text-decoration:underline;">capte.co</a></td>
+              </tr></table>
+            </td></tr>
+            <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#5C6470;padding:10px 0 0 22px;">500 S Grand Ave, Suite 2060<br>Los Angeles, CA 90071, United States</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Versailles -->
+      <div class="sheet-card">
+        <div class="card-header">
+          <span class="card-title">Versailles, France</span>
+          <span class="card-tag">FR • Domestic</span>
+        </div>
+        <div class="card-body">
+          <table role="presentation" lang="fr" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
+            <tr><td style="padding:0;">
+              <a href="https://www.capte.co/?utm_source=email-signature&utm_medium=email&utm_campaign=employee-signature&utm_content=office-fr" style="text-decoration:none;"><img src="capte-email-signature-logo@2x.png" width="189" height="92" alt="Capte Technologies" style="display:block;border:0;outline:none;width:189px;height:92px;"></a>
+            </td></tr>
+            <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#001384;padding:2px 0 0 22px;">Pierre Dubois <span style="font-weight:normal;font-size:13px;color:#5C6470;">&nbsp;(il/lui)</span></td></tr>
+            <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#0F0F11;padding:0 0 10px 22px;">Ingénieur Systèmes IoT</td></tr>
+            <tr><td style="padding:0 0 0 22px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+                <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">Portable</td>
+                <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:+33612345678" style="color:#0F0F11;text-decoration:none;">+33 6 12 34 56 78</a></td>
+              </tr></table>
+            </td></tr>
+            <tr><td style="padding:0 0 0 22px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+                <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">E-mail</td>
+                <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="mailto:pierre@capte.co" style="color:#0F0F11;text-decoration:none;">pierre@capte.co</a></td>
+              </tr></table>
+            </td></tr>
+            <tr><td style="padding:0 0 0 22px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+                <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">Site web</td>
+                <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="https://www.capte.co/?utm_source=email-signature&utm_medium=email&utm_campaign=employee-signature&utm_content=office-fr" style="color:#001384;text-decoration:underline;">capte.co</a></td>
+              </tr></table>
+            </td></tr>
+            <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#5C6470;padding:10px 0 0 22px;">7 rue des Chantiers<br>78000 Versailles, France</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Amsterdam -->
+      <div class="sheet-card">
+        <div class="card-header">
+          <span class="card-title">Amsterdam, Netherlands</span>
+          <span class="card-tag">NL • Domestic</span>
+        </div>
+        <div class="card-body">
+          <table role="presentation" lang="nl" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
+            <tr><td style="padding:0;">
+              <a href="https://www.capte.co/?utm_source=email-signature&utm_medium=email&utm_campaign=employee-signature&utm_content=office-nl" style="text-decoration:none;"><img src="capte-email-signature-logo@2x.png" width="189" height="92" alt="Capte Technologies" style="display:block;border:0;outline:none;width:189px;height:92px;"></a>
+            </td></tr>
+            <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#001384;padding:2px 0 0 22px;">Sanne de Vries <span style="font-weight:normal;font-size:13px;color:#5C6470;">&nbsp;(ze/haar)</span></td></tr>
+            <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#0F0F11;padding:0 0 10px 22px;">Head of Fleet Solutions</td></tr>
+            <tr><td style="padding:0 0 0 22px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+                <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">Mobiel</td>
+                <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:+31612345678" style="color:#0F0F11;text-decoration:none;">+31 6 1234 5678</a></td>
+              </tr></table>
+            </td></tr>
+            <tr><td style="padding:0 0 0 22px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+                <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">E-mail</td>
+                <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="mailto:sanne@capte.co" style="color:#0F0F11;text-decoration:none;">sanne@capte.co</a></td>
+              </tr></table>
+            </td></tr>
+            <tr><td style="padding:0 0 0 22px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+                <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">Website</td>
+                <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="https://www.capte.co/?utm_source=email-signature&utm_medium=email&utm_campaign=employee-signature&utm_content=office-nl" style="color:#001384;text-decoration:underline;">capte.co</a></td>
+              </tr></table>
+            </td></tr>
+            <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#5C6470;padding:10px 0 0 22px;">Kabelweg 57<br>1014 BA Amsterdam, Nederland</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Reply Variant & Plain Text Format -->
+    <h2 class="section-title">2. Replies / Forwards Variant & Plain Text Fallback</h2>
+    <div class="grid-2">
+      <!-- Reply Variant -->
+      <div class="sheet-card">
+        <div class="card-header">
+          <span class="card-title">Replies & Forwards Variant</span>
+          <span class="card-tag">Compact • 0px Indent</span>
+        </div>
+        <div class="card-body">
+          <table role="presentation" lang="en" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
+            <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#001384;padding:0;">John Hansen</td></tr>
+            <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#0F0F11;padding:0 0 10px 0;">Lead Web/Print Designer & Web Operations, Capte Technologies</td></tr>
+            <tr><td style="padding:0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+                <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">Mobile</td>
+                <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:+18582312916" style="color:#0F0F11;text-decoration:none;">+1 858 231 2916</a></td>
+              </tr></table>
+            </td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Plain Text Variant -->
+      <div class="sheet-card">
+        <div class="card-header">
+          <span class="card-title">Plain Text Variant</span>
+          <span class="card-tag">Outlook Mobile / Text</span>
+        </div>
+        <div class="card-body">
+          <div class="plain-text-box">John Hansen (he/him)
+Lead Web/Print Designer & Web Operations, Capte Technologies
+Mobile: +1 858 231 2916
+Email: john@capte.co
+Web: capte.co | https://linkedin.com/in/johnhansen
+500 S Grand Ave, Suite 2060, Los Angeles, CA 90071, United States</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Capte Technologies Inc. &bull; Brand & Web Operations &bull; Los Angeles, Versailles, Amsterdam</p>
+    </footer>
+  </div>
+
+</body>
+</html>

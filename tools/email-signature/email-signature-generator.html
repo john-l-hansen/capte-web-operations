@@ -911,16 +911,8 @@
         }
       };
 
-      // Inline Sample Logo SVG Data URI for realistic interactive previewing
-      // Capte Brand Logo: Primary Blue #001384 tile with brand clearspace and accent dot
-      const SAMPLE_LOGO_PREVIEW_URI = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg" width="189" height="92" viewBox="0 0 189 92">
-          <rect width="189" height="92" fill="#FFFFFF"/>
-          <g transform="translate(22, 28)">
-            <text x="0" y="32" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="bold" fill="#001384" letter-spacing="-0.5">capte<tspan fill="#FC5522">.</tspan></text>
-          </g>
-        </svg>
-      `);
+      // Default local preview logo asset
+      const SAMPLE_LOGO_PREVIEW_URI = "capte-email-signature-logo@2x.png";
 
       // DOM Elements
       const form = document.getElementById('sig-form');
