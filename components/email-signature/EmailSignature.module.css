@@ -1,0 +1,46 @@
+.signatureWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.signatureContainer {
+  background-color: #FFFFFF;
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid #DDE2EE;
+  box-shadow: 0 2px 8px rgba(0, 19, 132, 0.04);
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.copyToolbar {
+  display: flex;
+  gap: 10px;
+}
+
+.copyButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #001384;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.copyButton:hover {
+  background-color: #093AEC;
+}
+
+.copyButton:focus-visible {
+  outline: 2px solid #093AEC;
+  outline-offset: 2px;
+}

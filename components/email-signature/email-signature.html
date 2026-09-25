@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Capte Technologies — Internal Email Signature Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --capte-blue: #001384;
+      --capte-blue-hover: #093AEC;
+      --capte-blue-light: #EAF0FF;
+      --capte-blue-subtle: #F2F4FC;
+      --capte-orange: #FC5522;
+      --capte-orange-hover: #DD3603;
+      --capte-surface: #FFFFFF;
+      --capte-surface-muted: #F2F4FC;
+      --capte-border: #DDE2EE;
+      --capte-border-focus: #093AEC;
+      --capte-text: #0F0F11;
+      --capte-text-muted: #5C6470;
+      --capte-error: #D93025;
+      --capte-error-bg: #FCE8E6;
+      --capte-success: #059669;
+      --capte-success-bg: #ECFDF5;
+      --capte-info-bg: #EAF0FF;
+      --capte-radius-sm: 4px;
+      --capte-radius-md: 8px;
+      --capte-radius-lg: 12px;
+      --capte-radius-full: 9999px;
+      --capte-shadow-sm: 0 2px 8px rgba(0, 19, 132, 0.04);
+      --capte-shadow-md: 0 6px 24px rgba(0, 19, 132, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--capte-text);
+      background-color: var(--capte-surface-muted);
+      line-height: 1.5;
+      padding: 32px 20px 60px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--capte-blue);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: var(--capte-radius-sm);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .back-link:hover {
+      background: var(--capte-blue-light);
+      color: var(--capte-blue-hover);
+      text-decoration: none;
+    }
+
+    .back-link:focus-visible {
+      outline: 2px solid var(--capte-border-focus);
+      outline-offset: 2px;
+    }
+
+    .portal-tag {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--capte-blue);
+      background: var(--capte-blue-light);
+      padding: 4px 12px;
+      border-radius: var(--capte-radius-full);
+      border: 1px solid #BAC9FC;
+    }
+
+    /* Header Banner */
+    header {
+      background: var(--capte-surface);
+      border-radius: var(--capte-radius-lg);
+      border: 1px solid var(--capte-border);
+      padding: 28px 32px;
+      box-shadow: var(--capte-shadow-md);
+      margin-bottom: 24px;
+    }
+
+    .badge-internal {
+      display: inline-block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--capte-blue);
+      background: var(--capte-blue-light);
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    p.lead {
+      color: var(--capte-text-muted);
+      font-size: 14.5px;
+      max-width: 860px;
+      line-height: 1.5;
+    }
+
+    /* Guidance Callout Box */
+    .guidance-box {
+      background: #FFFFFF;
+      border-left: 4px solid var(--capte-blue);
+      border-top: 1px solid var(--capte-border);
+      border-right: 1px solid var(--capte-border);
+      border-bottom: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      font-size: 13.5px;
+      color: var(--capte-text);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .guidance-icon {
+      color: var(--capte-blue);
+      font-size: 18px;
+      line-height: 1;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .guidance-content h2 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      margin-bottom: 4px;
+    }
+
+    .guidance-content p {
+      color: var(--capte-text-muted);
+      line-height: 1.45;
+    }
+
+    /* Two-Column App Layout */
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 992px) {
+      .app-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--capte-surface);
+      border-radius: var(--capte-radius-lg);
+      border: 1px solid var(--capte-border);
+      box-shadow: var(--capte-shadow-sm);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--capte-border);
+      background: #FAFBFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--capte-blue);
+    }
+
+    .card-body {
+      padding: 24px;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 540px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--capte-text);
+      margin-bottom: 6px;
+    }
+
+    .label-optional {
+      font-size: 11.5px;
+      font-weight: normal;
+      color: var(--capte-text-muted);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select {
+      width: 100%;
+      height: 38px;
+      padding: 8px 12px;
+      font-family: inherit;
+      font-size: 13.5px;
+      color: var(--capte-text);
+      background-color: #FFFFFF;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-sm);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--capte-border-focus);
+      box-shadow: 0 0 0 3px rgba(9, 58, 236, 0.12);
+    }
+
+    input[aria-invalid="true"] {
+      border-color: var(--capte-error);
+      background-color: #FFFDFD;
+    }
+
+    input[aria-invalid="true"]:focus {
+      box-shadow: 0 0 0 3px rgba(217, 48, 37, 0.12);
+    }
+
+    .hint-text {
+      font-size: 11.5px;
+      color: var(--capte-text-muted);
+      margin-top: 4px;
+      line-height: 1.35;
+    }
+
+    .error-msg {
+      font-size: 11.5px;
+      color: var(--capte-error);
+      margin-top: 4px;
+      display: none;
+      font-weight: 500;
+    }
+
+    input[aria-invalid="true"] ~ .error-msg {
+      display: block;
+    }
+
+    /* Segmented Control / Radio Pill Buttons */
+    .segmented-control {
+      display: flex;
+      background: var(--capte-surface-muted);
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-sm);
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .segmented-option {
+      flex: 1;
+      text-align: center;
+    }
+
+    .segmented-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .segmented-option label {
+      display: block;
+      padding: 7px 10px;
+      margin-bottom: 0;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--capte-text-muted);
+      border-radius: var(--capte-radius-sm);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .segmented-option input[type="radio"]:checked + label {
+      background: #FFFFFF;
+      color: var(--capte-blue);
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .segmented-option input[type="radio"]:focus-visible + label {
+      outline: 2px solid var(--capte-border-focus);
+    }
+
+    /* Preview Box */
+    .preview-container {
+      background: #FFFFFF;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+      padding: 28px;
+      min-height: 240px;
+      position: relative;
+      transition: background 0.2s ease;
+      overflow-x: auto;
+    }
+
+    .preview-container.mode-dark {
+      background: #1e1e1e;
+      border-color: #333333;
+    }
+
+    .preview-container.mode-blocked img {
+      display: none !important;
+    }
+
+    .preview-container.mode-blocked .img-blocked-placeholder {
+      display: block !important;
+    }
+
+    .img-blocked-placeholder {
+      display: none;
+      width: 189px;
+      height: 92px;
+      border: 1px dashed #7B8491;
+      color: #5C6470;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      line-height: 92px;
+      text-align: center;
+      background: #F2F3F6;
+    }
+
+    .preview-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .preview-toggle-btn {
+      background: #FFFFFF;
+      border: 1px solid var(--capte-border);
+      color: var(--capte-text-muted);
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: var(--capte-radius-sm);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .preview-toggle-btn.active {
+      background: var(--capte-blue);
+      color: #FFFFFF;
+      border-color: var(--capte-blue);
+    }
+
+    .preview-toggle-btn:focus-visible {
+      outline: 2px solid var(--capte-border-focus);
+      outline-offset: 2px;
+    }
+
+    /* Action Buttons */
+    .button-group {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 580px) {
+      .button-group {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: var(--capte-radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--capte-border-focus);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background-color: var(--capte-blue);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--capte-blue-hover);
+    }
+
+    .btn-secondary {
+      background-color: #FFFFFF;
+      color: var(--capte-text);
+      border-color: var(--capte-border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--capte-surface-muted);
+      border-color: #BAC9FC;
+    }
+
+    /* Live Feedback Status */
+    .status-toast {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: var(--capte-radius-sm);
+      font-size: 12.5px;
+      font-weight: 500;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--capte-success-bg);
+      color: var(--capte-success);
+      border: 1px solid #A7F3D0;
+    }
+
+    .status-toast.show {
+      display: flex;
+    }
+
+    /* Tabs Component */
+    .tabs-card {
+      margin-top: 24px;
+    }
+
+    .tab-list {
+      display: flex;
+      border-bottom: 1px solid var(--capte-border);
+      background: #FAFBFF;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 12px 18px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--capte-text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--capte-blue);
+    }
+
+    .tab-btn[aria-selected="true"] {
+      color: var(--capte-blue);
+      border-bottom-color: var(--capte-blue);
+      background: #FFFFFF;
+    }
+
+    .tab-btn:focus-visible {
+      outline: 2px solid var(--capte-border-focus);
+      outline-offset: -2px;
+    }
+
+    .tab-panel {
+      padding: 24px;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .tab-panel[hidden] {
+      display: none;
+    }
+
+    .instructions-list {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .instructions-list li {
+      margin-bottom: 8px;
+    }
+
+    .kbd {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      background: var(--capte-surface-muted);
+      border: 1px solid var(--capte-border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--capte-text);
+    }
+
+    /* Raw HTML viewer */
+    .code-preview-box {
+      margin-top: 18px;
+      background: #0F1424;
+      border-radius: var(--capte-radius-sm);
+      padding: 14px;
+      overflow-x: auto;
+      max-height: 180px;
+    }
+
+    .code-preview-box pre {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11.5px;
+      color: #E1E6FA;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* Advanced Settings Accordion */
+    .advanced-details {
+      margin-top: 16px;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-sm);
+      padding: 12px 16px;
+      background: #FAFBFF;
+    }
+
+    .advanced-details summary {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--capte-blue);
+      cursor: pointer;
+    }
+
+    .advanced-details summary:focus-visible {
+      outline: 2px solid var(--capte-border-focus);
+    }
+
+    .advanced-fields {
+      margin-top: 12px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--capte-text-muted);
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--capte-border);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <nav class="top-nav" aria-label="Portal Navigation">
+      <a href="../../index.html" class="back-link">
+        &larr; Back to Web Operations Portal
+      </a>
+      <span class="portal-tag">Internal Utility</span>
+    </nav>
+
+    <header>
+      <span class="badge-internal">Capte Web Operations</span>
+      <h1>Internal Email Signature Generator</h1>
+      <p class="lead">
+        Generate brand-accurate, accessible, Word-engine-compliant Outlook signatures for Los Angeles, Versailles, and Amsterdam staff. Output meets strict WCAG AA contrast standards and supports 1-click clipboard installation.
+      </p>
+    </header>
+
+    <!-- Location & Dual-Signature Guidance Callout -->
+    <div class="guidance-box" role="region" aria-label="Signature Setup Recommendations">
+      <div class="guidance-icon" aria-hidden="true">&#9432;</div>
+      <div class="guidance-content">
+        <h2>Guidance for European & International Staff</h2>
+        <p>
+          Staff in <strong>Versailles</strong> and <strong>Amsterdam</strong> should configure two separate signatures in Outlook: a <em>local-language signature</em> (Français / Nederlands) for domestic correspondence and an <em>English signature</em> for international clients and partners. If your primary counterparties are international, we recommend setting English as your Outlook default.
+        </p>
+      </div>
+    </div>
+
+    <main class="app-grid">
+      <!-- Left Column: Generator Form -->
+      <section class="card" aria-labelledby="form-heading">
+        <div class="card-header">
+          <h2 id="form-heading" class="card-title">Employee Details</h2>
+          <span class="hint-text">All changes update live</span>
+        </div>
+        <div class="card-body">
+          <form id="sig-form" novalidate>
+            <!-- Signature Variant Switcher -->
+            <div class="form-group">
+              <label id="sig-type-label">Signature Type</label>
+              <div class="segmented-control" role="radiogroup" aria-labelledby="sig-type-label">
+                <div class="segmented-option">
+                  <input type="radio" id="type-new" name="sigType" value="new" checked>
+                  <label for="type-new">New Email</label>
+                </div>
+                <div class="segmented-option">
+                  <input type="radio" id="type-reply" name="sigType" value="reply">
+                  <label for="type-reply">Replies & Forwards</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Full Name & Pronouns -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="field-name">Full Name <span style="color:var(--capte-error);">*</span></label>
+                <input type="text" id="field-name" name="fullName" value="John Hansen" required aria-describedby="name-error">
+                <div id="name-error" class="error-msg">Full name is required.</div>
+              </div>
+              <div class="form-group">
+                <label for="field-pronouns">Pronouns <span class="label-optional">(optional)</span></label>
+                <input type="text" id="field-pronouns" name="pronouns" placeholder="e.g. she/her, he/him">
+              </div>
+            </div>
+
+            <!-- Job Title -->
+            <div class="form-group">
+              <label for="field-title">Job Title <span style="color:var(--capte-error);">*</span></label>
+              <input type="text" id="field-title" name="jobTitle" value="Lead Web/Print Designer & Web Operations" required aria-describedby="title-error">
+              <div id="title-error" class="error-msg">Job title is required.</div>
+            </div>
+
+            <!-- Email Address -->
+            <div class="form-group">
+              <label for="field-email">Capte Email <span style="color:var(--capte-error);">*</span></label>
+              <input type="email" id="field-email" name="email" value="john@capte.co" required aria-describedby="email-hint email-error">
+              <div id="email-hint" class="hint-text">Must be an official address ending in @capte.co</div>
+              <div id="email-error" class="error-msg">Please enter a valid @capte.co email address.</div>
+            </div>
+
+            <!-- Office & Language Selectors -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="field-office">Office Location <span style="color:var(--capte-error);">*</span></label>
+                <select id="field-office" name="office">
+                  <option value="la" selected>Los Angeles</option>
+                  <option value="fr">Versailles</option>
+                  <option value="nl">Amsterdam</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="field-lang">Label Language <span style="color:var(--capte-error);">*</span></label>
+                <select id="field-lang" name="labelLang">
+                  <option value="en" selected>English</option>
+                  <option value="fr">Français</option>
+                  <option value="nl">Nederlands</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Mobile Phone & Office Phone -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="field-mobile">Mobile Phone <span style="color:var(--capte-error);">*</span></label>
+                <input type="tel" id="field-mobile" name="mobile" value="+1 858 231 2916" required aria-describedby="mobile-hint mobile-error">
+                <div id="mobile-hint" class="hint-text">US format: +1 858 231 2916</div>
+                <div id="mobile-error" class="error-msg">Must start with + and country dial code.</div>
+              </div>
+              <div class="form-group">
+                <label for="field-office-phone">Office Phone <span class="label-optional">(optional)</span></label>
+                <input type="tel" id="field-office-phone" name="officePhone" placeholder="e.g. +1 213 555 0100" aria-describedby="office-phone-hint office-phone-error">
+                <div id="office-phone-hint" class="hint-text">Omit if no direct landline</div>
+                <div id="office-phone-error" class="error-msg">Must start with + and country dial code.</div>
+              </div>
+            </div>
+
+            <!-- LinkedIn Profile URL -->
+            <div class="form-group">
+              <label for="field-linkedin">LinkedIn Profile URL <span class="label-optional">(optional)</span></label>
+              <input type="text" id="field-linkedin" name="linkedinUrl" placeholder="https://www.linkedin.com/in/username">
+              <div class="hint-text">Appends a subtle text link next to capte.co</div>
+            </div>
+
+            <!-- Advanced Configuration (Placeholders) -->
+            <details class="advanced-details">
+              <summary>Advanced / Template Placeholders</summary>
+              <div class="advanced-fields">
+                <div class="form-group">
+                  <label for="field-logo-url">Logo Image URL Placeholder</label>
+                  <input type="text" id="field-logo-url" name="logoUrl" value="{{LOGO_URL}}">
+                  <div class="hint-text">Managed by owner in Webflow production. Leave as {{LOGO_URL}} for production embeds.</div>
+                </div>
+                <div class="form-group">
+                  <label for="field-legal-line">Legal / Registration Line Placeholder</label>
+                  <input type="text" id="field-legal-line" name="legalLine" value="{{LEGAL_LINE}}">
+                  <div class="hint-text">Managed by owner. Leave empty or as {{LEGAL_LINE}}.</div>
+                </div>
+              </div>
+            </details>
+          </form>
+        </div>
+      </section>
+
+      <!-- Right Column: Live Preview & Copy Actions -->
+      <section class="card" aria-labelledby="preview-heading">
+        <div class="card-header">
+          <h2 id="preview-heading" class="card-title">Signature Preview</h2>
+          <div class="preview-controls">
+            <button type="button" id="toggle-sample-logo" class="preview-toggle-btn active" title="Toggle sample logo visual vs placeholder">Sample Logo</button>
+            <button type="button" id="toggle-dark-mode" class="preview-toggle-btn" title="Emulate dark mode email background">Dark Mode</button>
+            <button type="button" id="toggle-images-blocked" class="preview-toggle-btn" title="Simulate blocked remote images">Images Blocked</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="email-preview-wrapper" class="preview-container" role="region" aria-label="Signature Visual Render">
+            <div id="preview-render-target"></div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="button-group">
+            <button type="button" id="btn-copy-signature" class="btn btn-primary" title="Copy rich HTML & plain text to clipboard">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy signature
+            </button>
+            <button type="button" id="btn-copy-html" class="btn btn-secondary" title="Copy raw HTML markup">
+              Copy HTML
+            </button>
+            <button type="button" id="btn-copy-plain" class="btn btn-secondary" title="Copy plain text format">
+              Copy plain text
+            </button>
+          </div>
+
+          <!-- ARIA Live Status Toast -->
+          <div id="copy-status" class="status-toast" role="status" aria-live="polite">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span id="copy-status-text">Signature copied to clipboard!</span>
+          </div>
+
+          <!-- HTML Source Snippet (Collapsible) -->
+          <details class="advanced-details" style="margin-top:18px;">
+            <summary>View Generated HTML Source</summary>
+            <div class="code-preview-box">
+              <pre><code id="raw-html-code"></code></pre>
+            </div>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <!-- Installation Instructions Section -->
+    <section class="card tabs-card" aria-labelledby="instructions-heading">
+      <div class="card-header">
+        <h2 id="instructions-heading" class="card-title">Outlook Setup Instructions</h2>
+        <span class="hint-text">Step-by-step setup guides</span>
+      </div>
+      
+      <div class="tab-list" role="tablist" aria-label="Email Client Setup Guides">
+        <button type="button" role="tab" id="tab-new-outlook" aria-selected="true" aria-controls="panel-new-outlook" class="tab-btn" tabindex="0">
+          New Outlook & Web
+        </button>
+        <button type="button" role="tab" id="tab-classic-outlook" aria-selected="false" aria-controls="panel-classic-outlook" class="tab-btn" tabindex="-1">
+          Classic Outlook (Windows)
+        </button>
+        <button type="button" role="tab" id="tab-mac-outlook" aria-selected="false" aria-controls="panel-mac-outlook" class="tab-btn" tabindex="-1">
+          Outlook for Mac
+        </button>
+        <button type="button" role="tab" id="tab-mobile-outlook" aria-selected="false" aria-controls="panel-mobile-outlook" class="tab-btn" tabindex="-1">
+          iOS / Android
+        </button>
+      </div>
+
+      <div id="panel-new-outlook" role="tabpanel" aria-labelledby="tab-new-outlook" class="tab-panel" tabindex="0">
+        <p><strong>For New Outlook on Windows and Outlook on the Web (outlook.office.com):</strong></p>
+        <ol class="instructions-list">
+          <li>Click the <strong>Copy signature</strong> button above.</li>
+          <li>In Outlook, click the <strong>Settings</strong> gear icon (top-right) &rarr; <strong>Accounts</strong> &rarr; <strong>Signatures</strong>.</li>
+          <li>Click <strong>+ New signature</strong>, give it a name (e.g., <em>Capte — New Email</em>).</li>
+          <li>Click inside the signature edit box and press <kbd>Ctrl+V</kbd> (or <kbd>Cmd+V</kbd> on Mac).</li>
+          <li>Under <em>Select default signatures</em>, assign this signature to <em>For New Messages</em>.</li>
+          <li>(Optional) Switch generator to <em>Replies & Forwards</em>, copy, create a second signature, and assign to <em>For Replies/Forwards</em>.</li>
+          <li>Click <strong>Save</strong>.</li>
+        </ol>
+      </div>
+
+      <div id="panel-classic-outlook" role="tabpanel" aria-labelledby="tab-classic-outlook" class="tab-panel" tabindex="0" hidden>
+        <p><strong>For Classic Desktop Outlook for Windows (Word rendering engine):</strong></p>
+        <ol class="instructions-list">
+          <li>Click the <strong>Copy signature</strong> button above.</li>
+          <li>In Outlook, go to <strong>File</strong> &rarr; <strong>Options</strong> &rarr; <strong>Mail</strong> &rarr; <strong>Signatures...</strong>.</li>
+          <li>Click <strong>New</strong> and enter a name (e.g., <em>Capte Official</em>).</li>
+          <li>Click inside the <em>Edit signature</em> box and paste using <kbd>Ctrl+V</kbd>.</li>
+          <li>Verify that the logo, spacing (22px indent), and contact rows align accurately.</li>
+          <li>Under <em>Choose default signature</em>, select your account and set for <em>New messages</em>.</li>
+          <li>Click <strong>OK</strong> to save.</li>
+        </ol>
+      </div>
+
+      <div id="panel-mac-outlook" role="tabpanel" aria-labelledby="tab-mac-outlook" class="tab-panel" tabindex="0" hidden>
+        <p><strong>For Microsoft Outlook on macOS:</strong></p>
+        <ol class="instructions-list">
+          <li>Click the <strong>Copy signature</strong> button above.</li>
+          <li>In Outlook for Mac, go to <strong>Outlook</strong> menu &rarr; <strong>Settings...</strong> (or <kbd>Cmd+,</kbd>) &rarr; <strong>Signatures</strong>.</li>
+          <li>Click the <strong>+</strong> button to add a new signature.</li>
+          <li>Paste the copied signature directly into the preview area with <kbd>Cmd+V</kbd>.</li>
+          <li>Set as default for your Capte email account.</li>
+        </ol>
+      </div>
+
+      <div id="panel-mobile-outlook" role="tabpanel" aria-labelledby="tab-mobile-outlook" class="tab-panel" tabindex="0" hidden>
+        <p><strong>For Outlook Mobile App (iOS & Android):</strong></p>
+        <ol class="instructions-list">
+          <li>Mobile email clients do not support complex nested HTML tables in local signature editors.</li>
+          <li>Click the <strong>Copy plain text</strong> button above.</li>
+          <li>In Outlook mobile, tap your profile avatar (top-left) &rarr; <strong>Settings</strong> gear &rarr; <strong>Signature</strong>.</li>
+          <li>Paste the plain text signature into the signature field and save.</li>
+        </ol>
+      </div>
+    </section>
+
+    <footer>
+      <p>Capte Technologies Inc. &bull; Internal Web Operations &bull; Los Angeles, Versailles & Amsterdam &bull; Support: <a href="mailto:john@capte.co" style="color:var(--capte-blue); text-decoration:none; font-weight:600;">john@capte.co</a></p>
+    </footer>
+  </div>
+
+  <!-- Office Configuration & Generator Logic -->
+  <script src="office-config.js"></script>
+  <script>
+    (function() {
+      'use strict';
+
+      // Fallback office configuration if office-config.js is not loaded separately
+      const config = (typeof OFFICE_CONFIG !== 'undefined') ? OFFICE_CONFIG : {
+        offices: {
+          la: { label: "Los Angeles", line1: "500 S Grand Ave, Suite 2060", line2: "Los Angeles, CA 90071", country: { en: "United States", fr: "États-Unis", nl: "Verenigde Staten" }, defaultLang: "en", dial: "+1", path: "", phonePlaceholder: "+1 858 231 2916", phoneHint: "US format: +1 858 231 2916" },
+          fr: { label: "Versailles", line1: "7 rue des Chantiers", line2: "78000 Versailles", country: { en: "France", fr: "France", nl: "Frankrijk" }, defaultLang: "fr", dial: "+33", path: "", phonePlaceholder: "+33 6 12 34 56 78", phoneHint: "FR format: +33 6 12 34 56 78 (digits in pairs)" },
+          nl: { label: "Amsterdam", line1: "Kabelweg 57", line2: "1014 BA Amsterdam", country: { en: "Netherlands", fr: "Pays-Bas", nl: "Nederland" }, defaultLang: "nl", dial: "+31", path: "", phonePlaceholder: "+31 6 1234 5678", phoneHint: "NL mobile: +31 6 1234 5678 | Landline: +31 20 123 4567" }
+        },
+        labels: {
+          en: { name: "English", nativeName: "English", mobile: "Mobile", office: "Office", email: "Email", web: "Web" },
+          fr: { name: "French", nativeName: "Français", mobile: "Portable", office: "Bureau", email: "E-mail", web: "Site web" },
+          nl: { name: "Dutch", nativeName: "Nederlands", mobile: "Mobiel", office: "Kantoor", email: "E-mail", web: "Website" }
+        },
+        defaults: {
+          siteBaseUrl: "https://www.capte.co",
+          logoDisplayWidth: 189,
+          logoDisplayHeight: 92,
+          defaultLogoUrl: "{{LOGO_URL}}",
+          defaultLegalLine: "{{LEGAL_LINE}}"
+        }
+      };
+
+      // Inline Sample Logo SVG Data URI for realistic interactive previewing
+      // Capte Brand Logo: Primary Blue #001384 tile with brand clearspace and accent dot
+      const SAMPLE_LOGO_PREVIEW_URI = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg" width="189" height="92" viewBox="0 0 189 92">
+          <rect width="189" height="92" fill="#FFFFFF"/>
+          <g transform="translate(22, 28)">
+            <text x="0" y="32" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="bold" fill="#001384" letter-spacing="-0.5">capte<tspan fill="#FC5522">.</tspan></text>
+          </g>
+        </svg>
+      `);
+
+      // DOM Elements
+      const form = document.getElementById('sig-form');
+      const fieldName = document.getElementById('field-name');
+      const fieldPronouns = document.getElementById('field-pronouns');
+      const fieldTitle = document.getElementById('field-title');
+      const fieldEmail = document.getElementById('field-email');
+      const fieldMobile = document.getElementById('field-mobile');
+      const fieldOfficePhone = document.getElementById('field-office-phone');
+      const fieldOffice = document.getElementById('field-office');
+      const fieldLang = document.getElementById('field-lang');
+      const fieldLinkedin = document.getElementById('field-linkedin');
+      const fieldLogoUrl = document.getElementById('field-logo-url');
+      const fieldLegalLine = document.getElementById('field-legal-line');
+      
+      const mobileHint = document.getElementById('mobile-hint');
+      const previewRenderTarget = document.getElementById('preview-render-target');
+      const rawHtmlCode = document.getElementById('raw-html-code');
+      const previewWrapper = document.getElementById('email-preview-wrapper');
+      const copyStatus = document.getElementById('copy-status');
+      const copyStatusText = document.getElementById('copy-status-text');
+
+      const btnCopySignature = document.getElementById('btn-copy-signature');
+      const btnCopyHtml = document.getElementById('btn-copy-html');
+      const btnCopyPlain = document.getElementById('btn-copy-plain');
+      
+      const toggleSampleLogoBtn = document.getElementById('toggle-sample-logo');
+      const toggleDarkModeBtn = document.getElementById('toggle-dark-mode');
+      const toggleImagesBlockedBtn = document.getElementById('toggle-images-blocked');
+
+      let useSampleLogoForPreview = true;
+      let toastTimeout = null;
+
+      // HTML entity escaper
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      // Telephone sanitizer (keeps digits and leading + only)
+      function sanitizeTel(phone) {
+        if (!phone) return '';
+        const trimmed = phone.trim();
+        const hasPlus = trimmed.startsWith('+');
+        const digits = trimmed.replace(/\D/g, '');
+        return hasPlus ? '+' + digits : digits;
+      }
+
+      // UTM builder
+      function buildSiteUrl(officeKey) {
+        const office = config.offices[officeKey] || config.offices.la;
+        const basePath = office.path || '';
+        return `https://www.capte.co${basePath}?utm_source=email-signature&utm_medium=email&utm_campaign=employee-signature&utm_content=office-${officeKey}`;
+      }
+
+      // Validation functions
+      function validateForm() {
+        let isValid = true;
+
+        // Name
+        if (!fieldName.value.trim()) {
+          fieldName.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        } else {
+          fieldName.removeAttribute('aria-invalid');
+        }
+
+        // Title
+        if (!fieldTitle.value.trim()) {
+          fieldTitle.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        } else {
+          fieldTitle.removeAttribute('aria-invalid');
+        }
+
+        // Email: must end in @capte.co
+        const emailVal = fieldEmail.value.trim();
+        const emailRegex = /^[^\s@]+@capte\.co$/i;
+        if (!emailVal || !emailRegex.test(emailVal)) {
+          fieldEmail.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        } else {
+          fieldEmail.removeAttribute('aria-invalid');
+        }
+
+        // Mobile phone: starts with + and country code
+        const mobileVal = fieldMobile.value.trim();
+        const phoneRegex = /^\+[0-9]{1,4}[\s0-9().-]{5,}$/;
+        if (!mobileVal || !phoneRegex.test(mobileVal)) {
+          fieldMobile.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        } else {
+          fieldMobile.removeAttribute('aria-invalid');
+        }
+
+        // Office phone: optional, but if provided must start with +
+        const officePhoneVal = fieldOfficePhone.value.trim();
+        if (officePhoneVal && !phoneRegex.test(officePhoneVal)) {
+          fieldOfficePhone.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        } else {
+          fieldOfficePhone.removeAttribute('aria-invalid');
+        }
+
+        return isValid;
+      }
+
+      // Generate HTML signature markup
+      function generateSignatureHtml(isForPreview) {
+        const sigType = document.querySelector('input[name="sigType"]:checked').value;
+        const name = escapeHtml(fieldName.value.trim() || 'John Hansen');
+        const pronouns = fieldPronouns.value.trim();
+        const title = escapeHtml(fieldTitle.value.trim() || 'Lead Web/Print Designer & Web Operations');
+        const email = escapeHtml(fieldEmail.value.trim() || 'john@capte.co');
+        const mobile = escapeHtml(fieldMobile.value.trim() || '+1 858 231 2916');
+        const officePhone = escapeHtml(fieldOfficePhone.value.trim());
+        const officeKey = fieldOffice.value;
+        const langKey = fieldLang.value;
+        const linkedin = fieldLinkedin.value.trim();
+        
+        let logoUrl = fieldLogoUrl.value.trim() || '{{LOGO_URL}}';
+        if (isForPreview && useSampleLogoForPreview && logoUrl === '{{LOGO_URL}}') {
+          logoUrl = SAMPLE_LOGO_PREVIEW_URI;
+        }
+
+        const legalLineVal = fieldLegalLine.value.trim();
+        
+        const office = config.offices[officeKey] || config.offices.la;
+        const labels = config.labels[langKey] || config.labels.en;
+        const countryName = office.country[langKey] || office.country.en;
+        const siteUrl = buildSiteUrl(officeKey);
+
+        const pronounsSpan = pronouns 
+          ? `<span style="font-weight:normal;font-size:13px;color:#5C6470;">&nbsp;(${escapeHtml(pronouns)})</span>` 
+          : '';
+
+        if (sigType === 'reply') {
+          // Reply Variant: No logo row, 0px left padding, title with company, mobile only
+          return `<table role="presentation" lang="${langKey}" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
+  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#001384;padding:0;">${name}${pronounsSpan}</td></tr>
+  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#0F0F11;padding:0 0 10px 0;">${title}, Capte Technologies</td></tr>
+  <tr><td style="padding:0;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+      <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.mobile)}</td>
+      <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:${sanitizeTel(mobile)}" style="color:#0F0F11;text-decoration:none;">${mobile}</a></td>
+    </tr></table>
+  </td></tr>
+</table>`;
+        }
+
+        // New Email Variant: Full logo (189x92), 22px indent, all rows
+        let rowsHtml = '';
+
+        // Mobile row
+        rowsHtml += `  <tr><td style="padding:0 0 0 22px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+      <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.mobile)}</td>
+      <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:${sanitizeTel(mobile)}" style="color:#0F0F11;text-decoration:none;">${mobile}</a></td>
+    </tr></table>
+  </td></tr>\n`;
+
+        // Optional Office phone row
+        if (officePhone) {
+          rowsHtml += `  <tr><td style="padding:0 0 0 22px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+      <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.office)}</td>
+      <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:${sanitizeTel(officePhone)}" style="color:#0F0F11;text-decoration:none;">${officePhone}</a></td>
+    </tr></table>
+  </td></tr>\n`;
+        }
+
+        // Email row
+        rowsHtml += `  <tr><td style="padding:0 0 0 22px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+      <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.email)}</td>
+      <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="mailto:${email}" style="color:#0F0F11;text-decoration:none;">${email}</a></td>
+    </tr></table>
+  </td></tr>\n`;
+
+        // Web row (capte.co + optional LinkedIn)
+        let webLinkHtml = `<a href="${siteUrl}" style="color:#001384;text-decoration:underline;">capte.co</a>`;
+        if (linkedin) {
+          webLinkHtml += `&nbsp;&nbsp;<a href="${escapeHtml(linkedin)}" style="color:#001384;text-decoration:underline;">LinkedIn</a>`;
+        }
+        rowsHtml += `  <tr><td style="padding:0 0 0 22px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
+      <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.web)}</td>
+      <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;">${webLinkHtml}</td>
+    </tr></table>
+  </td></tr>\n`;
+
+        // Optional legal line
+        let legalLineHtml = '';
+        if (legalLineVal) {
+          legalLineHtml = `\n  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#5C6470;padding:8px 0 0 22px;">${escapeHtml(legalLineVal)}</td></tr>`;
+        }
+
+        return `<table role="presentation" lang="${langKey}" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
+  <tr><td style="padding:0;">
+    <a href="${siteUrl}" style="text-decoration:none;"><img src="${logoUrl}" width="189" height="92" alt="Capte Technologies" style="display:block;border:0;outline:none;width:189px;height:92px;"></a>
+  </td></tr>
+  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#001384;padding:2px 0 0 22px;">${name}${pronounsSpan}</td></tr>
+  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#0F0F11;padding:0 0 10px 22px;">${title}</td></tr>
+${rowsHtml}  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#5C6470;padding:10px 0 0 22px;">${escapeHtml(office.line1)}<br>${escapeHtml(office.line2)}, ${escapeHtml(countryName)}</td></tr>${legalLineHtml}
+</table>`;
+      }
+
+      // Generate Plain Text version
+      function generatePlainText() {
+        const sigType = document.querySelector('input[name="sigType"]:checked').value;
+        const name = fieldName.value.trim() || 'John Hansen';
+        const pronouns = fieldPronouns.value.trim();
+        const title = fieldTitle.value.trim() || 'Lead Web/Print Designer & Web Operations';
+        const email = fieldEmail.value.trim() || 'john@capte.co';
+        const mobile = fieldMobile.value.trim() || '+1 858 231 2916';
+        const officePhone = fieldOfficePhone.value.trim();
+        const officeKey = fieldOffice.value;
+        const langKey = fieldLang.value;
+        const linkedin = fieldLinkedin.value.trim();
+
+        const office = config.offices[officeKey] || config.offices.la;
+        const labels = config.labels[langKey] || config.labels.en;
+        const countryName = office.country[langKey] || office.country.en;
+
+        const nameLine = pronouns ? `${name} (${pronouns})` : name;
+
+        if (sigType === 'reply') {
+          return `${nameLine}\n${title}, Capte Technologies\n${labels.mobile}: ${mobile}`;
+        }
+
+        let lines = [
+          nameLine,
+          `${title}, Capte Technologies`,
+          `${labels.mobile}: ${mobile}`
+        ];
+
+        if (officePhone) {
+          lines.push(`${labels.office}: ${officePhone}`);
+        }
+
+        lines.push(`${labels.email}: ${email}`);
+        
+        let webLine = `${labels.web}: capte.co`;
+        if (linkedin) {
+          webLine += ` | ${linkedin}`;
+        }
+        lines.push(webLine);
+
+        lines.push(`${office.line1}, ${office.line2}, ${countryName}`);
+
+        const legalVal = fieldLegalLine.value.trim();
+        if (legalVal && legalVal !== '{{LEGAL_LINE}}') {
+          lines.push(legalVal);
+        }
+
+        return lines.join('\n');
+      }
+
+      // Update UI & Live Preview
+      function updatePreview() {
+        validateForm();
+        const previewHtml = generateSignatureHtml(true);
+        const productionHtml = generateSignatureHtml(false);
+        
+        previewRenderTarget.innerHTML = previewHtml;
+        rawHtmlCode.textContent = productionHtml;
+      }
+
+      // Handle Office Selection Changes
+      fieldOffice.addEventListener('change', function() {
+        const selectedOffice = this.value;
+        const officeData = config.offices[selectedOffice];
+        if (!officeData) return;
+
+        // Auto-select office default language
+        if (officeData.defaultLang) {
+          fieldLang.value = officeData.defaultLang;
+        }
+
+        // Update mobile format hint
+        if (officeData.phoneHint) {
+          mobileHint.textContent = officeData.phoneHint;
+        }
+
+        // Prefill dial code if empty or previous prefix
+        const currentMobile = fieldMobile.value.trim();
+        if (!currentMobile || currentMobile === '+1' || currentMobile === '+33' || currentMobile === '+31') {
+          fieldMobile.value = officeData.dial + ' ';
+        }
+
+        updatePreview();
+      });
+
+      // Form event listeners
+      form.addEventListener('input', updatePreview);
+      form.addEventListener('change', updatePreview);
+
+      // Toast notification helper
+      function showToast(message) {
+        copyStatusText.textContent = message;
+        copyStatus.classList.add('show');
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          copyStatus.classList.remove('show');
+        }, 3200);
+      }
+
+      // Copy Signature (Rich HTML + Plain Text via ClipboardItem with execCommand fallback)
+      btnCopySignature.addEventListener('click', async function() {
+        if (!validateForm()) {
+          showToast('Please check highlighted form errors.');
+          return;
+        }
+
+        const htmlData = generateSignatureHtml(false);
+        const plainData = generatePlainText();
+
+        try {
+          if (navigator.clipboard && window.ClipboardItem) {
+            const htmlBlob = new Blob([htmlData], { type: 'text/html' });
+            const plainBlob = new Blob([plainData], { type: 'text/plain' });
+            const item = new ClipboardItem({
+              'text/html': htmlBlob,
+              'text/plain': plainBlob
+            });
+            await navigator.clipboard.write([item]);
+            showToast('Rich signature copied! Ready to paste into Outlook.');
+            return;
+          }
+        } catch (err) {
+          console.warn('ClipboardItem failed, falling back to selection copy:', err);
+        }
+
+        // Fallback: Range selection + execCommand('copy')
+        try {
+          const selection = window.getSelection();
+          const range = document.createRange();
+          range.selectNodeContents(previewRenderTarget);
+          selection.removeAllRanges();
+          selection.addRange(range);
+          const successful = document.execCommand('copy');
+          selection.removeAllRanges();
+          if (successful) {
+            showToast('Signature copied! Ready to paste into Outlook.');
+          } else {
+            showToast('Press Ctrl+C (Cmd+C) to copy selected signature.');
+          }
+        } catch (fallbackErr) {
+          console.error('Fallback copy error:', fallbackErr);
+          showToast('Copy failed. Please manually select and copy the preview.');
+        }
+      });
+
+      // Copy HTML Source
+      btnCopyHtml.addEventListener('click', async function() {
+        const htmlData = generateSignatureHtml(false);
+        try {
+          await navigator.clipboard.writeText(htmlData);
+          showToast('Raw HTML code copied to clipboard!');
+        } catch (err) {
+          // Fallback
+          const textarea = document.createElement('textarea');
+          textarea.value = htmlData;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showToast('Raw HTML code copied to clipboard!');
+        }
+      });
+
+      // Copy Plain Text
+      btnCopyPlain.addEventListener('click', async function() {
+        const plainData = generatePlainText();
+        try {
+          await navigator.clipboard.writeText(plainData);
+          showToast('Plain text signature copied to clipboard!');
+        } catch (err) {
+          const textarea = document.createElement('textarea');
+          textarea.value = plainData;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showToast('Plain text signature copied to clipboard!');
+        }
+      });
+
+      // Preview Toolbar Toggles
+      toggleSampleLogoBtn.addEventListener('click', function() {
+        useSampleLogoForPreview = !useSampleLogoForPreview;
+        this.classList.toggle('active', useSampleLogoForPreview);
+        updatePreview();
+      });
+
+      toggleDarkModeBtn.addEventListener('click', function() {
+        previewWrapper.classList.toggle('mode-dark');
+        this.classList.toggle('active');
+      });
+
+      toggleImagesBlockedBtn.addEventListener('click', function() {
+        previewWrapper.classList.toggle('mode-blocked');
+        this.classList.toggle('active');
+      });
+
+      // Accessible Tab Navigation
+      const tabs = Array.from(document.querySelectorAll('.tab-btn'));
+      const panels = Array.from(document.querySelectorAll('.tab-panel'));
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => switchTab(index));
+
+        tab.addEventListener('keydown', (e) => {
+          let targetIndex = index;
+          if (e.key === 'ArrowRight') {
+            targetIndex = (index + 1) % tabs.length;
+          } else if (e.key === 'ArrowLeft') {
+            targetIndex = (index - 1 + tabs.length) % tabs.length;
+          } else if (e.key === 'Home') {
+            targetIndex = 0;
+          } else if (e.key === 'End') {
+            targetIndex = tabs.length - 1;
+          } else {
+            return;
+          }
+          e.preventDefault();
+          switchTab(targetIndex);
+          tabs[targetIndex].focus();
+        });
+      });
+
+      function switchTab(targetIndex) {
+        tabs.forEach((tab, i) => {
+          const isSelected = i === targetIndex;
+          tab.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+          tab.setAttribute('tabindex', isSelected ? '0' : '-1');
+          if (panels[i]) {
+            if (isSelected) {
+              panels[i].removeAttribute('hidden');
+            } else {
+              panels[i].setAttribute('hidden', '');
+            }
+          }
+        });
+      }
+
+      // Initial Render
+      updatePreview();
+    })();
+  </script>
+</body>
+</html>
