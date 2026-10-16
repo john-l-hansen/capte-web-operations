@@ -200,19 +200,19 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
           >
             <tbody>
               <tr>
-                <td style={{ padding: '0' }}>
+                <td style={{ padding: '0 0 14px 0' }}>
                   <a href={siteUrl} style={{ textDecoration: 'none' }}>
                     <img
                       src={logoUrl}
-                      width={189}
-                      height={92}
+                      width={150}
+                      height={50}
                       alt="Capte Technologies"
                       style={{
                         display: 'block',
                         border: 0,
                         outline: 'none',
-                        width: '189px',
-                        height: '92px',
+                        width: '150px',
+                        height: '50px',
                       }}
                     />
                   </a>
@@ -225,7 +225,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                     fontSize: '16px', lineHeight: '22px',
                     fontWeight: 'bold',
                     color: '#001384',
-                    padding: '2px 0 0 22px',
+                    padding: '0',
                   }}
                 >
                   {fullName}
@@ -242,7 +242,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                     fontFamily: "Roboto,Arial,Helvetica,sans-serif",
                     fontSize: '14px', lineHeight: '20px',
                     color: '#0F0F11',
-                    padding: '0 0 10px 22px',
+                    padding: '0 0 10px 0',
                   }}
                 >
                   {jobTitle}
@@ -250,7 +250,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
               </tr>
               {/* Mobile */}
               <tr>
-                <td style={{ padding: '0 0 0 22px' }}>
+                <td style={{ padding: '0' }}>
                   <table
                     role="presentation"
                     cellPadding={0}
@@ -297,7 +297,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
               {/* Office Phone (optional) */}
               {officePhone ? (
                 <tr>
-                  <td style={{ padding: '0 0 0 22px' }}>
+                  <td style={{ padding: '0' }}>
                     <table
                       role="presentation"
                       cellPadding={0}
@@ -344,7 +344,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
               ) : null}
               {/* Email */}
               <tr>
-                <td style={{ padding: '0 0 0 22px' }}>
+                <td style={{ padding: '0' }}>
                   <table
                     role="presentation"
                     cellPadding={0}
@@ -390,7 +390,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
               </tr>
               {/* Web & LinkedIn */}
               <tr>
-                <td style={{ padding: '0 0 0 22px' }}>
+                <td style={{ padding: '0' }}>
                   <table
                     role="presentation"
                     cellPadding={0}
@@ -452,7 +452,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                     fontFamily: "Roboto,Arial,Helvetica,sans-serif",
                     fontSize: '14px', lineHeight: '20px',
                     color: '#5C6470',
-                    padding: '10px 0 0 22px',
+                    padding: '10px 0 0 0',
                   }}
                 >
                   {selectedOffice.line1}
@@ -469,7 +469,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                       fontSize: '12px',
                       lineHeight: '16px',
                       color: '#5C6470',
-                      padding: '8px 0 0 22px',
+                      padding: '8px 0 0 0',
                     }}
                   >
                     {legalLine}
