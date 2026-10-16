@@ -748,14 +748,14 @@
               <summary>Advanced / Template Placeholders</summary>
               <div class="advanced-fields">
                 <div class="form-group">
-                  <label for="field-logo-url">Logo Image URL Placeholder</label>
-                  <input type="text" id="field-logo-url" name="logoUrl" value="{{LOGO_URL}}">
-                  <div class="hint-text">Managed by owner in Webflow production. Leave as {{LOGO_URL}} for production embeds.</div>
+                  <label for="field-logo-url">Logo Image URL</label>
+                  <input type="text" id="field-logo-url" name="logoUrl" value="https://cdn.prod.website-files.com/64f08f1a9f74ffb5762d6891/6ad24dcf0330817c4a7319e7_capte-email-signature-logo%402x.png">
+                  <div class="hint-text">Hosted on Webflow CDN.</div>
                 </div>
                 <div class="form-group">
-                  <label for="field-legal-line">Legal / Registration Line Placeholder</label>
-                  <input type="text" id="field-legal-line" name="legalLine" value="{{LEGAL_LINE}}">
-                  <div class="hint-text">Managed by owner. Leave empty or as {{LEGAL_LINE}}.</div>
+                  <label for="field-legal-line">Legal / Registration Line (optional)</label>
+                  <input type="text" id="field-legal-line" name="legalLine" value="">
+                  <div class="hint-text">Leave blank if no legal/registration line is required.</div>
                 </div>
               </div>
             </details>
@@ -906,8 +906,8 @@
           siteBaseUrl: "https://www.capte.co",
           logoDisplayWidth: 189,
           logoDisplayHeight: 92,
-          defaultLogoUrl: "{{LOGO_URL}}",
-          defaultLegalLine: "{{LEGAL_LINE}}"
+          defaultLogoUrl: "https://cdn.prod.website-files.com/64f08f1a9f74ffb5762d6891/6ad24dcf0330817c4a7319e7_capte-email-signature-logo%402x.png",
+          defaultLegalLine: ""
         }
       };
 

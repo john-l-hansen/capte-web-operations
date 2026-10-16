@@ -83,8 +83,8 @@ const OFFICE_CONFIG = {
     siteBaseUrl: "https://www.capte.co",
     logoDisplayWidth: 189,
     logoDisplayHeight: 92,
-    defaultLogoUrl: "{{LOGO_URL}}",
-    defaultLegalLine: "{{LEGAL_LINE}}"
+    defaultLogoUrl: "https://cdn.prod.website-files.com/64f08f1a9f74ffb5762d6891/6ad24dcf0330817c4a7319e7_capte-email-signature-logo%402x.png",
+    defaultLegalLine: ""
   }
 };
 
