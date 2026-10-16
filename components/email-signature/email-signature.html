@@ -682,7 +682,7 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="field-name">Full Name <span style="color:var(--capte-error);">*</span></label>
-                <input type="text" id="field-name" name="fullName" value="John Hansen" required aria-describedby="name-error">
+                <input type="text" id="field-name" name="fullName" placeholder="e.g. Sarah Chen" required aria-describedby="name-error">
                 <div id="name-error" class="error-msg">Full name is required.</div>
               </div>
               <div class="form-group">
@@ -694,14 +694,14 @@
             <!-- Job Title -->
             <div class="form-group">
               <label for="field-title">Job Title <span style="color:var(--capte-error);">*</span></label>
-              <input type="text" id="field-title" name="jobTitle" value="Lead Web/Print Designer & Web Operations" required aria-describedby="title-error">
+              <input type="text" id="field-title" name="jobTitle" placeholder="e.g. Lead Systems Engineer" required aria-describedby="title-error">
               <div id="title-error" class="error-msg">Job title is required.</div>
             </div>
 
             <!-- Email Address -->
             <div class="form-group">
               <label for="field-email">Capte Email <span style="color:var(--capte-error);">*</span></label>
-              <input type="email" id="field-email" name="email" value="john@capte.co" required aria-describedby="email-hint email-error">
+              <input type="email" id="field-email" name="email" placeholder="e.g. s.chen@capte.co" required aria-describedby="email-hint email-error">
               <div id="email-hint" class="hint-text">Must be an official address ending in @capte.co</div>
               <div id="email-error" class="error-msg">Please enter a valid @capte.co email address.</div>
             </div>
@@ -730,7 +730,7 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="field-mobile">Mobile Phone <span style="color:var(--capte-error);">*</span></label>
-                <input type="tel" id="field-mobile" name="mobile" value="+1 858 231 2916" required aria-describedby="mobile-hint mobile-error">
+                <input type="tel" id="field-mobile" name="mobile" value="+1 " placeholder="+1 858 231 2916" required aria-describedby="mobile-hint mobile-error">
                 <div id="mobile-hint" class="hint-text">US format: +1 858 231 2916</div>
                 <div id="mobile-error" class="error-msg">Must start with + and country dial code.</div>
               </div>
@@ -973,12 +973,12 @@
       }
 
       // Validation functions
-      function validateForm() {
+      function validateForm(showErrors = false) {
         let isValid = true;
 
         // Name
         if (!fieldName.value.trim()) {
-          fieldName.setAttribute('aria-invalid', 'true');
+          if (showErrors) fieldName.setAttribute('aria-invalid', 'true');
           isValid = false;
         } else {
           fieldName.removeAttribute('aria-invalid');
@@ -986,7 +986,7 @@
 
         // Title
         if (!fieldTitle.value.trim()) {
-          fieldTitle.setAttribute('aria-invalid', 'true');
+          if (showErrors) fieldTitle.setAttribute('aria-invalid', 'true');
           isValid = false;
         } else {
           fieldTitle.removeAttribute('aria-invalid');
@@ -996,7 +996,7 @@
         const emailVal = fieldEmail.value.trim();
         const emailRegex = /^[^\s@]+@capte\.co$/i;
         if (!emailVal || !emailRegex.test(emailVal)) {
-          fieldEmail.setAttribute('aria-invalid', 'true');
+          if (showErrors) fieldEmail.setAttribute('aria-invalid', 'true');
           isValid = false;
         } else {
           fieldEmail.removeAttribute('aria-invalid');
@@ -1006,7 +1006,7 @@
         const mobileVal = fieldMobile.value.trim();
         const phoneRegex = /^\+[0-9]{1,4}[\s0-9().-]{5,}$/;
         if (!mobileVal || !phoneRegex.test(mobileVal)) {
-          fieldMobile.setAttribute('aria-invalid', 'true');
+          if (showErrors) fieldMobile.setAttribute('aria-invalid', 'true');
           isValid = false;
         } else {
           fieldMobile.removeAttribute('aria-invalid');
@@ -1015,7 +1015,7 @@
         // Office phone: optional, but if provided must start with +
         const officePhoneVal = fieldOfficePhone.value.trim();
         if (officePhoneVal && !phoneRegex.test(officePhoneVal)) {
-          fieldOfficePhone.setAttribute('aria-invalid', 'true');
+          if (showErrors) fieldOfficePhone.setAttribute('aria-invalid', 'true');
           isValid = false;
         } else {
           fieldOfficePhone.removeAttribute('aria-invalid');
@@ -1027,11 +1027,18 @@
       // Generate HTML signature markup
       function generateSignatureHtml(isForPreview) {
         const sigType = document.querySelector('input[name="sigType"]:checked').value;
-        const name = escapeHtml(fieldName.value.trim() || 'John Hansen');
+        const rawName = fieldName.value.trim();
+        const rawTitle = fieldTitle.value.trim();
+        const rawEmail = fieldEmail.value.trim();
+        const rawMobile = fieldMobile.value.trim();
+
+        const name = escapeHtml(rawName || (isForPreview ? 'Your Name' : 'First Last'));
         const pronouns = fieldPronouns.value.trim();
-        const title = escapeHtml(fieldTitle.value.trim() || 'Lead Web/Print Designer & Web Operations');
-        const email = escapeHtml(fieldEmail.value.trim() || 'john@capte.co');
-        const mobile = escapeHtml(fieldMobile.value.trim() || '+1 858 231 2916');
+        const title = escapeHtml(rawTitle || (isForPreview ? 'Job Title' : 'Title'));
+        const email = escapeHtml(rawEmail || (isForPreview ? 'email@capte.co' : 'name@capte.co'));
+        const mobile = escapeHtml((rawMobile && rawMobile !== '+1' && rawMobile !== '+33' && rawMobile !== '+31') 
+          ? rawMobile 
+          : (isForPreview ? '+1 858 231 2916' : '+1 000 000 0000'));
         const officePhone = escapeHtml(fieldOfficePhone.value.trim());
         const officeKey = fieldOffice.value;
         const langKey = fieldLang.value;
@@ -1174,7 +1181,7 @@ ${rowsHtml}  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font
 
       // Update UI & Live Preview
       function updatePreview() {
-        validateForm();
+        validateForm(false);
         const previewHtml = generateSignatureHtml(true);
         const productionHtml = generateSignatureHtml(false);
         
@@ -1211,6 +1218,15 @@ ${rowsHtml}  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font
       form.addEventListener('input', updatePreview);
       form.addEventListener('change', updatePreview);
 
+      // Validate individual fields on blur
+      [fieldName, fieldTitle, fieldEmail, fieldMobile, fieldOfficePhone].forEach(field => {
+        field.addEventListener('blur', () => {
+          if (field.value.trim()) {
+            validateForm(true);
+          }
+        });
+      });
+
       // Toast notification helper
       function showToast(message) {
         copyStatusText.textContent = message;
@@ -1223,7 +1239,7 @@ ${rowsHtml}  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font
 
       // Copy Signature (Rich HTML + Plain Text via ClipboardItem with execCommand fallback)
       btnCopySignature.addEventListener('click', async function() {
-        if (!validateForm()) {
+        if (!validateForm(true)) {
           showToast('Please check highlighted form errors.');
           return;
         }
