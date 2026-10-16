@@ -767,11 +767,7 @@
       <section class="card" aria-labelledby="preview-heading">
         <div class="card-header">
           <h2 id="preview-heading" class="card-title">Signature Preview</h2>
-          <div class="preview-controls">
-            <button type="button" id="toggle-light-mode" class="preview-toggle-btn active" title="Emulate light mode email background">Light Mode</button>
-            <button type="button" id="toggle-dark-mode" class="preview-toggle-btn" title="Emulate dark mode email background">Dark Mode</button>
-            <button type="button" id="toggle-images-blocked" class="preview-toggle-btn" title="Simulate blocked remote images">Images Blocked</button>
-          </div>
+          <span class="hint-text">Live 1:1 Outlook View</span>
         </div>
         <div class="card-body">
           <div id="email-preview-wrapper" class="preview-container" role="region" aria-label="Signature Visual Render">
@@ -938,10 +934,6 @@
       const btnCopySignature = document.getElementById('btn-copy-signature');
       const btnCopyHtml = document.getElementById('btn-copy-html');
       const btnCopyPlain = document.getElementById('btn-copy-plain');
-      
-      const toggleLightModeBtn = document.getElementById('toggle-light-mode');
-      const toggleDarkModeBtn = document.getElementById('toggle-dark-mode');
-      const toggleImagesBlockedBtn = document.getElementById('toggle-images-blocked');
 
       let toastTimeout = null;
 
@@ -1303,24 +1295,6 @@ ${rowsHtml}  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13p
           document.body.removeChild(textarea);
           showToast('Plain text signature copied to clipboard!');
         }
-      });
-
-      // Preview Toolbar Toggles
-      toggleLightModeBtn.addEventListener('click', function() {
-        previewWrapper.classList.remove('mode-dark');
-        toggleLightModeBtn.classList.add('active');
-        toggleDarkModeBtn.classList.remove('active');
-      });
-
-      toggleDarkModeBtn.addEventListener('click', function() {
-        previewWrapper.classList.add('mode-dark');
-        toggleDarkModeBtn.classList.add('active');
-        toggleLightModeBtn.classList.remove('active');
-      });
-
-      toggleImagesBlockedBtn.addEventListener('click', function() {
-        previewWrapper.classList.toggle('mode-blocked');
-        this.classList.toggle('active');
       });
 
       // Accessible Tab Navigation
