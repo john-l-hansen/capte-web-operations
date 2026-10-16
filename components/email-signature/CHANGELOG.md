@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [1.1.0] - 2026-10-16
+
+### Changed
+- **Cross-Platform Universal Logo**: Replaced solid white-tile asset with universal transparent PNG (`750x248` master rendered at `150x50` Retina display size) featuring an anti-aliased white contour stroke. Eliminates rectangular "sticker" effect on dark surfaces while rendering natively in both light and dark email clients without CSS filters.
+- **Brand Typography Stack & Proportional Scale**: Upgraded font stack to `'Roboto', Arial, Helvetica, sans-serif` across all 12 permutations and generator templates. Elevated name typography to `16px / line-height: 22px` (`#001384`) and detail text to `14px / line-height: 20px` (`#0F0F11` and `#5C6470`).
+- **Precision Left Alignment**: Aligned contact lines directly flush (`padding-left: 0`) under the outer curve of the Capte mark, paired with a balanced `14px` gap beneath the logo.
+- **Stacked Action Hierarchy**: Redesigned generator actions with a prominent full-width primary CTA ("Copy signature") above a 2-column secondary utility row ("Copy HTML" and "Copy plain text") matching Capte UI ergonomics.
+- **Form UX & Progressive Validation**: Implemented clean starting states with placeholder examples (`e.g. Sarah Chen`) and on-demand validation (`validateForm(showErrors)`), completely eliminating startup red error outlines.
+- **Brand Polish & Metadata**: Integrated official brand favicon, Open Graph social card (`capte-email-signature-og.png`), and aligned page metadata format (`Email Signature Generator | Capte Technologies`).
+
 ## [1.0.0] - 2026-09-25
 
 ### Added

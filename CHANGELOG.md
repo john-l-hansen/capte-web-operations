@@ -5,6 +5,7 @@ All notable changes to the `capte-web-components` repository (new components add
 ## [Unreleased]
 
 ### Added
+- Released **Email Signature Generator v1.1.0**: Universal cross-platform logo supporting light and dark mode email clients, Roboto font stack with elevated 16px/14px type scale, flush left optical alignment, clean placeholder validation UX, brand favicon and Open Graph assets.
 - Codified Capte Figma Design System tokens into `design-system/` (`tokens.css` and `tokens.json`) covering 217 variables, color ramps, typography, and spacing/radii scales.
 - Automated daily Figma sync pipeline via GitHub Actions (`.github/workflows/figma-sync.yml` and `scripts/figma-sync.js`) to open automated Pull Requests when Figma variables or files are updated.
 - Comprehensive multi-agent operating model and component lifecycle documentation in `docs/agent-workflow.md`.
