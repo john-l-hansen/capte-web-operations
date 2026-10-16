@@ -768,7 +768,7 @@
         <div class="card-header">
           <h2 id="preview-heading" class="card-title">Signature Preview</h2>
           <div class="preview-controls">
-            <button type="button" id="toggle-sample-logo" class="preview-toggle-btn active" title="Toggle sample logo visual vs placeholder">Sample Logo</button>
+            <button type="button" id="toggle-light-mode" class="preview-toggle-btn active" title="Emulate light mode email background">Light Mode</button>
             <button type="button" id="toggle-dark-mode" class="preview-toggle-btn" title="Emulate dark mode email background">Dark Mode</button>
             <button type="button" id="toggle-images-blocked" class="preview-toggle-btn" title="Simulate blocked remote images">Images Blocked</button>
           </div>
@@ -939,11 +939,10 @@
       const btnCopyHtml = document.getElementById('btn-copy-html');
       const btnCopyPlain = document.getElementById('btn-copy-plain');
       
-      const toggleSampleLogoBtn = document.getElementById('toggle-sample-logo');
+      const toggleLightModeBtn = document.getElementById('toggle-light-mode');
       const toggleDarkModeBtn = document.getElementById('toggle-dark-mode');
       const toggleImagesBlockedBtn = document.getElementById('toggle-images-blocked');
 
-      let useSampleLogoForPreview = true;
       let toastTimeout = null;
 
       // HTML entity escaper
@@ -1307,15 +1306,16 @@ ${rowsHtml}  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13p
       });
 
       // Preview Toolbar Toggles
-      toggleSampleLogoBtn.addEventListener('click', function() {
-        useSampleLogoForPreview = !useSampleLogoForPreview;
-        this.classList.toggle('active', useSampleLogoForPreview);
-        updatePreview();
+      toggleLightModeBtn.addEventListener('click', function() {
+        previewWrapper.classList.remove('mode-dark');
+        toggleLightModeBtn.classList.add('active');
+        toggleDarkModeBtn.classList.remove('active');
       });
 
       toggleDarkModeBtn.addEventListener('click', function() {
-        previewWrapper.classList.toggle('mode-dark');
-        this.classList.toggle('active');
+        previewWrapper.classList.add('mode-dark');
+        toggleDarkModeBtn.classList.add('active');
+        toggleLightModeBtn.classList.remove('active');
       });
 
       toggleImagesBlockedBtn.addEventListener('click', function() {
