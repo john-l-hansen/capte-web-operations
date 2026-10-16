@@ -109,15 +109,14 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
             cellPadding={0}
             cellSpacing={0}
             border={0}
-            style={{ borderCollapse: 'collapse', fontFamily: 'Arial,Helvetica,sans-serif' }}
+            style={{ borderCollapse: 'collapse', fontFamily: "Roboto,Arial,Helvetica,sans-serif" }}
           >
             <tbody>
               <tr>
                 <td
                   style={{
-                    fontFamily: 'Arial,Helvetica,sans-serif',
-                    fontSize: '15px',
-                    lineHeight: '20px',
+                    fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                    fontSize: '16px', lineHeight: '22px',
                     fontWeight: 'bold',
                     color: '#001384',
                     padding: '0',
@@ -125,7 +124,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                 >
                   {fullName}
                   {pronouns ? (
-                    <span style={{ fontWeight: 'normal', fontSize: '13px', color: '#5C6470' }}>
+                    <span style={{ fontWeight: 'normal', fontSize: '14px', color: '#5C6470' }}>
                       &nbsp;({pronouns})
                     </span>
                   ) : null}
@@ -134,9 +133,8 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
               <tr>
                 <td
                   style={{
-                    fontFamily: 'Arial,Helvetica,sans-serif',
-                    fontSize: '13px',
-                    lineHeight: '18px',
+                    fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                    fontSize: '14px', lineHeight: '20px',
                     color: '#0F0F11',
                     padding: '0 0 10px 0',
                   }}
@@ -158,10 +156,9 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                         <td
                           width="64"
                           style={{
-                            fontFamily: 'Arial,Helvetica,sans-serif',
-                            width: '64px',
-                            fontSize: '13px',
-                            lineHeight: '20px',
+                            fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                            width: '72px',
+                            fontSize: '14px', lineHeight: '20px',
                             color: '#5C6470',
                             padding: '0',
                             verticalAlign: 'top',
@@ -171,9 +168,8 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                         </td>
                         <td
                           style={{
-                            fontFamily: 'Arial,Helvetica,sans-serif',
-                            fontSize: '13px',
-                            lineHeight: '20px',
+                            fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                            fontSize: '14px', lineHeight: '20px',
                             color: '#0F0F11',
                             padding: '0',
                             verticalAlign: 'top',
@@ -200,7 +196,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
             cellPadding={0}
             cellSpacing={0}
             border={0}
-            style={{ borderCollapse: 'collapse', fontFamily: 'Arial,Helvetica,sans-serif' }}
+            style={{ borderCollapse: 'collapse', fontFamily: "Roboto,Arial,Helvetica,sans-serif" }}
           >
             <tbody>
               <tr>
@@ -225,9 +221,8 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
               <tr>
                 <td
                   style={{
-                    fontFamily: 'Arial,Helvetica,sans-serif',
-                    fontSize: '15px',
-                    lineHeight: '20px',
+                    fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                    fontSize: '16px', lineHeight: '22px',
                     fontWeight: 'bold',
                     color: '#001384',
                     padding: '2px 0 0 22px',
@@ -235,7 +230,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                 >
                   {fullName}
                   {pronouns ? (
-                    <span style={{ fontWeight: 'normal', fontSize: '13px', color: '#5C6470' }}>
+                    <span style={{ fontWeight: 'normal', fontSize: '14px', color: '#5C6470' }}>
                       &nbsp;({pronouns})
                     </span>
                   ) : null}
@@ -244,9 +239,8 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
               <tr>
                 <td
                   style={{
-                    fontFamily: 'Arial,Helvetica,sans-serif',
-                    fontSize: '13px',
-                    lineHeight: '18px',
+                    fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                    fontSize: '14px', lineHeight: '20px',
                     color: '#0F0F11',
                     padding: '0 0 10px 22px',
                   }}
@@ -269,10 +263,9 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                         <td
                           width="64"
                           style={{
-                            fontFamily: 'Arial,Helvetica,sans-serif',
-                            width: '64px',
-                            fontSize: '13px',
-                            lineHeight: '20px',
+                            fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                            width: '72px',
+                            fontSize: '14px', lineHeight: '20px',
                             color: '#5C6470',
                             padding: '0',
                             verticalAlign: 'top',
@@ -282,9 +275,8 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                         </td>
                         <td
                           style={{
-                            fontFamily: 'Arial,Helvetica,sans-serif',
-                            fontSize: '13px',
-                            lineHeight: '20px',
+                            fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                            fontSize: '14px', lineHeight: '20px',
                             color: '#0F0F11',
                             padding: '0',
                             verticalAlign: 'top',
@@ -318,10 +310,9 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                           <td
                             width="64"
                             style={{
-                              fontFamily: 'Arial,Helvetica,sans-serif',
-                              width: '64px',
-                              fontSize: '13px',
-                              lineHeight: '20px',
+                              fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                              width: '72px',
+                              fontSize: '14px', lineHeight: '20px',
                               color: '#5C6470',
                               padding: '0',
                               verticalAlign: 'top',
@@ -331,9 +322,8 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                           </td>
                           <td
                             style={{
-                              fontFamily: 'Arial,Helvetica,sans-serif',
-                              fontSize: '13px',
-                              lineHeight: '20px',
+                              fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                              fontSize: '14px', lineHeight: '20px',
                               color: '#0F0F11',
                               padding: '0',
                               verticalAlign: 'top',
@@ -367,10 +357,9 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                         <td
                           width="64"
                           style={{
-                            fontFamily: 'Arial,Helvetica,sans-serif',
-                            width: '64px',
-                            fontSize: '13px',
-                            lineHeight: '20px',
+                            fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                            width: '72px',
+                            fontSize: '14px', lineHeight: '20px',
                             color: '#5C6470',
                             padding: '0',
                             verticalAlign: 'top',
@@ -380,9 +369,8 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                         </td>
                         <td
                           style={{
-                            fontFamily: 'Arial,Helvetica,sans-serif',
-                            fontSize: '13px',
-                            lineHeight: '20px',
+                            fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                            fontSize: '14px', lineHeight: '20px',
                             color: '#0F0F11',
                             padding: '0',
                             verticalAlign: 'top',
@@ -415,10 +403,9 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                         <td
                           width="64"
                           style={{
-                            fontFamily: 'Arial,Helvetica,sans-serif',
-                            width: '64px',
-                            fontSize: '13px',
-                            lineHeight: '20px',
+                            fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                            width: '72px',
+                            fontSize: '14px', lineHeight: '20px',
                             color: '#5C6470',
                             padding: '0',
                             verticalAlign: 'top',
@@ -428,9 +415,8 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                         </td>
                         <td
                           style={{
-                            fontFamily: 'Arial,Helvetica,sans-serif',
-                            fontSize: '13px',
-                            lineHeight: '20px',
+                            fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                            fontSize: '14px', lineHeight: '20px',
                             color: '#0F0F11',
                             padding: '0',
                             verticalAlign: 'top',
@@ -463,9 +449,8 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
               <tr>
                 <td
                   style={{
-                    fontFamily: 'Arial,Helvetica,sans-serif',
-                    fontSize: '13px',
-                    lineHeight: '18px',
+                    fontFamily: "Roboto,Arial,Helvetica,sans-serif",
+                    fontSize: '14px', lineHeight: '20px',
                     color: '#5C6470',
                     padding: '10px 0 0 22px',
                   }}
@@ -480,7 +465,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                 <tr>
                   <td
                     style={{
-                      fontFamily: 'Arial,Helvetica,sans-serif',
+                      fontFamily: "Roboto,Arial,Helvetica,sans-serif",
                       fontSize: '12px',
                       lineHeight: '16px',
                       color: '#5C6470',

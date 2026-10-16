@@ -1047,18 +1047,18 @@
         const siteUrl = buildSiteUrl(officeKey);
 
         const pronounsSpan = pronouns 
-          ? `<span style="font-weight:normal;font-size:13px;color:#5C6470;">&nbsp;(${escapeHtml(pronouns)})</span>` 
+          ? `<span style="font-weight:normal;font-size:14px;color:#5C6470;">&nbsp;(${escapeHtml(pronouns)})</span>` 
           : '';
 
         if (sigType === 'reply') {
           // Reply Variant: No logo row, 0px left padding, title with company, mobile only
-          return `<table role="presentation" lang="${langKey}" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
-  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#001384;padding:0;">${name}${pronounsSpan}</td></tr>
-  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#0F0F11;padding:0 0 10px 0;">${title}, Capte Technologies</td></tr>
+          return `<table role="presentation" lang="${langKey}" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:'Roboto',Arial,Helvetica,sans-serif;">
+  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:16px;line-height:22px;font-weight:bold;color:#001384;padding:0;">${name}${pronounsSpan}</td></tr>
+  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#0F0F11;padding:0 0 10px 0;">${title}, Capte Technologies</td></tr>
   <tr><td style="padding:0;">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
-      <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.mobile)}</td>
-      <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:${sanitizeTel(mobile)}" style="color:#0F0F11;text-decoration:none;">${mobile}</a></td>
+      <td width="72" style="font-family:'Roboto',Arial,Helvetica,sans-serif;width:72px;font-size:14px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.mobile)}</td>
+      <td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:${sanitizeTel(mobile)}" style="color:#0F0F11;text-decoration:none;">${mobile}</a></td>
     </tr></table>
   </td></tr>
 </table>`;
@@ -1070,8 +1070,8 @@
         // Mobile row
         rowsHtml += `  <tr><td style="padding:0 0 0 22px;">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
-      <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.mobile)}</td>
-      <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:${sanitizeTel(mobile)}" style="color:#0F0F11;text-decoration:none;">${mobile}</a></td>
+      <td width="72" style="font-family:'Roboto',Arial,Helvetica,sans-serif;width:72px;font-size:14px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.mobile)}</td>
+      <td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:${sanitizeTel(mobile)}" style="color:#0F0F11;text-decoration:none;">${mobile}</a></td>
     </tr></table>
   </td></tr>\n`;
 
@@ -1079,8 +1079,8 @@
         if (officePhone) {
           rowsHtml += `  <tr><td style="padding:0 0 0 22px;">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
-      <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.office)}</td>
-      <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:${sanitizeTel(officePhone)}" style="color:#0F0F11;text-decoration:none;">${officePhone}</a></td>
+      <td width="72" style="font-family:'Roboto',Arial,Helvetica,sans-serif;width:72px;font-size:14px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.office)}</td>
+      <td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="tel:${sanitizeTel(officePhone)}" style="color:#0F0F11;text-decoration:none;">${officePhone}</a></td>
     </tr></table>
   </td></tr>\n`;
         }
@@ -1088,8 +1088,8 @@
         // Email row
         rowsHtml += `  <tr><td style="padding:0 0 0 22px;">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
-      <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.email)}</td>
-      <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="mailto:${email}" style="color:#0F0F11;text-decoration:none;">${email}</a></td>
+      <td width="72" style="font-family:'Roboto',Arial,Helvetica,sans-serif;width:72px;font-size:14px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.email)}</td>
+      <td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;"><a href="mailto:${email}" style="color:#0F0F11;text-decoration:none;">${email}</a></td>
     </tr></table>
   </td></tr>\n`;
 
@@ -1100,24 +1100,24 @@
         }
         rowsHtml += `  <tr><td style="padding:0 0 0 22px;">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>
-      <td width="64" style="font-family:Arial,Helvetica,sans-serif;width:64px;font-size:13px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.web)}</td>
-      <td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;">${webLinkHtml}</td>
+      <td width="72" style="font-family:'Roboto',Arial,Helvetica,sans-serif;width:72px;font-size:14px;line-height:20px;color:#5C6470;padding:0;vertical-align:top;">${escapeHtml(labels.web)}</td>
+      <td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#0F0F11;padding:0;vertical-align:top;">${webLinkHtml}</td>
     </tr></table>
   </td></tr>\n`;
 
         // Optional legal line
         let legalLineHtml = '';
         if (legalLineVal) {
-          legalLineHtml = `\n  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#5C6470;padding:8px 0 0 22px;">${escapeHtml(legalLineVal)}</td></tr>`;
+          legalLineHtml = `\n  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#5C6470;padding:8px 0 0 22px;">${escapeHtml(legalLineVal)}</td></tr>`;
         }
 
-        return `<table role="presentation" lang="${langKey}" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
+        return `<table role="presentation" lang="${langKey}" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:'Roboto',Arial,Helvetica,sans-serif;">
   <tr><td style="padding:0;">
     <a href="${siteUrl}" style="text-decoration:none;"><img src="${logoUrl}" width="189" height="92" alt="Capte Technologies" style="display:block;border:0;outline:none;width:189px;height:92px;"></a>
   </td></tr>
-  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#001384;padding:2px 0 0 22px;">${name}${pronounsSpan}</td></tr>
-  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#0F0F11;padding:0 0 10px 22px;">${title}</td></tr>
-${rowsHtml}  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#5C6470;padding:10px 0 0 22px;">${escapeHtml(office.line1)}<br>${escapeHtml(office.line2)}, ${escapeHtml(countryName)}</td></tr>${legalLineHtml}
+  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:16px;line-height:22px;font-weight:bold;color:#001384;padding:2px 0 0 22px;">${name}${pronounsSpan}</td></tr>
+  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#0F0F11;padding:0 0 10px 22px;">${title}</td></tr>
+${rowsHtml}  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#5C6470;padding:10px 0 0 22px;">${escapeHtml(office.line1)}<br>${escapeHtml(office.line2)}, ${escapeHtml(countryName)}</td></tr>${legalLineHtml}
 </table>`;
       }
 
