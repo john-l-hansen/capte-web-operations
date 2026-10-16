@@ -1029,10 +1029,7 @@
         const langKey = fieldLang.value;
         const linkedin = fieldLinkedin.value.trim();
         
-        let logoUrl = fieldLogoUrl.value.trim() || '{{LOGO_URL}}';
-        if (isForPreview && useSampleLogoForPreview && logoUrl === '{{LOGO_URL}}') {
-          logoUrl = SAMPLE_LOGO_PREVIEW_URI;
-        }
+        let logoUrl = (fieldLogoUrl && fieldLogoUrl.value.trim()) ? fieldLogoUrl.value.trim() : config.defaults.defaultLogoUrl;
 
         const legalLineVal = fieldLegalLine.value.trim();
         
