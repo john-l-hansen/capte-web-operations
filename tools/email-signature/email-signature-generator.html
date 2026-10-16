@@ -418,14 +418,20 @@
 
     /* Action Buttons */
     .button-group {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 10px;
-      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
     }
 
-    @media (max-width: 580px) {
-      .button-group {
+    .button-group-secondary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .button-group-secondary {
         grid-template-columns: 1fr;
       }
     }
@@ -436,9 +442,9 @@
       justify-content: center;
       gap: 8px;
       font-family: inherit;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
-      padding: 10px 16px;
+      padding: 12px 18px;
       border-radius: var(--capte-radius-sm);
       cursor: pointer;
       transition: all 0.15s ease;
@@ -777,15 +783,17 @@
           <!-- Action Buttons -->
           <div class="button-group">
             <button type="button" id="btn-copy-signature" class="btn btn-primary" title="Copy rich HTML & plain text to clipboard">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               Copy signature
             </button>
-            <button type="button" id="btn-copy-html" class="btn btn-secondary" title="Copy raw HTML markup">
-              Copy HTML
-            </button>
-            <button type="button" id="btn-copy-plain" class="btn btn-secondary" title="Copy plain text format">
-              Copy plain text
-            </button>
+            <div class="button-group-secondary">
+              <button type="button" id="btn-copy-html" class="btn btn-secondary" title="Copy raw HTML markup">
+                Copy HTML
+              </button>
+              <button type="button" id="btn-copy-plain" class="btn btn-secondary" title="Copy plain text format">
+                Copy plain text
+              </button>
+            </div>
           </div>
 
           <!-- ARIA Live Status Toast -->
