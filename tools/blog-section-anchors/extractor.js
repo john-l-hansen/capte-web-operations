@@ -1,13 +1,14 @@
 /**
- * Capte Blog Section-Anchor Link Extractor & Shortener (v1.2.1)
+ * Capte Blog Section-Anchor Link Extractor & Shortener (v1.2.2)
  * 
  * Extracts heading anchors (H2, H3) from published Capte blog posts and
  * automatically generates compact, branded shortened links for each section.
  * 
- * Includes:
- * - High-speed parallel shortening (TinyURL Pro or zero-config fallback)
- * - Bulletproof clipboard copy with automatic in-page modal HUD
- * - Drag vs Click detection on installation pages
+ * Resilient Multi-Engine Shortening:
+ * 1. TinyURL Pro (if token present) -> https://go.capte.co/xyz
+ * 2. is.gd Zero-Config CORS API -> https://is.gd/xyz
+ * 3. v.gd Backup Zero-Config API -> https://v.gd/xyz
+ * 4. Graceful Fallback -> Raw Anchor URL
  * 
  * Repository: https://github.com/john-l-hansen/capte-web-operations
  */
@@ -32,7 +33,7 @@
     return;
   }
 
-  // Helper to generate clean slug ID if h.id is missing
+  // Helper to generate clean slug ID if h.id is missing on the DOM
   function slugify(text) {
     return text
       .toLowerCase()
@@ -50,28 +51,24 @@
 
   const validCount = items.filter(item => item.id).length;
 
-  // Retrieve configuration from localStorage or global window scope
+  // Retrieve configuration from localStorage, window, or embedded variables
   const tinyUrlToken = (typeof localStorage !== 'undefined' && localStorage.getItem('capte_tinyurl_token')) ||
                        (typeof window !== 'undefined' && window.CAPTE_TINYURL_TOKEN);
   const tinyUrlDomain = (typeof localStorage !== 'undefined' && localStorage.getItem('capte_tinyurl_domain')) ||
                         (typeof window !== 'undefined' && window.CAPTE_TINYURL_DOMAIN) ||
-                        'tinyurl.com';
+                        'go.capte.co';
 
-  const engineLabel = tinyUrlToken 
-    ? (tinyUrlDomain !== 'tinyurl.com' ? `TinyURL (${tinyUrlDomain})` : 'TinyURL')
-    : 'Default Zero-Config Engine';
-
-  showToast(`⏳ Shortening ${validCount} section links via ${engineLabel}...`, 10000);
+  showToast(`⏳ Shortening ${validCount} section links...`, 12000);
 
   /**
-   * Shorten a deep-link URL preserving the #fragment anchor
+   * Robust Multi-Engine Shortener
    */
   async function shorten(targetUrl) {
-    try {
-      // 1. TinyURL API (Token configured -> uses custom domain if set)
-      if (tinyUrlToken) {
+    // Attempt 1: TinyURL Pro (if token configured)
+    if (tinyUrlToken) {
+      try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 4500);
+        const tid = setTimeout(() => controller.abort(), 4500);
         const res = await fetch('https://api.tinyurl.com/create', {
           method: 'POST',
           headers: {
@@ -80,35 +77,70 @@
           },
           body: JSON.stringify({
             url: targetUrl,
-            domain: tinyUrlDomain
+            domain: tinyUrlDomain || 'tinyurl.com'
           }),
           signal: controller.signal
         });
-        clearTimeout(timeoutId);
+        clearTimeout(tid);
         if (res.ok) {
           const data = await res.json();
-          if (data?.data?.tiny_url) return data.data.tiny_url;
+          if (data?.data?.tiny_url) {
+            return { url: data.data.tiny_url, engine: 'TinyURL Pro' };
+          }
+        } else {
+          console.warn('TinyURL API returned ' + res.status + ', trying fallback engines...');
         }
+      } catch (err) {
+        console.warn('TinyURL request failed (CORS / network):', err);
       }
-
-      // 2. Default Zero-Config Engine: is.gd JSON API (CORS enabled, fragment preservation)
-      const encoded = encodeURIComponent(targetUrl);
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3500);
-      const res = await fetch(`https://is.gd/create.php?format=json&url=${encoded}`, {
-        signal: controller.signal
-      });
-      clearTimeout(timeoutId);
-      if (res.ok) {
-        const data = await res.json();
-        if (data && data.shorturl) return data.shorturl;
-      }
-    } catch (err) {
-      console.warn('Shortening request failed for ' + targetUrl + ', falling back to raw anchor:', err);
     }
 
-    // 3. Fail-Safe Fallback: Return raw anchor link if network/API fails
-    return targetUrl;
+    // Attempt 2: is.gd Zero-Config CORS API
+    try {
+      const encoded = encodeURIComponent(targetUrl);
+      const controller = new AbortController();
+      const tid = setTimeout(() => controller.abort(), 4000);
+      const res = await fetch(`https://is.gd/create.php?format=json&url=${encoded}`, {
+        method: 'GET',
+        mode: 'cors',
+        referrerPolicy: 'no-referrer',
+        signal: controller.signal
+      });
+      clearTimeout(tid);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.shorturl) {
+          return { url: data.shorturl, engine: 'is.gd' };
+        }
+      }
+    } catch (err) {
+      console.warn('is.gd failed, trying v.gd fallback:', err);
+    }
+
+    // Attempt 3: v.gd Backup Zero-Config API
+    try {
+      const encoded = encodeURIComponent(targetUrl);
+      const controller = new AbortController();
+      const tid = setTimeout(() => controller.abort(), 4000);
+      const res = await fetch(`https://v.gd/create.php?format=json&url=${encoded}`, {
+        method: 'GET',
+        mode: 'cors',
+        referrerPolicy: 'no-referrer',
+        signal: controller.signal
+      });
+      clearTimeout(tid);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.shorturl) {
+          return { url: data.shorturl, engine: 'v.gd' };
+        }
+      }
+    } catch (err) {
+      console.warn('v.gd failed:', err);
+    }
+
+    // Attempt 4: Fallback to Raw Anchor Link
+    return { url: targetUrl, engine: 'raw' };
   }
 
   // Count duplicate IDs
@@ -118,9 +150,12 @@
   });
 
   // Shorten all section anchors in parallel
-  const shortenedUrls = await Promise.all(
+  const results = await Promise.all(
     items.map(item => item.id ? shorten(`${base}#${item.id}`) : Promise.resolve(null))
   );
+
+  let successEngine = null;
+  let rawFallbackCount = 0;
 
   const lines = [];
   items.forEach((item, idx) => {
@@ -130,14 +165,22 @@
     }
 
     const prefix = idCounts[item.id] > 1 ? '⚠️ DUPLICATE: ' : '';
-    const url = shortenedUrls[idx] || `${base}#${item.id}`;
+    const res = results[idx];
+    const url = res?.url || `${base}#${item.id}`;
+    
+    if (res?.engine && res.engine !== 'raw') {
+      successEngine = res.engine;
+    } else {
+      rawFallbackCount++;
+    }
+
     lines.push(`${prefix}${item.text} — ${url}`);
   });
 
   const fullOutput = lines.join('\n');
-  console.log('--- Capte Blog Section Shortlinks ---\n' + fullOutput);
+  console.log('--- Capte Blog Section Links ---\n' + fullOutput);
 
-  // Attempt async clipboard copy
+  // Attempt clipboard copy
   let copied = false;
   try {
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -165,15 +208,19 @@
     }
   }
 
+  // Provide accurate toast feedback based on shortening results
   if (copied) {
-    showToast(`✅ Copied ${validCount} shortened links to clipboard!`, 4000);
+    if (successEngine) {
+      showToast(`✅ Copied ${validCount} shortened links (via ${successEngine})!`, 4000);
+    } else {
+      showToast(`⚠️ Shortener APIs blocked by browser/network — copied ${validCount} raw links!`, 5000);
+    }
   } else {
-    // Show in-page modal HUD if browser strictly blocks clipboard API
-    showModal(fullOutput, validCount);
+    showModal(fullOutput, validCount, successEngine);
   }
 
   /**
-   * Non-intrusive HUD toast notification for bookmarklet users
+   * Non-intrusive HUD toast notification
    */
   function showToast(message, duration = 3500) {
     if (typeof document === 'undefined') return;
@@ -220,9 +267,9 @@
   }
 
   /**
-   * Modal HUD fallback if clipboard is blocked by browser policy
+   * In-page modal HUD fallback
    */
-  function showModal(content, count) {
+  function showModal(content, count, engine) {
     const existing = document.getElementById('capte-anchor-modal');
     if (existing) existing.remove();
 
@@ -240,10 +287,14 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     `);
 
+    const titleText = engine 
+      ? `✅ Generated ${count} Shortened Links (${engine})`
+      : `⚠️ Generated ${count} Raw Section Links (Shortener Blocked)`;
+
     modal.innerHTML = `
       <div style="background:#fff; border-radius:12px; width:100%; max-width:640px; padding:24px; box-shadow:0 8px 32px rgba(0,0,0,0.25);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-          <h3 style="margin:0; font-size:17px; color:#001384; font-weight:700;">✅ Generated ${count} Section Shortlinks</h3>
+          <h3 style="margin:0; font-size:16px; color:#001384; font-weight:700;">${titleText}</h3>
           <button id="close-capte-modal" style="background:none; border:none; font-size:20px; cursor:pointer; color:#626A7A;">✕</button>
         </div>
         <textarea id="capte-modal-text" readonly style="width:100%; height:200px; padding:12px; font-family:monospace; font-size:12px; border:1px solid #DDE2EE; border-radius:6px; background:#F2F4FC; color:#111523; resize:vertical; box-sizing:border-box;">${content}</textarea>

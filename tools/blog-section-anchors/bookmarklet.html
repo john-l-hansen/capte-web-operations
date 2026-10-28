@@ -528,16 +528,52 @@
   </div>
 
   <script>
-    // Minified bookmarklet scripts with branded domain support
-    const shortScriptCode = `javascript:(async function(){const b=location.origin+location.pathname,s=document.querySelector('article,.blog-post,.w-richtext,main')||document.body,hs=[...s.querySelectorAll('h2,h3')];if(!hs.length){alert('⚠️ No H2/H3 headings found on this page.');return;}const it=hs.map(h=>({t:(h.textContent||'').trim().replace(/\\s+/g,' '),i:h.id?h.id.trim():''})),vc=it.filter(x=>x.i).length;function st(m,d=3500){let e=document.getElementById('capte-anchor-toast');if(e)e.remove();e=document.createElement('div');e.id='capte-anchor-toast';e.setAttribute('style','position:fixed;bottom:24px;right:24px;z-index:999999;background:#001384;color:#fff;padding:12px 18px;border-radius:6px;box-shadow:0 4px 16px rgba(0,19,132,0.25);font-family:sans-serif;font-size:13px;font-weight:500;transition:opacity .3s,transform .3s;opacity:0;transform:translateY(8px);pointer-events:none;');e.textContent=m;document.body.appendChild(e);requestAnimationFrame(()=>{e.style.opacity='1';e.style.transform='translateY(0)';});setTimeout(()=>{e.style.opacity='0';e.style.transform='translateY(8px)';setTimeout(()=>e.remove(),300);},d);}const tk=(typeof localStorage!=='undefined'&&localStorage.getItem('capte_tinyurl_token'))||(typeof window!=='undefined'&&window.CAPTE_TINYURL_TOKEN);const dm=(typeof localStorage!=='undefined'&&localStorage.getItem('capte_tinyurl_domain'))||(typeof window!=='undefined'&&window.CAPTE_TINYURL_DOMAIN)||'tinyurl.com';st('⏳ Shortening '+vc+' section links ('+(tk?(dm!=='tinyurl.com'?dm:'TinyURL'):'Default Engine')+')...',8000);async function sh(u){try{if(tk){const r=await fetch('https://api.tinyurl.com/create',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+tk},body:JSON.stringify({url:u,domain:dm})});if(r.ok){const d=await r.json();if(d?.data?.tiny_url)return d.data.tiny_url;}}const r=await fetch('https://is.gd/create.php?format=json&url='+encodeURIComponent(u));if(r.ok){const d=await r.json();if(d?.shorturl)return d.shorturl;} }catch(e){}return u;}const c={},ls=[];it.forEach(x=>{if(x.i)c[x.i]=(c[x.i]||0)+1;});const su=await Promise.all(it.map(x=>x.i?sh(b+'#'+x.i):null));it.forEach((x,k)=>{if(!x.i){ls.push('⚠️ NO ID: '+x.t+' — (no id assigned)');return;}const p=c[x.i]>1?'⚠️ DUPLICATE: ':'';ls.push(p+x.t+' — '+(su[k]||(b+'#'+x.i)));});const o=ls.join('\\n');console.log(o);if(navigator.clipboard&&navigator.clipboard.writeText){try{await navigator.clipboard.writeText(o);st('✅ Copied '+vc+' shortened links to clipboard!');}catch(e){st('⚠️ Check console (clipboard denied)');}}else{st('✅ Printed to console');}})();`;
+    // Dynamic generator that embeds token and domain directly into the bookmarklet
+    function generateBookmarkletScript(token = '', domain = 'go.capte.co') {
+      const safeTk = token.replace(/"/g, '\\"');
+      const safeDm = (domain || 'go.capte.co').replace(/"/g, '\\"');
+      return `javascript:(async function(){const b=location.origin+location.pathname,s=document.querySelector('article,.blog-post,.w-richtext,main')||document.body,hs=[...s.querySelectorAll('h2,h3')];if(!hs.length){alert('⚠️ No H2/H3 headings found on this page.');return;}function sl(t){return t.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}const it=hs.map(h=>({t:(h.textContent||'').trim().replace(/\\s+/g,' '),i:h.id?h.id.trim():sl(h.textContent||'')})),vc=it.filter(x=>x.i).length;function st(m,d=3500){let e=document.getElementById('capte-anchor-toast');if(e)e.remove();e=document.createElement('div');e.id='capte-anchor-toast';e.setAttribute('style','position:fixed;bottom:24px;right:24px;z-index:999999;background:#001384;color:#fff;padding:12px 18px;border-radius:6px;box-shadow:0 4px 16px rgba(0,19,132,0.25);font-family:sans-serif;font-size:13px;font-weight:500;transition:opacity .3s,transform .3s;opacity:0;transform:translateY(8px);pointer-events:none;');e.textContent=m;document.body.appendChild(e);requestAnimationFrame(()=>{e.style.opacity='1';e.style.transform='translateY(0)';});setTimeout(()=>{e.style.opacity='0';e.style.transform='translateY(8px)';setTimeout(()=>e.remove(),300);},d);}st('⏳ Shortening '+vc+' section links...',10000);const tk="${safeTk}";const dm="${safeDm}";async function sh(u){if(tk){try{const r=await fetch('https://api.tinyurl.com/create',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+tk},body:JSON.stringify({url:u,domain:dm})});if(r.ok){const d=await r.json();if(d?.data?.tiny_url)return{u:d.data.tiny_url,e:'TinyURL'};}}catch(e){}}try{const r=await fetch('https://is.gd/create.php?format=json&url='+encodeURIComponent(u),{mode:'cors',referrerPolicy:'no-referrer'});if(r.ok){const d=await r.json();if(d?.shorturl)return{u:d.shorturl,e:'is.gd'};}}catch(e){}try{const r=await fetch('https://v.gd/create.php?format=json&url='+encodeURIComponent(u),{mode:'cors',referrerPolicy:'no-referrer'});if(r.ok){const d=await r.json();if(d?.shorturl)return{u:d.shorturl,e:'v.gd'};}}catch(e){}return{u:u,e:'raw'};}const c={},ls=[];it.forEach(x=>{if(x.i)c[x.i]=(c[x.i]||0)+1;});const rs=await Promise.all(it.map(x=>x.i?sh(b+'#'+x.i):null));let se=null;it.forEach((x,k)=>{if(!x.i){ls.push('⚠️ NO ID: '+x.t+' — (no id assigned)');return;}const p=c[x.i]>1?'⚠️ DUPLICATE: ':'';const r=rs[k];if(r?.e&&r.e!=='raw')se=r.e;ls.push(p+x.t+' — '+(r?.u||(b+'#'+x.i)));});const o=ls.join('\\n');console.log(o);if(navigator.clipboard&&navigator.clipboard.writeText){try{await navigator.clipboard.writeText(o);st(se?'✅ Copied '+vc+' shortened links (via '+se+')!':'⚠️ Shorteners blocked — copied raw links!',4500);}catch(e){st('⚠️ Check console (clipboard blocked)');}}else{st('✅ Printed to console');}})();`;
+    }
 
-    const rawScriptCode = `javascript:(function(){const b=location.origin+location.pathname,s=document.querySelector('article,.blog-post,.w-richtext,main')||document.body,hs=[...s.querySelectorAll('h2,h3')];if(!hs.length){alert('⚠️ No H2/H3 headings found on this page.');return;}const c={},ls=[];hs.forEach(h=>{const t=(h.textContent||'').trim().replace(/\\s+/g,' '),i=h.id?h.id.trim():'';if(!i){ls.push('⚠️ NO ID: '+t+' — (no id assigned)');return;}c[i]=(c[i]||0)+1;const p=c[i]>1?'⚠️ DUPLICATE: ':'';ls.push(p+t+' — '+b+'#'+i);});const out=ls.join('\\n');console.log(out);if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(out).then(()=>{alert('✅ Copied '+hs.length+' section links to clipboard!\\n\\nFormat: [heading] — [URL]');}).catch(()=>{alert('✅ Printed to console (clipboard access denied)');});}else{alert('✅ Printed to console');}})();`;
+    const rawScriptCode = `javascript:(function(){const b=location.origin+location.pathname,s=document.querySelector('article,.blog-post,.w-richtext,main')||document.body,hs=[...s.querySelectorAll('h2,h3')];if(!hs.length){alert('⚠️ No H2/H3 headings found on this page.');return;}function sl(t){return t.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}const c={},ls=[];hs.forEach(h=>{const t=(h.textContent||'').trim().replace(/\\s+/g,' '),i=h.id?h.id.trim():sl(t);if(!i){ls.push('⚠️ NO ID: '+t+' — (no id assigned)');return;}c[i]=(c[i]||0)+1;const p=c[i]>1?'⚠️ DUPLICATE: ':'';ls.push(p+t+' — '+b+'#'+i);});const out=ls.join('\\n');console.log(out);if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(out).then(()=>{alert('✅ Copied '+hs.length+' raw section links to clipboard!\\n\\nFormat: [heading] — [URL]');}).catch(()=>{alert('✅ Printed to console (clipboard access denied)');});}else{alert('✅ Printed to console');}})();`;
 
-    // Bind Bookmarklet URLs
-    document.getElementById('short-bookmarklet-link').setAttribute('href', shortScriptCode);
-    document.getElementById('raw-bookmarklet-link').setAttribute('href', rawScriptCode);
+    const tokenInput = document.getElementById('tinyurl-token-input');
+    const domainInput = document.getElementById('tinyurl-domain-input');
+    const tokenStatus = document.getElementById('token-status');
+    const shortBookmarkletLink = document.getElementById('short-bookmarklet-link');
+    const rawBookmarkletLink = document.getElementById('raw-bookmarklet-link');
 
-    // Intercept clicks on the setup page to guide users to drag instead of click
+    // Update bookmarklet href with current token and domain
+    function refreshBookmarkletLinks() {
+      const token = tokenInput.value.trim();
+      const domain = domainInput.value.trim() || 'go.capte.co';
+      const script = generateBookmarkletScript(token, domain);
+      shortBookmarkletLink.setAttribute('href', script);
+      rawBookmarkletLink.setAttribute('href', rawScriptCode);
+      return script;
+    }
+
+    // Initialize from localStorage
+    const savedToken = localStorage.getItem('capte_tinyurl_token');
+    const savedDomain = localStorage.getItem('capte_tinyurl_domain');
+    if (savedToken) tokenInput.value = savedToken;
+    if (savedDomain) domainInput.value = savedDomain;
+    
+    function updateStatusUI() {
+      const token = tokenInput.value.trim();
+      const domain = domainInput.value.trim() || 'go.capte.co';
+      if (token) {
+        tokenStatus.className = 'token-badge active';
+        tokenStatus.textContent = `● Active TinyURL Pro (${domain}) — embedded in bookmarklet!`;
+      } else {
+        tokenStatus.className = 'token-badge inactive';
+        tokenStatus.textContent = '● Mode: Zero-Config Fallback (is.gd / v.gd)';
+      }
+      refreshBookmarkletLinks();
+    }
+    updateStatusUI();
+
+    // Intercept clicks on setup page
     document.querySelectorAll('.bookmarklet-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -547,7 +583,8 @@
 
     // Copy Bookmarklet Code Buttons
     document.getElementById('copy-short-bookmarklet').addEventListener('click', () => {
-      navigator.clipboard.writeText(shortScriptCode).then(() => {
+      const code = refreshBookmarkletLinks();
+      navigator.clipboard.writeText(code).then(() => {
         const btn = document.getElementById('copy-short-bookmarklet');
         btn.textContent = '✅ Copied Shortener Code!';
         setTimeout(() => btn.textContent = '📋 Copy Shortener Code', 2000);
@@ -563,28 +600,6 @@
     });
 
     // Configuration Management
-    const tokenInput = document.getElementById('tinyurl-token-input');
-    const domainInput = document.getElementById('tinyurl-domain-input');
-    const tokenStatus = document.getElementById('token-status');
-
-    function updateStatusUI() {
-      const savedToken = localStorage.getItem('capte_tinyurl_token');
-      const savedDomain = localStorage.getItem('capte_tinyurl_domain') || 'go.capte.co';
-      if (savedToken) {
-        tokenStatus.className = 'token-badge active';
-        tokenStatus.textContent = `● Active TinyURL Pro Token (${savedDomain})`;
-      } else {
-        tokenStatus.className = 'token-badge inactive';
-        tokenStatus.textContent = '● Mode: Default Zero-Config Engine (is.gd / v.gd)';
-      }
-    }
-
-    const initialToken = localStorage.getItem('capte_tinyurl_token');
-    const initialDomain = localStorage.getItem('capte_tinyurl_domain');
-    if (initialToken) tokenInput.value = initialToken;
-    if (initialDomain) domainInput.value = initialDomain;
-    updateStatusUI();
-
     document.getElementById('save-settings-btn').addEventListener('click', () => {
       const tokenVal = tokenInput.value.trim();
       const domainVal = domainInput.value.trim() || 'go.capte.co';
@@ -593,12 +608,12 @@
         localStorage.setItem('capte_tinyurl_token', tokenVal);
         localStorage.setItem('capte_tinyurl_domain', domainVal);
         updateStatusUI();
-        alert(`✅ Configuration saved!\n\nToken: Active\nDomain: ${domainVal}`);
+        alert(`✅ Configuration saved & baked into bookmarklet!\n\nToken: Active\nDomain: ${domainVal}\n\n👉 Now DRAG the orange "Capte Section Shortlinks" button to your Bookmarks Bar to update it!`);
       } else {
         localStorage.removeItem('capte_tinyurl_token');
         localStorage.setItem('capte_tinyurl_domain', domainVal);
         updateStatusUI();
-        alert('⚠️ Token cleared. Will use default zero-config shortener.');
+        alert('⚠️ Token cleared. Bookmarklet updated with zero-config shortener.\n\n👉 Drag the button to your Bookmarks Bar to update it.');
       }
     });
 
@@ -608,7 +623,7 @@
       tokenInput.value = '';
       domainInput.value = 'go.capte.co';
       updateStatusUI();
-      alert('Settings cleared. Using default zero-config engine.');
+      alert('Settings cleared. Using zero-config engine.');
     });
 
     // Test Connection Button
@@ -671,8 +686,8 @@
       }));
 
       const base = 'https://capte.co/blog/precision-transit-telematics';
-      const token = localStorage.getItem('capte_tinyurl_token');
-      const domain = localStorage.getItem('capte_tinyurl_domain') || 'go.capte.co';
+      const token = tokenInput.value.trim();
+      const domain = domainInput.value.trim() || 'go.capte.co';
 
       async function testShorten(u) {
         if (token) {
@@ -684,28 +699,41 @@
             });
             if (r.ok) {
               const d = await r.json();
-              if (d?.data?.tiny_url) return d.data.tiny_url;
+              if (d?.data?.tiny_url) return { url: d.data.tiny_url, engine: 'TinyURL Pro' };
             }
           } catch (e) {}
         }
         try {
-          const res = await fetch('https://is.gd/create.php?format=json&url=' + encodeURIComponent(u));
+          const res = await fetch('https://is.gd/create.php?format=json&url=' + encodeURIComponent(u), { mode: 'cors', referrerPolicy: 'no-referrer' });
           if (res.ok) {
             const data = await res.json();
-            if (data?.shorturl) return data.shorturl;
+            if (data?.shorturl) return { url: data.shorturl, engine: 'is.gd' };
           }
         } catch (e) {}
-        return u;
+        try {
+          const res = await fetch('https://v.gd/create.php?format=json&url=' + encodeURIComponent(u), { mode: 'cors', referrerPolicy: 'no-referrer' });
+          if (res.ok) {
+            const data = await res.json();
+            if (data?.shorturl) return { url: data.shorturl, engine: 'v.gd' };
+          }
+        } catch (e) {}
+        return { url: u, engine: 'raw' };
       }
 
-      const shortened = await Promise.all(items.map(x => x.i ? testShorten(base + '#' + x.i) : Promise.resolve(null)));
-      const lines = items.map((x, idx) => `${x.t} — ${shortened[idx] || (base + '#' + x.i)}`);
+      const results = await Promise.all(items.map(x => x.i ? testShorten(base + '#' + x.i) : Promise.resolve(null)));
+      let engine = null;
+      const lines = items.map((x, idx) => {
+        const res = results[idx];
+        if (res?.engine && res.engine !== 'raw') engine = res.engine;
+        return `${x.t} — ${res?.url || (base + '#' + x.i)}`;
+      });
       const output = lines.join('\n');
       demoBox.textContent = output;
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(output);
       }
+      alert(`Test Complete! Shortened via: ${engine || 'Raw Fallback (check network)'}\n\nCopied to clipboard.`);
     });
 
     // Toggle Extension Guide Box
@@ -722,6 +750,9 @@
 
     // Download Icon-Ready HTML Bookmark File
     document.getElementById('download-icon-bookmark-btn').addEventListener('click', () => {
+      const code = refreshBookmarkletLinks();
+      // Safe HTML attribute escaping
+      const escapedCode = code.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
       const bookmarkContent = `<!DOCTYPE NETSCAPE-Bookmark-file-1>
 <!-- This is an automatically generated file.
      It will be read and overwritten.
@@ -730,7 +761,7 @@
 <TITLE>Bookmarks</TITLE>
 <H1>Bookmarks</H1>
 <DL><p>
-    <DT><A HREF="${shortScriptCode}" ICON="data:image/png;base64,${CAPTE_ICON_B64}">🔗 Capte Section Shortlinks</A>
+    <DT><A HREF="${escapedCode}" ICON="data:image/png;base64,${CAPTE_ICON_B64}">🔗 Capte Section Shortlinks</A>
 </DL><p>`;
 
       const blob = new Blob([bookmarkContent], { type: 'text/html' });
@@ -743,10 +774,29 @@
       a.remove();
       URL.revokeObjectURL(url);
 
-      alert("✅ Bookmark file downloaded: capte-section-shortlinks-bookmark.html\\n\\nTo show the Capte Blue Icon in Chrome:\\n1. Go to Chrome Menu (3 dots) → Bookmarks and lists → Import bookmarks and settings\\n2. Select 'Bookmarks HTML file' and pick the downloaded file.\\n\\nChrome will install the bookmarklet with the official Capte icon!");
+      alert("✅ Bookmark file downloaded: capte-section-shortlinks-bookmark.html\n\nTo show the Capte Blue Icon in Chrome:\n1. Go to Chrome Menu (3 dots) → Bookmarks and lists → Import bookmarks and settings\n2. Select 'Bookmarks HTML file' and pick the downloaded file.\n\nChrome will install the bookmarklet with the official Capte icon!");
     });
 
     document.getElementById('run-demo-raw-btn').addEventListener('click', () => {
+      demoBox.style.display = 'block';
+      const hs = [...document.querySelectorAll('.demo-area h2, .demo-area h3')];
+      const base = 'https://capte.co/blog/precision-transit-telematics';
+      function sl(t){return t.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}
+      const lines = hs.map(h => {
+        const t = (h.textContent || '').replace(/#[\w-]+/g, '').trim();
+        const id = h.id || sl(t);
+        return `${t} — ${base}#${id}`;
+      });
+      const output = lines.join('\n');
+      demoBox.textContent = output;
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(output);
+      }
+    });
+  </script>
+</body>
+</html>
       demoBox.style.display = 'block';
       const hs = [...document.querySelectorAll('.demo-area h2, .demo-area h3')];
       const base = 'https://capte.co/blog/precision-transit-telematics';
