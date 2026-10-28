@@ -413,6 +413,31 @@
           <button class="btn-secondary" id="copy-raw-bookmarklet" style="margin-top: 12px; width: 100%;">📋 Copy Raw Code</button>
         </div>
       </div>
+
+      <!-- Capte Custom Favicon / Extension Options -->
+      <div style="background:#F2F4FC; border:1px solid #DDE2EE; border-radius:var(--capte-radius-md); padding:16px 20px; margin-top:16px;">
+        <h3 style="font-size:14px; font-weight:700; color:var(--capte-blue); margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+          <img src="capte-favicon-32.png" width="18" height="18" alt="Capte Logo" style="vertical-align:middle; border-radius:3px;">
+          Want the official Capte icon instead of the default globe?
+        </h3>
+        <p style="font-size:13px; color:var(--capte-text); margin-bottom:12px;">
+          Browsers assign a default globe icon to dragged bookmarklets. To display the official <strong>Capte Blue Icon</strong> in your browser, pick either option:
+        </p>
+        <div class="button-row">
+          <button class="btn-secondary active" id="download-icon-bookmark-btn">📥 Download Capte Icon Bookmark (.html)</button>
+          <button class="btn-secondary" id="toggle-extension-guide-btn">🧩 Chrome Toolbar Extension (Pinned Icon)</button>
+        </div>
+        <div id="extension-guide-box" style="display:none; margin-top:12px; background:#fff; border:1px solid var(--capte-border); border-radius:var(--capte-radius-sm); padding:14px; font-size:12px; line-height:1.6;">
+          <p><strong>How to Pin the Capte Icon in your Chrome Toolbar:</strong></p>
+          <ol style="margin-left:18px; margin-top:6px;">
+            <li>In Chrome, navigate to <code>chrome://extensions</code> in a new tab.</li>
+            <li>Toggle on <strong>Developer mode</strong> in the top right.</li>
+            <li>Click <strong>Load unpacked</strong> in the top left.</li>
+            <li>Select the folder: <code>tools/blog-section-anchors/chrome-extension/</code> from this repository.</li>
+            <li>Click the puzzle piece icon in Chrome's top toolbar and <strong>Pin</strong> the Capte icon! Now you can click the Capte icon directly from your toolbar on any blog post!</li>
+          </ol>
+        </div>
+      </div>
     </div>
 
     <!-- Branded Domain & TinyURL Configuration -->
@@ -681,6 +706,44 @@
       if (navigator.clipboard) {
         navigator.clipboard.writeText(output);
       }
+    });
+
+    // Toggle Extension Guide Box
+    const extGuideBtn = document.getElementById('toggle-extension-guide-btn');
+    const extGuideBox = document.getElementById('extension-guide-box');
+    extGuideBtn.addEventListener('click', () => {
+      const isHidden = extGuideBox.style.display === 'none';
+      extGuideBox.style.display = isHidden ? 'block' : 'none';
+      extGuideBtn.className = isHidden ? 'btn-secondary active' : 'btn-secondary';
+    });
+
+    // Base64 32x32 Capte Favicon for HTML Bookmark Import
+    const CAPTE_ICON_B64 = "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";
+
+    // Download Icon-Ready HTML Bookmark File
+    document.getElementById('download-icon-bookmark-btn').addEventListener('click', () => {
+      const bookmarkContent = `<!DOCTYPE NETSCAPE-Bookmark-file-1>
+<!-- This is an automatically generated file.
+     It will be read and overwritten.
+     DO NOT EDIT! -->
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<TITLE>Bookmarks</TITLE>
+<H1>Bookmarks</H1>
+<DL><p>
+    <DT><A HREF="${shortScriptCode}" ICON="data:image/png;base64,${CAPTE_ICON_B64}">🔗 Capte Section Shortlinks</A>
+</DL><p>`;
+
+      const blob = new Blob([bookmarkContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'capte-section-shortlinks-bookmark.html';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      alert("✅ Bookmark file downloaded: capte-section-shortlinks-bookmark.html\\n\\nTo show the Capte Blue Icon in Chrome:\\n1. Go to Chrome Menu (3 dots) → Bookmarks and lists → Import bookmarks and settings\\n2. Select 'Bookmarks HTML file' and pick the downloaded file.\\n\\nChrome will install the bookmarklet with the official Capte icon!");
     });
 
     document.getElementById('run-demo-raw-btn').addEventListener('click', () => {

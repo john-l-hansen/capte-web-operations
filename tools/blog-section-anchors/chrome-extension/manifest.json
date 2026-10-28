@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Capte Blog Section Shortener",
+  "version": "1.2.0",
+  "description": "Extract and auto-shorten section deep links from capte.co blog posts with 1 click.",
+  "icons": {
+    "32": "capte-favicon-32.png"
+  },
+  "action": {
+    "default_icon": {
+      "32": "capte-favicon-32.png"
+    },
+    "default_title": "Copy Capte Section Shortlinks"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ]
+}
