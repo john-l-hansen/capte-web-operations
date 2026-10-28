@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Section-Anchor Extractor | Capte Technologies</title>
-  <meta name="description" content="Quick bookmarklet and console tool to extract H2/H3 deep section anchor links from published articles on capte.co.">
+  <title>Blog Section-Anchor Extractor & Shortener | Capte Technologies</title>
+  <meta name="description" content="Quick bookmarklet and console tool to extract H2/H3 deep section anchor links from published articles on capte.co with automated branded link shortening for social campaigns.">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="capte-favicon.png">
@@ -12,19 +12,20 @@
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Blog Section-Anchor Extractor | Capte Technologies">
-  <meta property="og:description" content="Quick bookmarklet and console tool to extract H2/H3 deep section anchor links from published articles on capte.co.">
+  <meta property="og:title" content="Blog Section-Anchor Extractor & Shortener | Capte Technologies">
+  <meta property="og:description" content="Extract and auto-shorten section deep links from published Capte blog posts to maximize content runway across multiple social shares.">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Blog Section-Anchor Extractor | Capte Technologies">
-  <meta name="twitter:description" content="Quick bookmarklet and console tool to extract H2/H3 deep section anchor links from published articles on capte.co.">
+  <meta name="twitter:title" content="Blog Section-Anchor Extractor & Shortener | Capte Technologies">
+  <meta name="twitter:description" content="Extract and auto-shorten section deep links from published Capte blog posts to maximize content runway across multiple social shares.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --capte-blue: #001384;
       --capte-blue-hover: #093AEC;
+      --capte-blue-light: #EAF0FF;
       --capte-orange: #FC5522;
       --capte-orange-hover: #DD3603;
       --capte-surface: #FFFFFF;
@@ -32,6 +33,8 @@
       --capte-border: #DDE2EE;
       --capte-text: #111523;
       --capte-text-muted: #626A7A;
+      --capte-success: #059669;
+      --capte-success-bg: #ECFDF5;
       --capte-radius-sm: 4px;
       --capte-radius-md: 8px;
       --capte-radius-lg: 12px;
@@ -46,7 +49,7 @@
     }
 
     body {
-      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--capte-text);
       background-color: var(--capte-surface-muted);
       line-height: 1.6;
@@ -54,7 +57,7 @@
     }
 
     .container {
-      max-width: 760px;
+      max-width: 840px;
       margin: 0 auto;
       background: var(--capte-surface);
       border-radius: var(--capte-radius-lg);
@@ -77,7 +80,7 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--capte-blue);
-      background: #EAF0FF;
+      background: var(--capte-blue-light);
       padding: 4px 10px;
       border-radius: var(--capte-radius-full);
       margin-bottom: 12px;
@@ -123,27 +126,49 @@
       border-radius: 50%;
     }
 
+    .bookmarklet-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    @media (max-width: 640px) {
+      .bookmarklet-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .bookmarklet-box {
       background: #FAFBFE;
       border: 2px dashed #BAC9FC;
       border-radius: var(--capte-radius-md);
-      padding: 28px;
+      padding: 24px;
       text-align: center;
-      margin: 16px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .bookmarklet-box.primary {
+      border-color: #FC5522;
+      background: #FFF9F7;
     }
 
     .bookmarklet-btn {
       display: inline-block;
       background-color: var(--capte-orange);
       color: #ffffff !important;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       text-decoration: none;
-      padding: 12px 24px;
+      padding: 12px 20px;
       border-radius: var(--capte-radius-sm);
       cursor: grab;
       box-shadow: 0 2px 8px rgba(252, 85, 34, 0.25);
       transition: background-color 0.15s ease, transform 0.15s ease;
+      margin-bottom: 10px;
     }
 
     .bookmarklet-btn:hover {
@@ -151,10 +176,19 @@
       transform: translateY(-1px);
     }
 
+    .bookmarklet-btn.secondary {
+      background-color: var(--capte-blue);
+      box-shadow: 0 2px 8px rgba(0, 19, 132, 0.2);
+    }
+
+    .bookmarklet-btn.secondary:hover {
+      background-color: var(--capte-blue-hover);
+    }
+
     .bookmarklet-hint {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--capte-text-muted);
-      margin-top: 12px;
+      line-height: 1.4;
     }
 
     pre {
@@ -167,6 +201,13 @@
       overflow-x: auto;
       line-height: 1.5;
       margin: 12px 0;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
     }
 
     .btn-secondary {
@@ -189,19 +230,108 @@
       background: #E2E7F5;
     }
 
-    .notice {
-      background: #FFF9E6;
-      border-left: 4px solid #E6A700;
-      padding: 12px 16px;
-      border-radius: 0 var(--capte-radius-sm) var(--capte-radius-sm) 0;
-      font-size: 13px;
-      color: #5C4300;
+    .btn-secondary.active {
+      border-color: var(--capte-blue);
+      background: var(--capte-blue-light);
+      color: var(--capte-blue);
+      font-weight: 600;
+    }
+
+    /* Configuration Panel */
+    .config-box {
+      background: #F9FAFC;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+      padding: 20px;
       margin: 16px 0;
     }
 
-    .notice strong {
-      display: block;
-      margin-bottom: 2px;
+    .form-row {
+      margin-bottom: 14px;
+    }
+
+    .config-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--capte-text);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .config-label-hint {
+      font-weight: 400;
+      color: var(--capte-text-muted);
+      font-size: 11px;
+    }
+
+    .config-input {
+      width: 100%;
+      padding: 9px 12px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-sm);
+      background: #fff;
+    }
+
+    .config-input:focus {
+      outline: none;
+      border-color: var(--capte-blue);
+      box-shadow: 0 0 0 2px var(--capte-blue-light);
+    }
+
+    .token-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: var(--capte-radius-sm);
+      margin-top: 8px;
+    }
+
+    .token-badge.active {
+      background: var(--capte-success-bg);
+      color: var(--capte-success);
+      font-weight: 500;
+    }
+
+    .token-badge.inactive {
+      background: var(--capte-surface-muted);
+      color: var(--capte-text-muted);
+    }
+
+    /* Collapsible Setup Guide */
+    details.dns-guide {
+      margin-top: 14px;
+      background: #fff;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-sm);
+      padding: 12px 16px;
+      font-size: 13px;
+    }
+
+    details.dns-guide summary {
+      font-weight: 600;
+      color: var(--capte-blue);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    details.dns-guide ol {
+      margin-top: 10px;
+      margin-left: 20px;
+      color: var(--capte-text);
+      line-height: 1.6;
+    }
+
+    details.dns-guide code {
+      background: var(--capte-surface-muted);
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
     }
 
     /* Interactive Demo Area */
@@ -230,115 +360,343 @@
       border-radius: 4px;
       margin-left: 6px;
     }
+
+    .output-preview {
+      background: #0F1424;
+      color: #DDE2EE;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      padding: 14px;
+      border-radius: var(--capte-radius-md);
+      margin-top: 14px;
+      white-space: pre-wrap;
+      display: none;
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
     <header>
-      <span class="badge">Marketing & Ops Utility</span>
-      <h1>Blog Section-Anchor Link Tool</h1>
-      <p class="lead">Extract deep-link URLs for every H2 & H3 on any published Capte blog post formatted cleanly as <code>[heading] — [URL]</code>.</p>
+      <span class="badge">Marketing & Web Ops Utility</span>
+      <h1>Blog Section-Anchor Extractor & Shortener</h1>
+      <p class="lead">Extract section deep-link URLs from any published Capte blog post and automatically generate compact, branded shortlinks to extend content runway across multiple social shares.</p>
     </header>
 
-    <!-- Option 1: Bookmarklet -->
+    <!-- Option 1: Bookmarklets -->
     <div class="section">
-      <h2><span class="step-number">1</span> Option A: Bookmarklet (Recommended for Marketing)</h2>
+      <h2><span class="step-number">1</span> Option A: 1-Click Bookmarklet (Recommended for Marketing)</h2>
       <p style="font-size: 14px; color: var(--capte-text-muted);">
-        Drag the button below directly into your browser's <strong>Bookmarks Bar</strong>, or create a bookmark and paste the URL code:
+        Drag either button below directly into your browser's <strong>Bookmarks Bar</strong>:
       </p>
 
-      <div class="bookmarklet-box">
-        <a class="bookmarklet-btn" id="bookmarklet-link" href="#">🔗 Capte Section Links</a>
-        <p class="bookmarklet-hint">💡 When viewing any live blog post on <a href="https://capte.co" target="_blank" style="color:var(--capte-blue);">capte.co</a>, click it to instantly copy all section URLs formatted as <code>[heading] — [URL]</code>.</p>
-      </div>
+      <div class="bookmarklet-grid">
+        <!-- Shortened Bookmarklet (Primary) -->
+        <div class="bookmarklet-box primary">
+          <div>
+            <a class="bookmarklet-btn" id="short-bookmarklet-link" href="#">🔗 Capte Section Shortlinks</a>
+            <p class="bookmarklet-hint">
+              <strong>Social Slices (Branded / Shortened)</strong>: Auto-shortens every heading link into a compact URL ready for LinkedIn, X, or email posts.
+            </p>
+          </div>
+          <button class="btn-secondary" id="copy-short-bookmarklet" style="margin-top: 12px; width: 100%;">📋 Copy Shortener Code</button>
+        </div>
 
-      <button class="btn-secondary" id="copy-bookmarklet-code">📋 Copy Bookmarklet Code (For Manual Bookmark URL)</button>
+        <!-- Raw Bookmarklet (Classic) -->
+        <div class="bookmarklet-box">
+          <div>
+            <a class="bookmarklet-btn secondary" id="raw-bookmarklet-link" href="#">🔗 Capte Raw Section Links</a>
+            <p class="bookmarklet-hint">
+              <strong>Raw Anchors</strong>: Instantly copies unshortened URLs formatted as <code>capte.co/blog/slug#anchor</code>.
+            </p>
+          </div>
+          <button class="btn-secondary" id="copy-raw-bookmarklet" style="margin-top: 12px; width: 100%;">📋 Copy Raw Code</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branded Domain & TinyURL Configuration -->
+    <div class="section">
+      <h2><span class="step-number">2</span> TinyURL Pro & Branded Domain Configuration</h2>
+      <p style="font-size: 13px; color: var(--capte-text-muted);">
+        Configure your TinyURL Pro API token and branded domain below. Settings are stored safely in your browser’s <code>localStorage</code> and automatically picked up by the bookmarklet:
+      </p>
+
+      <div class="config-box">
+        <div class="form-row">
+          <label class="config-label" for="tinyurl-token-input">
+            <span>TinyURL API Bearer Token</span>
+            <span class="config-label-hint">From <a href="https://tinyurl.com/app/dev" target="_blank" style="color:var(--capte-blue);">tinyurl.com/app/dev</a></span>
+          </label>
+          <input type="password" id="tinyurl-token-input" class="config-input" placeholder="Paste TinyURL Bearer token...">
+        </div>
+
+        <div class="form-row">
+          <label class="config-label" for="tinyurl-domain-input">
+            <span>Branded Short Domain</span>
+            <span class="config-label-hint">e.g. <code>go.capte.co</code>, <code>links.capte.co</code>, or leave as <code>tinyurl.com</code></span>
+          </label>
+          <input type="text" id="tinyurl-domain-input" class="config-input" placeholder="go.capte.co" value="go.capte.co">
+        </div>
+
+        <div class="button-row" style="align-items: center;">
+          <button class="btn-secondary active" id="save-settings-btn">💾 Save Configuration</button>
+          <button class="btn-secondary" id="test-connection-btn">⚡ Test Connection</button>
+          <button class="btn-secondary" id="clear-settings-btn" style="color:#C53030;">Clear</button>
+        </div>
+
+        <div id="token-status" class="token-badge inactive">
+          ● Mode: Default Zero-Config Engine (is.gd / v.gd)
+        </div>
+
+        <!-- Expandable DNS Setup Guide -->
+        <details class="dns-guide">
+          <summary>🛠️ How to configure go.capte.co in Cloudflare & TinyURL</summary>
+          <ol>
+            <li><strong>TinyURL Dashboard</strong>: Go to <em>TinyURL &rarr; Branded Domains</em> &rarr; click <strong>Add Domain</strong> and enter <code>go.capte.co</code>.</li>
+            <li><strong>Cloudflare DNS</strong>: Add a <strong>CNAME</strong> record:
+              <br>• <strong>Name / Host</strong>: <code>go</code> (points to <code>go.capte.co</code>)
+              <br>• <strong>Target / Destination</strong>: <code>custom.tinyurl.com</code>
+              <br>• <strong>Proxy status</strong>: <code>DNS Only</code> (Grey cloud)
+            </li>
+            <li><strong>Verify</strong>: Click <strong>Verify Domain</strong> inside TinyURL. Once green, all shortened links generated through this tool will use <code>https://go.capte.co/xyz</code>!</li>
+          </ol>
+        </details>
+      </div>
     </div>
 
     <!-- Option 2: DevTools Console -->
     <div class="section">
-      <h2><span class="step-number">2</span> Option B: DevTools Console (For Technical Workflows)</h2>
+      <h2><span class="step-number">3</span> Option B: DevTools Console Script</h2>
       <p style="font-size: 14px; color: var(--capte-text-muted);">
-        Open the published blog post &rarr; Right Click &rarr; <strong>Inspect</strong> &rarr; <strong>Console</strong> &rarr; paste and run:
+        Open any published blog post on <a href="https://capte.co/blog" target="_blank" style="color:var(--capte-blue);">capte.co/blog</a> &rarr; Right Click &rarr; <strong>Inspect</strong> &rarr; <strong>Console</strong> &rarr; paste and run:
       </p>
 
-      <pre id="code-block"><code>(function() {
-  const base = location.origin + location.pathname;
-  const headings = [...(document.querySelector('article, .blog-post, .w-richtext, main') || document.body).querySelectorAll('h2, h3')];
-  const idCounts = {};
-  const lines = [];
-  headings.forEach(h => {
-    const text = (h.textContent || '').trim().replace(/\s+/g, ' ');
-    const id = h.id ? h.id.trim() : '';
-    if (!id) {
-      lines.push(`⚠️ NO ID: ${text} — (no id assigned)`);
-      return;
-    }
-    idCounts[id] = (idCounts[id] || 0) + 1;
-    const prefix = idCounts[id] > 1 ? '⚠️ DUPLICATE: ' : '';
-    lines.push(`${prefix}${text} — ${base}#${id}`);
-  });
-  const out = lines.join('\n');
-  console.log(out);
-  navigator.clipboard.writeText(out).then(() => console.log('✅ Copied to clipboard'));
-})();</code></pre>
+      <pre id="console-code-block"><code>/* See tools/blog-section-anchors/extractor.js for the complete production source */</code></pre>
 
-      <button class="btn-secondary" id="copy-code-btn">📋 Copy Console Code</button>
-    </div>
-
-    <!-- Known Limitations -->
-    <div class="section">
-      <h2><span class="step-number">3</span> Known Limitations & Best Practices</h2>
-      
-      <div class="notice">
-        <strong>⚠️ Heading Stability:</strong>
-        IDs are dynamically calculated from heading text on page load. If an article's heading text is edited in Webflow CMS after links are shared, older anchor links will gracefully fall back to the top of the article. Pull section links only once an article's headings are final.
-      </div>
-
-      <div class="notice" style="background:#F2F4FC; border-left-color:var(--capte-blue); color:var(--capte-text);">
-        <strong>💡 Output Format:</strong>
-        Output is formatted line-by-line as <code>[heading] — [URL]</code> for immediate copy-pasting into Notion, Slack, Google Docs, or social schedulers.
+      <div class="button-row">
+        <button class="btn-secondary" id="copy-console-code-btn">📋 Copy Console Code (extractor.js)</button>
       </div>
     </div>
 
     <!-- Interactive Test Area -->
     <div class="section">
-      <h2><span class="step-number">4</span> Try It Out (Test Area)</h2>
+      <h2><span class="step-number">4</span> Interactive Test Harness</h2>
       <p style="font-size: 14px; color: var(--capte-text-muted);">
-        Click the bookmarklet button above or run the script right now to test on these sample headings:
+        Test the shortening and extraction directly right now on these mock article headings:
       </p>
 
       <div class="demo-area">
-        <h2 class="demo-heading" id="telematics-overview">1. Telematics Architecture <span class="demo-tag">#telematics-overview</span></h2>
-        <h3 class="demo-heading" id="can-bus-integration">1.1 CAN Bus Direct Integration <span class="demo-tag">#can-bus-integration</span></h3>
-        <h3 class="demo-heading" id="rtk-accuracy">1.2 RTK Precision Positioning <span class="demo-tag">#rtk-accuracy</span></h3>
-        <h2 class="demo-heading" id="hardware-specifications">2. Hardware Specifications <span class="demo-tag">#hardware-specifications</span></h2>
+        <h2 class="demo-heading" id="telematics-architecture">1. Telematics Gateway Architecture <span class="demo-tag">#telematics-architecture</span></h2>
+        <h3 class="demo-heading" id="can-bus-decoding">1.1 High-Speed CAN Bus Decoding <span class="demo-tag">#can-bus-decoding</span></h3>
+        <h3 class="demo-heading" id="rtk-precision-positioning">1.2 Dual-Frequency RTK Precision Positioning <span class="demo-tag">#rtk-precision-positioning</span></h3>
+        <h2 class="demo-heading" id="hardware-redundancy">2. Hardware Power & Cellular Redundancy <span class="demo-tag">#hardware-redundancy</span></h2>
+
+        <div style="margin-top: 16px;" class="button-row">
+          <button class="btn-secondary active" id="run-demo-short-btn">⚡ Test Shortener Extractor</button>
+          <button class="btn-secondary" id="run-demo-raw-btn">Test Raw Extractor</button>
+        </div>
+
+        <div id="demo-output-box" class="output-preview"></div>
       </div>
     </div>
   </div>
 
   <script>
-    const scriptCode = `javascript:(function(){const b=location.origin+location.pathname,s=document.querySelector('article,.blog-post,.w-richtext,main')||document.body,hs=[...s.querySelectorAll('h2,h3')];if(!hs.length){alert('⚠️ No H2/H3 headings found on this page.');return;}const c={},ls=[];hs.forEach(h=>{const t=(h.textContent||'').trim().replace(/\\s+/g,' '),i=h.id?h.id.trim():'';if(!i){ls.push('⚠️ NO ID: '+t+' — (no id assigned)');return;}c[i]=(c[i]||0)+1;const p=c[i]>1?'⚠️ DUPLICATE: ':'';ls.push(p+t+' — '+b+'#'+i);});const out=ls.join('\\n');console.log(out);if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(out).then(()=>{alert('✅ Copied '+hs.length+' section links to clipboard!\\n\\nFormat: [heading] — [URL]');}).catch(()=>{alert('✅ Printed to console (clipboard access denied)');});}else{alert('✅ Printed to console');}})();`;
+    // Minified bookmarklet scripts with branded domain support
+    const shortScriptCode = `javascript:(async function(){const b=location.origin+location.pathname,s=document.querySelector('article,.blog-post,.w-richtext,main')||document.body,hs=[...s.querySelectorAll('h2,h3')];if(!hs.length){alert('⚠️ No H2/H3 headings found on this page.');return;}const it=hs.map(h=>({t:(h.textContent||'').trim().replace(/\\s+/g,' '),i:h.id?h.id.trim():''})),vc=it.filter(x=>x.i).length;function st(m,d=3500){let e=document.getElementById('capte-anchor-toast');if(e)e.remove();e=document.createElement('div');e.id='capte-anchor-toast';e.setAttribute('style','position:fixed;bottom:24px;right:24px;z-index:999999;background:#001384;color:#fff;padding:12px 18px;border-radius:6px;box-shadow:0 4px 16px rgba(0,19,132,0.25);font-family:sans-serif;font-size:13px;font-weight:500;transition:opacity .3s,transform .3s;opacity:0;transform:translateY(8px);pointer-events:none;');e.textContent=m;document.body.appendChild(e);requestAnimationFrame(()=>{e.style.opacity='1';e.style.transform='translateY(0)';});setTimeout(()=>{e.style.opacity='0';e.style.transform='translateY(8px)';setTimeout(()=>e.remove(),300);},d);}const tk=(typeof localStorage!=='undefined'&&localStorage.getItem('capte_tinyurl_token'))||(typeof window!=='undefined'&&window.CAPTE_TINYURL_TOKEN);const dm=(typeof localStorage!=='undefined'&&localStorage.getItem('capte_tinyurl_domain'))||(typeof window!=='undefined'&&window.CAPTE_TINYURL_DOMAIN)||'tinyurl.com';st('⏳ Shortening '+vc+' section links ('+(tk?(dm!=='tinyurl.com'?dm:'TinyURL'):'Default Engine')+')...',8000);async function sh(u){try{if(tk){const r=await fetch('https://api.tinyurl.com/create',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+tk},body:JSON.stringify({url:u,domain:dm})});if(r.ok){const d=await r.json();if(d?.data?.tiny_url)return d.data.tiny_url;}}const r=await fetch('https://is.gd/create.php?format=json&url='+encodeURIComponent(u));if(r.ok){const d=await r.json();if(d?.shorturl)return d.shorturl;} }catch(e){}return u;}const c={},ls=[];it.forEach(x=>{if(x.i)c[x.i]=(c[x.i]||0)+1;});const su=await Promise.all(it.map(x=>x.i?sh(b+'#'+x.i):null));it.forEach((x,k)=>{if(!x.i){ls.push('⚠️ NO ID: '+x.t+' — (no id assigned)');return;}const p=c[x.i]>1?'⚠️ DUPLICATE: ':'';ls.push(p+x.t+' — '+(su[k]||(b+'#'+x.i)));});const o=ls.join('\\n');console.log(o);if(navigator.clipboard&&navigator.clipboard.writeText){try{await navigator.clipboard.writeText(o);st('✅ Copied '+vc+' shortened links to clipboard!');}catch(e){st('⚠️ Check console (clipboard denied)');}}else{st('✅ Printed to console');}})();`;
 
-    const bookmarkletEl = document.getElementById('bookmarklet-link');
-    bookmarkletEl.setAttribute('href', scriptCode);
+    const rawScriptCode = `javascript:(function(){const b=location.origin+location.pathname,s=document.querySelector('article,.blog-post,.w-richtext,main')||document.body,hs=[...s.querySelectorAll('h2,h3')];if(!hs.length){alert('⚠️ No H2/H3 headings found on this page.');return;}const c={},ls=[];hs.forEach(h=>{const t=(h.textContent||'').trim().replace(/\\s+/g,' '),i=h.id?h.id.trim():'';if(!i){ls.push('⚠️ NO ID: '+t+' — (no id assigned)');return;}c[i]=(c[i]||0)+1;const p=c[i]>1?'⚠️ DUPLICATE: ':'';ls.push(p+t+' — '+b+'#'+i);});const out=ls.join('\\n');console.log(out);if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(out).then(()=>{alert('✅ Copied '+hs.length+' section links to clipboard!\\n\\nFormat: [heading] — [URL]');}).catch(()=>{alert('✅ Printed to console (clipboard access denied)');});}else{alert('✅ Printed to console');}})();`;
 
-    document.getElementById('copy-bookmarklet-code').addEventListener('click', () => {
-      navigator.clipboard.writeText(scriptCode).then(() => {
-        const btn = document.getElementById('copy-bookmarklet-code');
-        btn.textContent = '✅ Copied Bookmarklet Code!';
-        setTimeout(() => btn.textContent = '📋 Copy Bookmarklet Code (For Manual Bookmark URL)', 2000);
+    // Bind Bookmarklet URLs
+    document.getElementById('short-bookmarklet-link').setAttribute('href', shortScriptCode);
+    document.getElementById('raw-bookmarklet-link').setAttribute('href', rawScriptCode);
+
+    // Intercept clicks on the setup page to guide users to drag instead of click
+    document.querySelectorAll('.bookmarklet-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert("👉 Don't click here!\n\nDrag this button up into your browser's Bookmarks Bar (Cmd+Shift+B on Mac if hidden).\n\nOnce it's in your bookmarks bar, visit any published blog post on capte.co/blog and click it there to generate your links!");
       });
     });
 
-    document.getElementById('copy-code-btn').addEventListener('click', () => {
-      const code = document.getElementById('code-block').innerText;
-      navigator.clipboard.writeText(code).then(() => {
-        const btn = document.getElementById('copy-code-btn');
-        btn.textContent = '✅ Copied Console Code!';
-        setTimeout(() => btn.textContent = '📋 Copy Console Code', 2000);
+    // Copy Bookmarklet Code Buttons
+    document.getElementById('copy-short-bookmarklet').addEventListener('click', () => {
+      navigator.clipboard.writeText(shortScriptCode).then(() => {
+        const btn = document.getElementById('copy-short-bookmarklet');
+        btn.textContent = '✅ Copied Shortener Code!';
+        setTimeout(() => btn.textContent = '📋 Copy Shortener Code', 2000);
       });
+    });
+
+    document.getElementById('copy-raw-bookmarklet').addEventListener('click', () => {
+      navigator.clipboard.writeText(rawScriptCode).then(() => {
+        const btn = document.getElementById('copy-raw-bookmarklet');
+        btn.textContent = '✅ Copied Raw Code!';
+        setTimeout(() => btn.textContent = '📋 Copy Raw Code', 2000);
+      });
+    });
+
+    // Configuration Management
+    const tokenInput = document.getElementById('tinyurl-token-input');
+    const domainInput = document.getElementById('tinyurl-domain-input');
+    const tokenStatus = document.getElementById('token-status');
+
+    function updateStatusUI() {
+      const savedToken = localStorage.getItem('capte_tinyurl_token');
+      const savedDomain = localStorage.getItem('capte_tinyurl_domain') || 'go.capte.co';
+      if (savedToken) {
+        tokenStatus.className = 'token-badge active';
+        tokenStatus.textContent = `● Active TinyURL Pro Token (${savedDomain})`;
+      } else {
+        tokenStatus.className = 'token-badge inactive';
+        tokenStatus.textContent = '● Mode: Default Zero-Config Engine (is.gd / v.gd)';
+      }
+    }
+
+    const initialToken = localStorage.getItem('capte_tinyurl_token');
+    const initialDomain = localStorage.getItem('capte_tinyurl_domain');
+    if (initialToken) tokenInput.value = initialToken;
+    if (initialDomain) domainInput.value = initialDomain;
+    updateStatusUI();
+
+    document.getElementById('save-settings-btn').addEventListener('click', () => {
+      const tokenVal = tokenInput.value.trim();
+      const domainVal = domainInput.value.trim() || 'go.capte.co';
+
+      if (tokenVal) {
+        localStorage.setItem('capte_tinyurl_token', tokenVal);
+        localStorage.setItem('capte_tinyurl_domain', domainVal);
+        updateStatusUI();
+        alert(`✅ Configuration saved!\n\nToken: Active\nDomain: ${domainVal}`);
+      } else {
+        localStorage.removeItem('capte_tinyurl_token');
+        localStorage.setItem('capte_tinyurl_domain', domainVal);
+        updateStatusUI();
+        alert('⚠️ Token cleared. Will use default zero-config shortener.');
+      }
+    });
+
+    document.getElementById('clear-settings-btn').addEventListener('click', () => {
+      localStorage.removeItem('capte_tinyurl_token');
+      localStorage.removeItem('capte_tinyurl_domain');
+      tokenInput.value = '';
+      domainInput.value = 'go.capte.co';
+      updateStatusUI();
+      alert('Settings cleared. Using default zero-config engine.');
+    });
+
+    // Test Connection Button
+    document.getElementById('test-connection-btn').addEventListener('click', async () => {
+      const token = tokenInput.value.trim();
+      const domain = domainInput.value.trim() || 'go.capte.co';
+
+      if (!token) {
+        alert('Please enter a TinyURL API Token to test connection.');
+        return;
+      }
+
+      tokenStatus.className = 'token-badge inactive';
+      tokenStatus.textContent = '⏳ Testing TinyURL API connection...';
+
+      try {
+        const res = await fetch('https://api.tinyurl.com/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            url: 'https://capte.co/blog/precision-transit-telematics#dual-frequency-rtk-precision',
+            domain: domain
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const generated = data?.data?.tiny_url || 'URL generated';
+          tokenStatus.className = 'token-badge active';
+          tokenStatus.textContent = `✅ Connected! Sample: ${generated}`;
+          alert(`✅ Success! TinyURL connection verified.\n\nGenerated: ${generated}`);
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          const errMsg = errData.errors?.[0] || `HTTP ${res.status}`;
+          tokenStatus.className = 'token-badge inactive';
+          tokenStatus.textContent = `⚠️ Connection error: ${errMsg}`;
+          alert(`⚠️ TinyURL Error: ${errMsg}\n\nPlease check that your API token is valid and that ${domain} is verified in your TinyURL dashboard.`);
+        }
+      } catch (err) {
+        tokenStatus.className = 'token-badge inactive';
+        tokenStatus.textContent = '⚠️ Network / CORS error testing TinyURL';
+        alert('⚠️ Network or CORS error testing TinyURL directly. If calling from localhost, test from the live blog domain.');
+      }
+    });
+
+    // Demo Test Handlers
+    const demoBox = document.getElementById('demo-output-box');
+
+    document.getElementById('run-demo-short-btn').addEventListener('click', async () => {
+      demoBox.style.display = 'block';
+      demoBox.textContent = '⏳ Extracting headings and generating shortlinks in parallel...';
+
+      const hs = [...document.querySelectorAll('.demo-area h2, .demo-area h3')];
+      const items = hs.map(h => ({
+        t: (h.textContent || '').replace(/#[\w-]+/g, '').trim(),
+        i: h.id || ''
+      }));
+
+      const base = 'https://capte.co/blog/precision-transit-telematics';
+      const token = localStorage.getItem('capte_tinyurl_token');
+      const domain = localStorage.getItem('capte_tinyurl_domain') || 'go.capte.co';
+
+      async function testShorten(u) {
+        if (token) {
+          try {
+            const r = await fetch('https://api.tinyurl.com/create', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+              body: JSON.stringify({ url: u, domain: domain })
+            });
+            if (r.ok) {
+              const d = await r.json();
+              if (d?.data?.tiny_url) return d.data.tiny_url;
+            }
+          } catch (e) {}
+        }
+        try {
+          const res = await fetch('https://is.gd/create.php?format=json&url=' + encodeURIComponent(u));
+          if (res.ok) {
+            const data = await res.json();
+            if (data?.shorturl) return data.shorturl;
+          }
+        } catch (e) {}
+        return u;
+      }
+
+      const shortened = await Promise.all(items.map(x => x.i ? testShorten(base + '#' + x.i) : Promise.resolve(null)));
+      const lines = items.map((x, idx) => `${x.t} — ${shortened[idx] || (base + '#' + x.i)}`);
+      const output = lines.join('\n');
+      demoBox.textContent = output;
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(output);
+      }
+    });
+
+    document.getElementById('run-demo-raw-btn').addEventListener('click', () => {
+      demoBox.style.display = 'block';
+      const hs = [...document.querySelectorAll('.demo-area h2, .demo-area h3')];
+      const base = 'https://capte.co/blog/precision-transit-telematics';
+      const lines = hs.map(h => {
+        const t = (h.textContent || '').replace(/#[\w-]+/g, '').trim();
+        return `${t} — ${base}#${h.id}`;
+      });
+      const output = lines.join('\n');
+      demoBox.textContent = output;
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(output);
+      }
     });
   </script>
 </body>

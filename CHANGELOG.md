@@ -5,6 +5,9 @@ All notable changes to the `capte-web-components` repository (new components add
 ## [Unreleased]
 
 ### Added
+- Upgraded **Blog Section-Anchor Extractor & Shortener to v1.2.0** (`tools/blog-section-anchors/`): Integrated parallel link shortening with dual-engine architecture supporting TinyURL Pro with Capte Branded Domains (`go.capte.co`), a zero-config CORS fallback engine (`is.gd`), URI-encoded hash-fragment preservation (`#heading-id`), in-page modal HUD fallback for clipboard restrictions, and an interactive connection testing panel on `bookmarklet.html`.
+- Added **Branded Shortener Setup Guide SOP** (`docs/branded-shortener-setup-guide.md`) detailing Cloudflare DNS CNAME and TinyURL Pro branded domain configuration.
+- Updated Web Operations Portal (`index.html`) to showcase the upgraded `v1.2.0` Blog Section-Anchor Extractor & Shortener utility.
 - Released **Email Signature Generator v1.1.0**: Universal cross-platform logo supporting light and dark mode email clients, Roboto font stack with elevated 16px/14px type scale, flush left optical alignment, clean placeholder validation UX, brand favicon and Open Graph assets.
 - Codified Capte Figma Design System tokens into `design-system/` (`tokens.css` and `tokens.json`) covering 217 variables, color ramps, typography, and spacing/radii scales.
 - Automated daily Figma sync pipeline via GitHub Actions (`.github/workflows/figma-sync.yml` and `scripts/figma-sync.js`) to open automated Pull Requests when Figma variables or files are updated.
