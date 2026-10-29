@@ -3,7 +3,8 @@
 A lightweight marketing operations browser utility that extracts section-specific deep links from published Capte blog posts ([capte.co/blog/*](https://www.capte.co)) and automatically generates compact, branded shortened links for social sharing.
 
 > **Scope**: Personal browser utility (Bookmarklet & DevTools Console script). Does not alter Webflow templates or runtime code; only inspects the live rendered DOM in the user's browser.  
-> **Version**: `v1.2.0` (TinyURL Pro Branded Domain Integration & Zero-Config Fallback)  
+> **Version**: `v1.2.3` (Interactive Slide Deck Tutorial & Resilient Multi-Engine Shortener)  
+> **Interactive Tutorial**: [`tools/blog-section-anchors/tutorial.html`](tutorial.html)  
 > **SOP Guide**: [`docs/branded-shortener-setup-guide.md`](../../docs/branded-shortener-setup-guide.md)
 
 ---
@@ -25,7 +26,7 @@ By combining DOM heading extraction with an automated URL shortener, marketing c
 
 ### Option A: 1-Click Bookmarklet (Recommended for Marketing)
 
-1. Open [`tools/blog-section-anchors/bookmarklet.html`](bookmarklet.html) in your web browser.
+1. Open [`tools/blog-section-anchors/bookmarklet.html`](bookmarklet.html) in your web browser. *(First-time visitors will see a 30-second visual presentation deck at [`tutorial.html`](tutorial.html) illustrating the workflow; this can be replayed anytime).*
 2. Configure your TinyURL Token and Branded Domain (`go.capte.co`) under **Step 2** (if available).
 3. Drag the **`🔗 Capte Section Shortlinks`** button up into your browser's **Bookmarks Bar**.
 4. Visit any published post on [capte.co/blog](https://www.capte.co).

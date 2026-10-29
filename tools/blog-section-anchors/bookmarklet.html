@@ -378,8 +378,13 @@
 
   <div class="container">
     <header>
-      <span class="badge">Marketing & Web Ops Utility</span>
-      <h1>Blog Section-Anchor Extractor & Shortener</h1>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <span class="badge">Marketing &amp; Web Ops Utility</span>
+        <a href="tutorial.html?manual=1" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--capte-blue); text-decoration: none; background: var(--capte-blue-light); padding: 5px 12px; border-radius: var(--capte-radius-full); transition: all 0.15s ease;" title="Replay the 30-second visual presentation">
+          🎓 30-Sec Visual Tutorial
+        </a>
+      </div>
+      <h1>Blog Section-Anchor Extractor &amp; Shortener</h1>
       <p class="lead">Extract section deep-link URLs from any published Capte blog post and automatically generate compact, branded shortlinks to extend content runway across multiple social shares.</p>
     </header>
 
@@ -520,6 +525,16 @@
   </div>
 
   <script>
+    // First-time visitor onboarding redirect:
+    // If user hasn't completed or skipped the visual tutorial, guide them to tutorial.html first
+    (function checkTutorialRedirect() {
+      const params = new URLSearchParams(window.location.search);
+      const isManual = params.has('fromTutorial') || params.has('skipTutorial');
+      if (!isManual && !localStorage.getItem('capte_tutorial_seen')) {
+        window.location.href = 'tutorial.html';
+      }
+    })();
+
     // Dynamic generator that embeds token and domain directly into the bookmarklet
     function generateBookmarkletScript(token = '', domain = 'go.capte.co') {
       const safeTk = token.replace(/"/g, '\\"');
@@ -778,23 +793,6 @@
         const t = (h.textContent || '').replace(/#[\w-]+/g, '').trim();
         const id = h.id || sl(t);
         return `${t} — ${base}#${id}`;
-      });
-      const output = lines.join('\n');
-      demoBox.textContent = output;
-
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(output);
-      }
-    });
-  </script>
-</body>
-</html>
-      demoBox.style.display = 'block';
-      const hs = [...document.querySelectorAll('.demo-area h2, .demo-area h3')];
-      const base = 'https://capte.co/blog/precision-transit-telematics';
-      const lines = hs.map(h => {
-        const t = (h.textContent || '').replace(/#[\w-]+/g, '').trim();
-        return `${t} — ${base}#${h.id}`;
       });
       const output = lines.join('\n');
       demoBox.textContent = output;

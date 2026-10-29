@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial — Capte Blog Section-Anchor & Shortener</title>
+  <link rel="icon" type="image/png" href="capte-favicon-32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --capte-blue: #001384;
+      --capte-blue-hover: #000F6B;
+      --capte-blue-light: #F2F4FC;
+      --capte-orange: #FC5522;
+      --capte-orange-hover: #E04010;
+      --capte-orange-light: #FFF1ED;
+      --capte-surface: #FFFFFF;
+      --capte-surface-muted: #F8FAFD;
+      --capte-border: #DDE2EE;
+      --capte-text: #111523;
+      --capte-text-muted: #5A6474;
+      --capte-radius-sm: 4px;
+      --capte-radius-md: 8px;
+      --capte-radius-lg: 16px;
+      --capte-radius-full: 9999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #F4F6FB;
+      color: var(--capte-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      overflow-x: hidden;
+    }
+
+    /* Deck Shell */
+    .deck-container {
+      width: 100%;
+      max-width: 880px;
+      background: var(--capte-surface);
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-lg);
+      box-shadow: 0 16px 40px rgba(0, 19, 132, 0.08), 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Progress bar */
+    .progress-bar-container {
+      width: 100%;
+      height: 4px;
+      background: #E8EEFA;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--capte-orange);
+      width: 25%;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Deck Header */
+    .deck-header {
+      padding: 16px 28px;
+      border-bottom: 1px solid var(--capte-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FAFCFE;
+    }
+
+    .brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+    }
+
+    .brand-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .slide-badge {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--capte-blue-light);
+      color: var(--capte-blue);
+      padding: 3px 8px;
+      border-radius: var(--capte-radius-full);
+      margin-left: 6px;
+    }
+
+    .skip-btn {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--capte-text-muted);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      border-radius: var(--capte-radius-sm);
+      transition: all 0.15s ease;
+    }
+
+    .skip-btn:hover {
+      color: var(--capte-orange);
+      background: var(--capte-orange-light);
+    }
+
+    /* Slide Viewport */
+    .slide-viewport {
+      position: relative;
+      min-height: 440px;
+      padding: 36px 36px 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--capte-orange);
+      margin-bottom: 8px;
+    }
+
+    .slide-heading {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .slide-desc {
+      font-size: 15px;
+      color: var(--capte-text-muted);
+      line-height: 1.5;
+      max-width: 680px;
+      margin-bottom: 24px;
+    }
+
+    /* Interactive Slide Visual Cards */
+    .slide-visual {
+      background: var(--capte-surface-muted);
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Slide 1 Visual: Content Runway */
+    .runway-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1.3fr;
+      gap: 20px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .runway-source {
+      background: #FFFFFF;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .runway-source-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: var(--capte-blue-light);
+      color: var(--capte-blue);
+      padding: 2px 6px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .runway-arrow {
+      font-size: 24px;
+      color: var(--capte-orange);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .runway-outputs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .runway-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E7F5;
+      border-left: 3px solid var(--capte-orange);
+      padding: 10px 14px;
+      border-radius: 4px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .runway-card-title {
+      font-weight: 600;
+      color: var(--capte-text);
+    }
+
+    .runway-card-link {
+      font-family: 'Roboto Mono', monospace;
+      color: var(--capte-blue);
+      font-size: 11px;
+      background: var(--capte-blue-light);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    /* Slide 2 Visual: Bookmark Bar Simulation */
+    .browser-sim {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid var(--capte-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+
+    .browser-top {
+      background: #EAEFF8;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #D8DFEE;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot.r { background: #FF5F56; }
+    .dot.y { background: #FFBD2E; }
+    .dot.g { background: #27C93F; }
+
+    .browser-bar {
+      background: #FFFFFF;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: 'Roboto Mono', monospace;
+      color: var(--capte-text-muted);
+      padding: 3px 12px;
+      flex: 1;
+    }
+
+    .bookmarks-bar {
+      background: #F6F8FC;
+      border-bottom: 1px solid #DDE2EE;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+    }
+
+    .bookmark-pill {
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      padding: 3px 8px;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--capte-text);
+      font-size: 11px;
+    }
+
+    .bookmark-target-drop {
+      border: 2px dashed var(--capte-orange);
+      background: var(--capte-orange-light);
+      color: var(--capte-orange);
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.85; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+
+    .drag-action-area {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #FFFFFF;
+    }
+
+    .sample-bookmarklet-button {
+      background: var(--capte-orange);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 22px;
+      border-radius: var(--capte-radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(252, 85, 34, 0.3);
+      cursor: grab;
+    }
+
+    /* Slide 3 Visual: 1-Click Execution */
+    .execution-sim {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid var(--capte-border);
+      border-radius: 8px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .hud-toast-preview {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: var(--capte-blue);
+      color: #FFFFFF;
+      padding: 12px 18px;
+      border-radius: 6px;
+      box-shadow: 0 8px 24px rgba(0, 19, 132, 0.3);
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: toastPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes toastPop {
+      from { transform: translateY(12px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Slide 4 Visual: Output Matrix */
+    .clipboard-code-box {
+      width: 100%;
+      background: #0F1424;
+      color: #DDE2EE;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      padding: 18px;
+      border-radius: 6px;
+      line-height: 1.7;
+    }
+
+    .code-hl {
+      color: #64D2FF;
+    }
+    .code-link {
+      color: #FFB340;
+    }
+
+    /* Deck Footer Controls */
+    .deck-footer {
+      padding: 16px 28px;
+      border-top: 1px solid var(--capte-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FAFCFE;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .dots-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot-btn {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #CCD5E4;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.2s ease;
+    }
+
+    .dot-btn.active {
+      background: var(--capte-blue);
+      transform: scale(1.25);
+    }
+
+    .key-hints {
+      font-size: 11px;
+      color: var(--capte-text-muted);
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .kbd {
+      background: #EAEEF5;
+      border: 1px solid #D5DCED;
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: var(--capte-text);
+      font-weight: 600;
+    }
+
+    .action-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-nav {
+      font-family: 'Roboto', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: var(--capte-radius-sm);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-prev {
+      background: #FFFFFF;
+      border-color: var(--capte-border);
+      color: var(--capte-text);
+    }
+
+    .btn-prev:hover:not(:disabled) {
+      background: #F1F4F9;
+    }
+
+    .btn-prev:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-next {
+      background: var(--capte-blue);
+      color: #FFFFFF;
+    }
+
+    .btn-next:hover {
+      background: var(--capte-blue-hover);
+    }
+
+    .btn-finish {
+      background: var(--capte-orange);
+      color: #FFFFFF;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(252, 85, 34, 0.25);
+    }
+
+    .btn-finish:hover {
+      background: var(--capte-orange-hover);
+    }
+
+    /* Footer Option Checkbox */
+    .pref-row {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--capte-text-muted);
+    }
+
+    .pref-row input {
+      accent-color: var(--capte-blue);
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+      .deck-header, .slide-viewport, .deck-footer {
+        padding: 16px;
+      }
+      .slide-heading {
+        font-size: 20px;
+      }
+      .runway-grid {
+        grid-template-columns: 1fr;
+      }
+      .runway-arrow {
+        transform: rotate(90deg);
+      }
+      .key-hints {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container">
+    <!-- Progress Indicator -->
+    <div class="progress-bar-container">
+      <div id="progress-bar" class="progress-bar-fill"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="deck-header">
+      <div class="brand-meta">
+        <img src="capte-favicon-32.png" alt="Capte Logo" class="brand-logo">
+        <span class="brand-title">Capte Web Ops</span>
+        <span id="slide-counter-badge" class="slide-badge">SLIDE 1 OF 4</span>
+      </div>
+      <button id="skip-deck-btn" class="skip-btn" title="Skip to Bookmarklet Installation">
+        Skip Tutorial ➔
+      </button>
+    </header>
+
+    <!-- Slide Canvas -->
+    <main class="slide-viewport">
+      
+      <!-- Slide 1: Why Section Anchors -->
+      <section class="slide active" data-slide="1">
+        <div class="slide-eyebrow">Concept & Strategy</div>
+        <h1 class="slide-heading">Multiply Your Content Runway</h1>
+        <p class="slide-desc">
+          Instead of sharing a generic blog post link just once, this tool automatically extracts every heading anchor so your marketing team can turn a single deep-dive article into 4–5 targeted social posts that jump straight to the exact paragraph.
+        </p>
+        <div class="slide-visual">
+          <div class="runway-grid">
+            <div class="runway-source">
+              <span class="runway-source-tag">1 Longform Article</span>
+              <div style="font-weight: 700; font-size: 13px; color: var(--capte-blue); margin-bottom: 6px;">Cutting Through Transit Vehicle Communication</div>
+              <div style="font-size: 11px; color: var(--capte-text-muted);">~2,800 words • 15 technical sections</div>
+            </div>
+            <div class="runway-arrow">➔</div>
+            <div class="runway-outputs">
+              <div class="runway-card">
+                <span class="runway-card-title">CAN & CAN FD</span>
+                <span class="runway-card-link">go.capte.co/can-fd</span>
+              </div>
+              <div class="runway-card">
+                <span class="runway-card-title">J1939 Transit Standards</span>
+                <span class="runway-card-link">go.capte.co/j1939</span>
+              </div>
+              <div class="runway-card">
+                <span class="runway-card-title">Unified Diagnostic Services</span>
+                <span class="runway-card-link">go.capte.co/uds</span>
+              </div>
+              <div class="runway-card">
+                <span class="runway-card-title">Charging & Depot Layer</span>
+                <span class="runway-card-link">go.capte.co/depot</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: 5-Second Installation -->
+      <section class="slide" data-slide="2">
+        <div class="slide-eyebrow">Zero Setup Effort</div>
+        <h1 class="slide-heading">Install in 5 Seconds via Drag & Drop</h1>
+        <p class="slide-desc">
+          No browser extension store, no admin permissions, and zero code required. Simply drag the orange bookmarklet button right into your browser's Bookmarks Bar.
+        </p>
+        <div class="slide-visual">
+          <div class="browser-sim">
+            <div class="browser-top">
+              <div class="browser-dots">
+                <div class="dot r"></div>
+                <div class="dot y"></div>
+                <div class="dot g"></div>
+              </div>
+              <div class="browser-bar">https://capte.co/blog/cutting-through-the-complexity...</div>
+            </div>
+            <div class="bookmarks-bar">
+              <span class="bookmark-pill">Capte Hub</span>
+              <span class="bookmark-pill">Analytics</span>
+              <span class="bookmark-target-drop">⬇️ Drop Bookmarklet Here (Bookmarks Bar)</span>
+            </div>
+            <div class="drag-action-area">
+              <div class="sample-bookmarklet-button">
+                🔗 Capte Section Shortlinks
+              </div>
+              <p style="font-size: 12px; color: var(--capte-text-muted); text-align: center;">
+                💡 <em>Shortcut: Press <span class="kbd">Cmd + Shift + B</span> (Mac) or <span class="kbd">Ctrl + Shift + B</span> (Win) if your Bookmarks Bar is hidden.</em>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: 1-Click Execution -->
+      <section class="slide" data-slide="3">
+        <div class="slide-eyebrow">Frictionless Workflow</div>
+        <h1 class="slide-heading">1 Click While Reading Any Blog Post</h1>
+        <p class="slide-desc">
+          Navigate to any published Capte blog article. Click your new bookmarklet once in the toolbar. It runs in the background, shortens all anchors in parallel, and copies them to your clipboard in ~1 second.
+        </p>
+        <div class="slide-visual">
+          <div class="execution-sim">
+            <div style="font-weight: 700; color: var(--capte-blue); font-size: 14px; margin-bottom: 8px;">
+              📄 Capte Blog: Cutting Through the Complexity of Transit Vehicle Communication
+            </div>
+            <p style="font-size: 12px; color: var(--capte-text-muted); line-height: 1.6; margin-bottom: 24px;">
+              Transit agencies and fleet operators manage complex multiplex communications across CAN bus, J1939, and diagnostic gateways...
+            </p>
+            <div style="border-left: 3px solid var(--capte-blue); padding-left: 12px; margin-bottom: 16px;">
+              <div style="font-weight: 700; font-size: 13px;">CAN and CAN FD</div>
+              <div style="font-size: 11px; color: var(--capte-text-muted);">Anchor: #can-and-can-fd</div>
+            </div>
+            <div style="border-left: 3px solid var(--capte-blue); padding-left: 12px;">
+              <div style="font-weight: 700; font-size: 13px;">J1939 Fleet Architecture</div>
+              <div style="font-size: 11px; color: var(--capte-text-muted);">Anchor: #j1939</div>
+            </div>
+
+            <!-- Toast simulation -->
+            <div class="hud-toast-preview">
+              <span>✅</span> Copied 15 shortened links (via is.gd)!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: Ready for Social & Campaigns -->
+      <section class="slide" data-slide="4">
+        <div class="slide-eyebrow">Distribution Ready</div>
+        <h1 class="slide-heading">Paste Straight into Social & Newsletters</h1>
+        <p class="slide-desc">
+          Your clipboard now contains clean, beautifully formatted links pairing every section heading with its verified shortlink. Ready for LinkedIn, X (Twitter), Slack, or marketing campaign briefs.
+        </p>
+        <div class="slide-visual">
+          <div class="clipboard-code-box">
+<span class="code-hl">Key Takeaways</span> — <span class="code-link">https://is.gd/7kF8bX</span>
+<span class="code-hl">CAN and CAN FD</span> — <span class="code-link">https://is.gd/a2Nk49</span>
+<span class="code-hl">J1939 Transit Standards</span> — <span class="code-link">https://is.gd/Bv91Zq</span>
+<span class="code-hl">Unified Diagnostic Services</span> — <span class="code-link">https://is.gd/4mP78w</span>
+<span class="code-hl">Fleet Management Standard (FMS)</span> — <span class="code-link">https://is.gd/x91Kd2</span>
+<span class="code-hl">The Charging and Depot Layer</span> — <span class="code-link">https://is.gd/q90LsA</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Deck Controls -->
+    <footer class="deck-footer">
+      <div class="dots-nav" id="dots-container">
+        <button class="dot-btn active" data-target="1" aria-label="Slide 1"></button>
+        <button class="dot-btn" data-target="2" aria-label="Slide 2"></button>
+        <button class="dot-btn" data-target="3" aria-label="Slide 3"></button>
+        <button class="dot-btn" data-target="4" aria-label="Slide 4"></button>
+      </div>
+
+      <div class="key-hints">
+        Navigate: <span class="kbd">←</span> <span class="kbd">→</span> or <span class="kbd">Space</span> • Skip: <span class="kbd">Esc</span>
+      </div>
+
+      <div class="action-nav">
+        <button id="btn-prev" class="btn-nav btn-prev" disabled>← Previous</button>
+        <button id="btn-next" class="btn-nav btn-next">Next ➔</button>
+        <button id="btn-finish" class="btn-nav btn-finish" style="display: none;">🚀 Open Bookmarklet Tool</button>
+      </div>
+    </footer>
+  </div>
+
+  <div class="pref-row">
+    <label>
+      <input type="checkbox" id="dont-show-again-checkbox" checked>
+      Don't show this walkthrough automatically on future visits
+    </label>
+  </div>
+
+  <script>
+    const totalSlides = 4;
+    let currentSlide = 1;
+
+    const slides = document.querySelectorAll('.slide');
+    const dotBtns = document.querySelectorAll('.dot-btn');
+    const progressBar = document.getElementById('progress-bar');
+    const slideCounterBadge = document.getElementById('slide-counter-badge');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnFinish = document.getElementById('btn-finish');
+    const skipBtn = document.getElementById('skip-deck-btn');
+    const dontShowCheckbox = document.getElementById('dont-show-again-checkbox');
+
+    function updateDeckUI() {
+      // Toggle slides
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', (idx + 1) === currentSlide);
+      });
+
+      // Update dots
+      dotBtns.forEach((dot, idx) => {
+        dot.classList.toggle('active', (idx + 1) === currentSlide);
+      });
+
+      // Update progress bar
+      const progressPercent = (currentSlide / totalSlides) * 100;
+      progressBar.style.width = progressPercent + '%';
+
+      // Update badge
+      slideCounterBadge.textContent = `SLIDE ${currentSlide} OF ${totalSlides}`;
+
+      // Update buttons
+      btnPrev.disabled = currentSlide === 1;
+
+      if (currentSlide === totalSlides) {
+        btnNext.style.display = 'none';
+        btnFinish.style.display = 'inline-flex';
+      } else {
+        btnNext.style.display = 'inline-flex';
+        btnFinish.style.display = 'none';
+      }
+    }
+
+    function goToSlide(n) {
+      if (n >= 1 && n <= totalSlides) {
+        currentSlide = n;
+        updateDeckUI();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        goToSlide(currentSlide + 1);
+      } else {
+        exitToTool();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        goToSlide(currentSlide - 1);
+      }
+    }
+
+    function exitToTool() {
+      if (dontShowCheckbox.checked) {
+        localStorage.setItem('capte_tutorial_seen', 'true');
+      }
+      window.location.href = 'bookmarklet.html?fromTutorial=1';
+    }
+
+    // Button Listeners
+    btnNext.addEventListener('click', nextSlide);
+    btnPrev.addEventListener('click', prevSlide);
+    btnFinish.addEventListener('click', exitToTool);
+    skipBtn.addEventListener('click', exitToTool);
+
+    dotBtns.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const target = parseInt(dot.getAttribute('data-target'), 10);
+        goToSlide(target);
+      });
+    });
+
+    // Keyboard Navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        exitToTool();
+      }
+    });
+
+    // Initial render
+    updateDeckUI();
+  </script>
+</body>
+</html>
