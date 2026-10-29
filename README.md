@@ -83,7 +83,8 @@ components/
 | Tool | Status | Description | Documentation |
 | :--- | :--- | :--- | :--- |
 | [`campaign-qr-generator`](tools/campaign-qr-generator/README.md) | `v1.0.0` | High-contrast QR generator with built-in Webflow 301 vanity redirects, forced UTM builder, and vector SVG export. | [Read Guide](tools/campaign-qr-generator/README.md) |
-| [`email-signature`](components/email-signature/README.md) | `v1.0.0` | Outlook/Apple Mail compliant email signature builder for Los Angeles, Versailles, and Amsterdam offices. | [Read Guide](components/email-signature/README.md) |
+| [`email-signature`](components/email-signature/README.md) | `v1.2.0` | Outlook/Apple Mail compliant email signature builder for Los Angeles, Versailles, and Amsterdam offices with centralized roster support. | [Read Guide](components/email-signature/README.md) |
+| [`sig-router`](workers/sig-router/README.md) | `v1.0.0` (Edge Router) | Cloudflare Worker for `sig.capte.co`: dynamic Webflow CMS banner streaming, automated GA4 campaign attribution redirects, and fail-closed inbox rendering. | [Read Guide](workers/sig-router/README.md) |
 | [`blog-section-anchors`](tools/blog-section-anchors/README.md) | `v1.0.0` | Browser bookmarklet & console extractor that generates heading deep-link URLs from published blog posts to support section-level social campaigns. | [Read Guide](tools/blog-section-anchors/README.md) |
 | [`capte-icons`](https://github.com/john-l-hansen/capte-icons) | `v0.1.3` (Preview) | Shared Capte icon catalog and live-editing Figma plugin with optical sizing, weights, and light/dark theme adaptation. | [Repository](https://github.com/john-l-hansen/capte-icons) |
 
