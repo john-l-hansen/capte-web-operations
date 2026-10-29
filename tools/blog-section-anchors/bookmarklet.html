@@ -390,27 +390,19 @@
         Drag either button below directly into your browser's <strong>Bookmarks Bar</strong>:
       </p>
 
-      <div class="bookmarklet-grid">
-        <!-- Shortened Bookmarklet (Primary) -->
-        <div class="bookmarklet-box primary">
-          <div>
-            <a class="bookmarklet-btn" id="short-bookmarklet-link" href="#">🔗 Capte Section Shortlinks</a>
-            <p class="bookmarklet-hint">
-              <strong>Social Slices (Branded / Shortened)</strong>: Auto-shortens every heading link into a compact URL ready for LinkedIn, X, or email posts.
-            </p>
-          </div>
-          <button class="btn-secondary" id="copy-short-bookmarklet" style="margin-top: 12px; width: 100%;">📋 Copy Shortener Code</button>
+      <div class="bookmarklet-box primary" style="max-width: 600px; margin: 16px auto;">
+        <div>
+          <span class="badge" style="background:#FFE6DE; color:#FC5522; margin-bottom:8px;">Auto-Shortener v1.2.2</span>
+          <br>
+          <a class="bookmarklet-btn" id="short-bookmarklet-link" href="#" style="font-size: 16px; padding: 14px 28px;">🔗 Capte Section Shortlinks</a>
+          <p class="bookmarklet-hint" style="font-size: 13px; margin-top: 10px;">
+            <strong>Drag this button up into your browser's Bookmarks Bar</strong> (Cmd+Shift+B if hidden).
+            <br>
+            <span style="color:#C53030; font-weight:500;">⚠️ Important: If you installed an earlier version, right-click and delete the old bookmark first so you're running the new shortener engine!</span>
+          </p>
         </div>
-
-        <!-- Raw Bookmarklet (Classic) -->
-        <div class="bookmarklet-box">
-          <div>
-            <a class="bookmarklet-btn secondary" id="raw-bookmarklet-link" href="#">🔗 Capte Raw Section Links</a>
-            <p class="bookmarklet-hint">
-              <strong>Raw Anchors</strong>: Instantly copies unshortened URLs formatted as <code>capte.co/blog/slug#anchor</code>.
-            </p>
-          </div>
-          <button class="btn-secondary" id="copy-raw-bookmarklet" style="margin-top: 12px; width: 100%;">📋 Copy Raw Code</button>
+        <div class="button-row" style="margin-top: 14px;">
+          <button class="btn-secondary" id="copy-short-bookmarklet">📋 Copy Bookmarklet Code</button>
         </div>
       </div>
 
