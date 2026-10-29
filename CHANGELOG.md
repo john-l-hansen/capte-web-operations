@@ -5,6 +5,8 @@ All notable changes to the `capte-web-components` repository (new components add
 ## [Unreleased]
 
 ### Added
+- Scaffolded **Centralized Email Signature Edge Router (`workers/sig-router/`)**: Cloudflare Worker backend for `sig.capte.co` enabling centralized marketing campaign banner distribution managed in Webflow CMS, automated GA4 campaign attribution redirects (`/r/banner`), fail-closed transparent PNG fallback, and pre-filled employee generator onboarding (`/setup?user=...`).
+- Authored **Centralized Email Signature Architecture & Implementation Plan** (`docs/proposals/centralized-email-signature-plan.md`): Detailed feasibility assessment, technical constraint evaluation across Outlook/Gmail/Apple Mail rendering engines, Webflow CMS schema, and 3-day execution roadmap.
 - Upgraded **Blog Section-Anchor Extractor & Shortener to v1.2.0** (`tools/blog-section-anchors/`): Integrated parallel link shortening with dual-engine architecture supporting TinyURL Pro with Capte Branded Domains (`go.capte.co`), a zero-config CORS fallback engine (`is.gd`), URI-encoded hash-fragment preservation (`#heading-id`), in-page modal HUD fallback for clipboard restrictions, and an interactive connection testing panel on `bookmarklet.html`.
 - Added **Branded Shortener Setup Guide SOP** (`docs/branded-shortener-setup-guide.md`) detailing Cloudflare DNS CNAME and TinyURL Pro branded domain configuration.
 - Updated Web Operations Portal (`index.html`) to showcase the upgraded `v1.2.0` Blog Section-Anchor Extractor & Shortener utility.

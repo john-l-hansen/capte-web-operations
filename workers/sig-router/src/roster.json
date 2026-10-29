@@ -1,0 +1,25 @@
+{
+  "employees": [
+    {
+      "id": "johnhansen",
+      "fullName": "John Hansen",
+      "pronouns": "",
+      "jobTitle": "Lead Web/Print Designer & Web Operations",
+      "email": "john@capte.co",
+      "office": "la",
+      "mobile": "+1 858 231 2916",
+      "officePhone": "+1 213 555 0100",
+      "linkedin": "https://www.linkedin.com/company/capte-technologies"
+    },
+    {
+      "id": "s.chen",
+      "fullName": "Sarah Chen",
+      "pronouns": "she/her",
+      "jobTitle": "Lead Systems Engineer",
+      "email": "s.chen@capte.co",
+      "office": "la",
+      "mobile": "+1 858 231 2916",
+      "officePhone": "+1 213 555 0100"
+    }
+  ]
+}

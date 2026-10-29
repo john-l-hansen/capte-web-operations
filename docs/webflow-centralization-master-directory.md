@@ -98,14 +98,16 @@ The projects deployed or prepared for Webflow are organized into four core pilla
   - **Print Physics & ISO/IEC 18004 Compliance**: Enforces Reed-Solomon Level Q (25%) / Level H (30%) error correction, ISO 4-module quiet zones, and high-contrast brand tokens (14.7:1+ optical contrast).
   - **Dual Format Output**: Instant vector SVG (`.svg`) for professional large-format print houses and $1024 \times 1024\text{px}$ 300-DPI raster PNGs.
 
-#### Project 2: Multi-Office Email Signature System & Generator
-* **Location**: `components/email-signature/` & `tools/email-signature/`
-* **Status**: **Completed / Ready for Deployment**
-* **Purpose**: Provide all global employees with an on-brand, accessible, Outlook Word-engine-compliant email signature with 1-click installation.
+#### Project 2: Multi-Office Email Signature System & Centralized Edge Service
+* **Location**: `components/email-signature/`, `tools/email-signature/` & `workers/sig-router/`
+* **Status**: **Completed / Ready for Deployment & Edge Centralization**
+* **Proposal & Architecture**: [`docs/proposals/email-signature-system-proposal.md`](proposals/email-signature-system-proposal.md) & [`docs/proposals/centralized-email-signature-plan.md`](proposals/centralized-email-signature-plan.md)
+* **Purpose**: Provide all global employees with an on-brand, accessible, Outlook Word-engine-compliant email signature with 1-click installation and centralized marketing campaign control via `sig.capte.co`.
 * **Key Features & Implementation**:
   - **Triple Office Localization**: Pre-configured support for **Los Angeles** (HQ), **Versailles** (France), and **Amsterdam** (Netherlands) with localized postal standards (USPS, La Poste, PostNL) and international dialing codes (`+1`, `+33`, `+31`).
   - **Outlook Word-Engine Proof Markup**: Built strictly with nested `<table>` layouts and inline CSS to survive Microsoft Outlook Windows sanitization and prevent collapsed flexbox/margin bugs.
   - **1-Click Dual Clipboard Copy**: Simultaneously writes rich HTML and plain-text fallback to the clipboard via the Modern Clipboard API.
+  - **Centralized Edge Router (`sig.capte.co`)**: Hosted on Cloudflare Workers; dynamically streams campaign banners managed in Webflow CMS, handles 302 redirects with automated GA4 UTM tracking, and offers fail-closed fallbacks.
   - **High-DPI Retina Branding**: Hosted `@2x` logo assets with brand-standard **22px clear space** and automated GA4 inbound campaign tracking.
 
 #### Project 3: Blog Section-Anchor Extractor

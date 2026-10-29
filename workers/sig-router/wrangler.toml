@@ -1,0 +1,22 @@
+name = "capte-sig-router"
+main = "src/index.ts"
+compatibility_date = "2024-10-22"
+compatibility_flags = ["nodejs_compat"]
+
+# Production route for the custom email signature subdomain
+# Uncomment once the DNS CNAME record for sig.capte.co is provisioned in Cloudflare
+# routes = [
+#   { pattern = "sig.capte.co/*", zone_name = "capte.co" }
+# ]
+
+[vars]
+ENVIRONMENT = "production"
+DEFAULT_SITE_URL = "https://www.capte.co"
+DEFAULT_LOGO_URL = "https://cdn.prod.website-files.com/64f08f1a9f74ffb5762d6891/6ad2663ae87bb73bcf0f350e_capte-email-signature-logo.png"
+
+# Cloudflare KV binding for edge-caching Webflow CMS campaign definitions
+# Run: npx wrangler kv:namespace create CAMPAIGNS_KV
+# Then paste the generated id below:
+# [[kv_namespaces]]
+# binding = "CAMPAIGNS_KV"
+# id = "<YOUR_KV_NAMESPACE_ID>"
