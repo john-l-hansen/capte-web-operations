@@ -71,7 +71,7 @@
     }
 
     .container {
-      max-width: 960px;
+      max-width: 1120px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
@@ -162,8 +162,8 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
       margin-bottom: 36px;
     }
 
@@ -171,7 +171,7 @@
       background: var(--capte-surface);
       border-radius: var(--capte-radius-md);
       border: 1px solid var(--capte-border);
-      padding: 24px;
+      padding: 26px;
       box-shadow: var(--capte-shadow-sm);
       display: flex;
       flex-direction: column;
@@ -219,23 +219,35 @@
       font-weight: 700;
       color: var(--capte-text);
       margin-bottom: 8px;
+      line-height: 1.35;
     }
 
     .card p {
       font-size: 13.5px;
       color: var(--capte-text-muted);
-      line-height: 1.5;
-      margin-bottom: 20px;
+      line-height: 1.55;
+      margin-bottom: 22px;
       flex-grow: 1;
     }
 
     .card-actions {
       display: flex;
+      flex-direction: column;
       gap: 10px;
     }
 
+    .card-actions.row {
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    .card-actions-sub {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     .btn-card-primary {
-      flex: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -245,9 +257,10 @@
       text-decoration: none;
       font-size: 13px;
       font-weight: 600;
-      padding: 8px 14px;
+      padding: 10px 16px;
       border-radius: var(--capte-radius-sm);
-      transition: background 0.15s ease;
+      transition: background 0.15s ease, transform 0.15s ease;
+      text-align: center;
     }
 
     .btn-card-primary:hover {
@@ -258,19 +271,22 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 5px;
       background: var(--capte-surface-muted);
       color: var(--capte-text);
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 500;
-      padding: 8px 12px;
+      padding: 7px 12px;
       border-radius: var(--capte-radius-sm);
       border: 1px solid var(--capte-border);
-      transition: background 0.15s ease;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
     }
 
     .btn-card-secondary:hover {
       background: #E2E7F5;
+      border-color: #BAC9FC;
+      color: var(--capte-blue);
     }
 
     /* Design Tokens Box */
@@ -365,7 +381,9 @@
         </div>
         <div class="card-actions">
           <a class="btn-card-primary" href="tools/campaign-qr-generator/campaign-qr-generator.html">Launch Generator App &rarr;</a>
-          <a class="btn-card-secondary" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/tools/campaign-qr-generator" target="_blank">Docs</a>
+          <div class="card-actions-sub">
+            <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/tools/campaign-qr-generator" target="_blank">Documentation &rarr;</a>
+          </div>
         </div>
       </div>
       <div class="card">
@@ -379,8 +397,10 @@
         </div>
         <div class="card-actions">
           <a class="btn-card-primary" href="tools/blog-section-anchors/bookmarklet.html">Launch Bookmarklet Tool &rarr;</a>
-          <a class="btn-card-secondary" href="tools/blog-section-anchors/tutorial.html?manual=1">🎓 30s Tutorial</a>
-          <a class="btn-card-secondary" href="tools/blog-section-anchors/README.md">Docs</a>
+          <div class="card-actions-sub">
+            <a class="btn-card-secondary" style="flex:1;" href="tools/blog-section-anchors/tutorial.html?manual=1">🎓 30s Tutorial</a>
+            <a class="btn-card-secondary" style="flex:1;" href="tools/blog-section-anchors/README.md">Docs &rarr;</a>
+          </div>
         </div>
       </div>
       <div class="card">
@@ -394,7 +414,9 @@
         </div>
         <div class="card-actions">
           <a class="btn-card-primary" href="tools/email-signature/email-signature-generator.html">Launch Generator App &rarr;</a>
-          <a class="btn-card-secondary" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/components/email-signature" target="_blank">Docs</a>
+          <div class="card-actions-sub">
+            <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/components/email-signature" target="_blank">Documentation &rarr;</a>
+          </div>
         </div>
       </div>
       <div class="card">
@@ -408,7 +430,9 @@
         </div>
         <div class="card-actions">
           <a class="btn-card-primary" href="https://github.com/john-l-hansen/capte-icons/releases" target="_blank">Download Plugin &rarr;</a>
-          <a class="btn-card-secondary" href="https://github.com/john-l-hansen/capte-icons" target="_blank">GitHub</a>
+          <div class="card-actions-sub">
+            <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-icons" target="_blank">GitHub Repository &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
