@@ -29,9 +29,11 @@
       --capte-blue-hover: #093AEC;
       --capte-orange: #FC5522;
       --capte-orange-hover: #DD3603;
+      --capte-orange-dark: #A62903;
       --capte-surface: #FFFFFF;
       --capte-surface-muted: #F2F4FC;
       --capte-border: #DDE2EE;
+      --capte-border-strong: #9198A6;
       --capte-text: #111523;
       --capte-text-muted: #626A7A;
       --capte-radius-sm: 4px;
@@ -210,6 +212,7 @@
       font-size: 10px;
       font-weight: 600;
       text-transform: uppercase;
+      letter-spacing: 0.04em;
       padding: 3px 8px;
       border-radius: 4px;
       background: #EAF0FF;
@@ -218,7 +221,7 @@
 
     .card-tag.tool {
       background: #FFF2ED;
-      color: var(--capte-orange);
+      color: var(--capte-orange-dark);
     }
 
     .card-version {
@@ -290,21 +293,20 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
-      background: var(--capte-surface-muted);
+      background: transparent;
       color: var(--capte-text);
       text-decoration: none;
       font-size: 12.5px;
-      font-weight: 500;
+      font-weight: 600;
       padding: 7px 12px;
       border-radius: var(--capte-radius-sm);
-      border: 1px solid var(--capte-border);
+      border: 1px solid var(--capte-border-strong);
       transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
     }
 
     .btn-card-secondary:hover {
-      background: #E2E7F5;
-      border-color: #BAC9FC;
+      background: var(--capte-surface-muted);
+      border-color: var(--capte-blue);
       color: var(--capte-blue);
     }
 
@@ -471,7 +473,7 @@
     </header>
 
     <!-- Internal Marketing & Ops Tools -->
-    <h2 class="section-title">🛠️ Internal Marketing & Ops Tools</h2>
+    <h2 class="section-title">Internal Marketing & Ops Tools</h2>
     <div class="grid">
       <div class="card">
         <div>
@@ -483,9 +485,9 @@
           <p>Print-safe, zero-attribution-loss marketing QR generator with built-in Webflow 301 vanity redirects, forced UTM builder, and high-contrast Vector SVG / 300-DPI PNG exports.</p>
         </div>
         <div class="card-actions">
-          <a class="btn-card-primary" href="tools/campaign-qr-generator/campaign-qr-generator.html">Launch Generator App &rarr;</a>
+          <a class="btn-card-primary" href="tools/campaign-qr-generator/campaign-qr-generator.html">Launch Generator App</a>
           <div class="card-actions-sub">
-            <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/tools/campaign-qr-generator" target="_blank">Documentation &rarr;</a>
+            <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/tools/campaign-qr-generator" target="_blank">Documentation</a>
           </div>
         </div>
       </div>
@@ -499,10 +501,10 @@
           <p>Extracts section deep links from any published article on capte.co in 1 click and automatically generates compact, branded shortlinks (TinyURL Pro / go.capte.co with zero-config fallback) to repurpose long-form content into targeted social shares.</p>
         </div>
         <div class="card-actions">
-          <a class="btn-card-primary" href="tools/blog-section-anchors/bookmarklet.html">Launch Bookmarklet Tool &rarr;</a>
+          <a class="btn-card-primary" href="tools/blog-section-anchors/bookmarklet.html">Launch Bookmarklet Tool</a>
           <div class="card-actions-sub">
-            <a class="btn-card-secondary" style="flex:1;" href="tools/blog-section-anchors/tutorial.html?manual=1">🎓 30s Tutorial</a>
-            <a class="btn-card-secondary" style="flex:1;" href="tools/blog-section-anchors/README.md">Docs &rarr;</a>
+            <a class="btn-card-secondary" style="flex:1;" href="tools/blog-section-anchors/tutorial.html?manual=1">30s Tutorial</a>
+            <a class="btn-card-secondary" style="flex:1;" href="tools/blog-section-anchors/README.md">Docs</a>
           </div>
         </div>
       </div>
@@ -516,10 +518,10 @@
           <p>Word-engine-compliant Outlook signature generator with Cloudflare Edge Router (<code style="font-family:'Roboto Mono'; font-size:11px; color:var(--capte-blue);">sig.capte.co</code>), Webflow CMS campaign banner streaming, and automated GA4 click attribution.</p>
         </div>
         <div class="card-actions">
-          <a class="btn-card-primary" href="tools/email-signature/email-signature-generator.html">Launch Generator App &rarr;</a>
+          <a class="btn-card-primary" href="tools/email-signature/email-signature-generator.html">Launch Generator App</a>
           <div class="card-actions-sub">
-            <a class="btn-card-secondary" style="flex:1;" href="workers/sig-router/README.md">Edge Router &rarr;</a>
-            <a class="btn-card-secondary" style="flex:1;" href="docs/proposals/centralized-email-signature-plan.md">Architecture Plan &rarr;</a>
+            <a class="btn-card-secondary" style="flex:1;" href="workers/sig-router/README.md">Edge Router</a>
+            <a class="btn-card-secondary" style="flex:1;" href="docs/proposals/centralized-email-signature-plan.md">Architecture Plan</a>
           </div>
         </div>
       </div>
@@ -533,17 +535,17 @@
           <p>Interactive Google Fonts-style web explorer and Figma plugin for Capte's 60-icon system. Features real-time optical sizing (20–48 dp), stroke weights, grades, deep-link sharing, and one-click SVG, PNG (1x/2x/3x), and raw code exports.</p>
         </div>
         <div class="card-actions">
-          <a class="btn-card-primary" href="tools/icon-explorer/index.html">Launch Icon Explorer &rarr;</a>
+          <a class="btn-card-primary" href="tools/icon-explorer/index.html">Launch Icon Explorer</a>
           <div class="card-actions-sub">
-            <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-icons/releases" target="_blank">Figma Plugin &rarr;</a>
-            <a class="btn-card-secondary" style="flex:1;" href="tools/icon-explorer/README.md">Docs &rarr;</a>
+            <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-icons/releases" target="_blank">Figma Plugin</a>
+            <a class="btn-card-secondary" style="flex:1;" href="tools/icon-explorer/README.md">Docs</a>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Active Web Components -->
-    <h2 class="section-title">📦 Active Web Components (Webflow Embeds)</h2>
+    <h2 class="section-title">Active Web Components (Webflow Embeds)</h2>
     <div class="grid">
       <div class="card">
         <div>
@@ -555,13 +557,13 @@
           <p>Region-gated and campaign-driven floating card (desktop) / bottom bar (mobile) built for event promotions (APTA, trade expos) with zero third-party tracking APIs.</p>
         </div>
         <div class="card-actions">
-          <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/components/promo-card" target="_blank">View Embed Code & Documentation &rarr;</a>
+          <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/components/promo-card" target="_blank">View Embed Code & Documentation</a>
         </div>
       </div>
     </div>
 
     <!-- Design System Tokens -->
-    <h2 class="section-title">🎨 Codified Brand Tokens (217 Variables)</h2>
+    <h2 class="section-title">Codified Brand Tokens (217 Variables)</h2>
     <div class="tokens-preview">
       <p style="font-size: 14px; color: var(--capte-text-muted);">
         Synched daily with Figma via GitHub Actions. Zero external CSS dependencies.
@@ -580,7 +582,7 @@
     </div>
 
     <!-- Governance & Standards -->
-    <h2 class="section-title">📚 Standards & Multi-Agent Architecture</h2>
+    <h2 class="section-title">Standards & Multi-Agent Architecture</h2>
     <div class="grid">
       <div class="card">
         <div>
@@ -588,7 +590,7 @@
           <p>Supreme governance laws ensuring fail-closed robustness, strict CSS scoping, and zero client secrets.</p>
         </div>
         <div class="card-actions">
-          <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/blob/main/CONSTITUTION.md" target="_blank">Read Constitution &rarr;</a>
+          <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/blob/main/CONSTITUTION.md" target="_blank">Read Constitution</a>
         </div>
       </div>
       <div class="card">
@@ -597,13 +599,13 @@
           <p>Client-First class naming conventions, spacing rules, and Webflow implementation specs.</p>
         </div>
         <div class="card-actions">
-          <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/blob/main/DESIGN.md" target="_blank">Read Design Specs &rarr;</a>
+          <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/blob/main/DESIGN.md" target="_blank">Read Design Specs</a>
         </div>
       </div>
     </div>
 
     <!-- Reporting Issues & Support -->
-    <h2 class="section-title">📬 Reporting Issues & Support</h2>
+    <h2 class="section-title">Reporting Issues & Support</h2>
     <div class="card" style="margin-bottom: 36px;">
       <div class="card-meta">
         <span class="card-tag">Support & Escalations</span>
@@ -614,8 +616,8 @@
         For issues with custom code embeds, Figma design token discrepancies, security disclosures, or web ops inquiries, contact John Hansen directly or file an issue on GitHub.
       </p>
       <div class="card-actions" style="margin-top: 12px;">
-        <a class="btn-card-primary" href="mailto:john@capte.co?subject=%5BCapte%20Web%20Ops%5D%20Issue%20Report">✉️ Email john@capte.co</a>
-        <a class="btn-card-secondary" href="https://github.com/john-l-hansen/capte-web-operations/issues" target="_blank">Open GitHub Issue &rarr;</a>
+        <a class="btn-card-primary" href="mailto:john@capte.co?subject=%5BCapte%20Web%20Ops%5D%20Issue%20Report">Email john@capte.co</a>
+        <a class="btn-card-secondary" href="https://github.com/john-l-hansen/capte-web-operations/issues" target="_blank">Open GitHub Issue</a>
       </div>
     </div>
 

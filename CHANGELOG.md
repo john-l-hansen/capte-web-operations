@@ -24,6 +24,11 @@ All notable changes to the `capte-web-components` repository (new components add
 - Codified the **Webflow Migration & Convergence Mandate** across `CONSTITUTION.md` (Article VII.4), `AGENTS.md` (Section 1 & 5.7), `README.md`, `DESIGN.md`, `docs/agent-workflow.md`, and the portal dashboard (`index.html`) declaring that all repository components, utilities, and digital experiences are engineered with the architectural intent to migrate natively into the primary Webflow site (`capte.co`) when able.
 
 ### Changed
+- Updated Design & Web Operations Portal (`index.html`):
+  - Removed directional arrows from all button labels across primary and secondary controls.
+  - Converted secondary buttons (`.btn-card-secondary`) to an outlined, transparent-background appearance matching Figma design system specifications (Node 1357:44).
+  - Ensured type tags pass WCAG 2.1 AA accessibility by updating `.card-tag.tool` to `--capte-orange-dark` (`#A62903`), reaching a 6.52:1 contrast ratio.
+  - Removed decorative emojis across section titles and actions to maintain Capte's restrained, industrial aesthetic.
 - Streamlined `CLAUDE.md` to serve as a thin adapter pointing to `AGENTS.md` and `docs/agent-workflow.md`.
 
 ## [1.0.0] - 2026-09-09
