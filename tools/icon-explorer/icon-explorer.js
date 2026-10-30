@@ -119,6 +119,9 @@
             return colorOverride;
           }
           if (p === 'surface') {
+            if (typeof colorOverride === 'string' && colorOverride.toLowerCase() === '#ffffff') {
+              return '#001384'; // Match Primary Blue tile background for surface cutouts
+            }
             return options.theme === 'dark' ? '#111523' : '#FFFFFF';
           }
         }
@@ -334,6 +337,11 @@
     return activeState.colorMode;
   }
 
+  function isWhitePresetActive() {
+    const val = getActiveColorValue();
+    return typeof val === 'string' && val.toLowerCase() === '#ffffff';
+  }
+
   /**
    * Render the icon grid
    */
@@ -354,6 +362,9 @@
     el.iconCountBadge.textContent = `${matches.length} ${matches.length === 1 ? 'icon' : 'icons'}`;
     el.iconGrid.innerHTML = '';
 
+    const isWhite = isWhitePresetActive();
+    document.documentElement.dataset.whitePreset = isWhite ? 'true' : 'false';
+
     if (!matches.length) {
       el.emptyState.hidden = false;
       return;
@@ -367,7 +378,7 @@
       const isSelected = icon.id === activeState.iconId;
       const card = document.createElement('button');
       card.type = 'button';
-      card.className = `icon-card ${isSelected ? 'is-selected' : ''}`;
+      card.className = `icon-card ${isSelected ? 'is-selected' : ''} ${isWhite ? 'is-white-preset' : ''}`;
       card.dataset.id = icon.id;
       card.setAttribute('aria-pressed', String(isSelected));
       card.setAttribute('aria-label', `${icon.name} (${icon.category})`);
@@ -420,10 +431,13 @@
    * Update card highlight without re-rendering entire grid
    */
   function updateSelectionHighlight() {
+    const isWhite = isWhitePresetActive();
+    document.documentElement.dataset.whitePreset = isWhite ? 'true' : 'false';
     const cards = el.iconGrid.querySelectorAll('.icon-card');
     cards.forEach(c => {
       const isSelected = c.dataset.id === activeState.iconId;
       c.classList.toggle('is-selected', isSelected);
+      c.classList.toggle('is-white-preset', isWhite);
       c.setAttribute('aria-pressed', String(isSelected));
     });
   }
@@ -439,6 +453,13 @@
     el.drawer.classList.toggle('is-open', drawerOpen);
     el.drawerBackdrop.classList.toggle('is-open', drawerOpen);
     document.body.classList.toggle('drawer-open', drawerOpen);
+
+    const isWhite = isWhitePresetActive();
+    document.documentElement.dataset.whitePreset = isWhite ? 'true' : 'false';
+    const heroBox = el.drawerHeroPreview?.closest('.hero-preview-box');
+    if (heroBox) {
+      heroBox.classList.toggle('is-white-preset', isWhite);
+    }
 
     if (!drawerOpen) return;
 
