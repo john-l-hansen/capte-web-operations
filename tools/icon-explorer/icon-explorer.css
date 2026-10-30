@@ -923,18 +923,47 @@ body.drawer-open .workspace-wrapper {
 }
 
 @media (max-width: 640px) {
+  .top-nav {
+    padding: 0 16px;
+  }
+
   .nav-inner {
     flex-wrap: wrap;
     height: auto;
     padding: 12px 0;
+    gap: 12px;
   }
 
   .nav-actions {
     max-width: 100%;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .search-wrapper {
+    max-width: 100%;
+    flex: 1;
+  }
+
+  .filter-bar {
+    padding: 8px 16px;
+  }
+
+  .workspace-wrapper {
+    padding: 20px 16px 48px;
+  }
+
+  .icon-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 110px), 1fr));
+    gap: 12px;
   }
 
   .inspect-drawer {
     max-width: 100%;
+  }
+
+  .drawer-scroll-body {
+    padding: 20px 16px;
   }
 
   .export-actions-row {

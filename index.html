@@ -58,6 +58,7 @@
       position: relative;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     .hero-bg {
@@ -72,6 +73,8 @@
 
     .container {
       max-width: 1120px;
+      width: 100%;
+      min-width: 0;
       margin: 0 auto;
       position: relative;
       z-index: 1;
@@ -94,7 +97,8 @@
 
     .header-content {
       flex: 1;
-      min-width: 280px;
+      min-width: 0;
+      width: 100%;
     }
 
     .badge {
@@ -117,18 +121,24 @@
       color: var(--capte-blue);
       margin-bottom: 8px;
       letter-spacing: -0.01em;
+      line-height: 1.25;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     p.lead {
       color: var(--capte-text-muted);
       font-size: 16px;
       max-width: 620px;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .header-actions {
       display: flex;
       gap: 12px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .btn-github {
@@ -158,11 +168,12 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      overflow-wrap: break-word;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
       gap: 24px;
       margin-bottom: 36px;
     }
@@ -177,6 +188,8 @@
       flex-direction: column;
       justify-content: space-between;
       transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      min-width: 0;
+      overflow-wrap: break-word;
     }
 
     .card:hover {
@@ -190,6 +203,8 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .card-tag {
@@ -220,6 +235,8 @@
       color: var(--capte-text);
       margin-bottom: 8px;
       line-height: 1.35;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .card p {
@@ -228,6 +245,8 @@
       line-height: 1.55;
       margin-bottom: 22px;
       flex-grow: 1;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .card-actions {
@@ -239,12 +258,14 @@
     .card-actions.row {
       flex-direction: row;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .card-actions-sub {
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .btn-card-primary {
@@ -297,6 +318,7 @@
       padding: 24px;
       margin-bottom: 36px;
       box-shadow: var(--capte-shadow-sm);
+      overflow-wrap: break-word;
     }
 
     .swatches {
@@ -335,15 +357,75 @@
     }
 
     @media (max-width: 768px) {
+      body {
+        padding: 0 16px 40px;
+      }
       .hero-bg {
         height: 180px;
       }
       .container {
-        padding-top: 32px;
+        padding-top: 28px;
       }
       header {
-        padding: 24px;
+        padding: 24px 20px;
+        margin-bottom: 24px;
+        gap: 16px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      p.lead {
+        font-size: 14.5px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
         margin-bottom: 28px;
+      }
+      .card {
+        padding: 20px 16px;
+      }
+      .tokens-preview {
+        padding: 20px 16px;
+        margin-bottom: 28px;
+      }
+      .swatches {
+        gap: 8px;
+      }
+      .swatch {
+        font-size: 10.5px;
+        padding: 4px 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0 12px 32px;
+      }
+      header {
+        padding: 18px 14px;
+        border-radius: var(--capte-radius-md);
+      }
+      h1 {
+        font-size: 21px;
+      }
+      .badge {
+        font-size: 10px;
+        padding: 3px 10px;
+      }
+      .card {
+        padding: 18px 14px;
+      }
+      .section-title {
+        font-size: 16px;
+      }
+      .card-actions-sub {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .card-actions-sub .btn-card-secondary {
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
