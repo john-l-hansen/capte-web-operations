@@ -3,22 +3,23 @@
 > **Location**: `tools/email-signature/` & `components/email-signature/`  
 > **Component**: `<EmailSignature>` & Interactive Generator Web App  
 > **Deployment Target**: Internal Web Operations Portal (`index.html`) & Webflow  
-> **Version**: `v1.0.0`  
+> **Version**: `v1.3.0`  
 > **Owner**: John Hansen ([john@capte.co](mailto:john@capte.co))
 
 ---
 
 ## 1. Overview & Objective
 
-The **Capte Email Signature Generator** provides employees across Los Angeles, Versailles, and Amsterdam with brand-accurate, accessible, and Outlook Windows Word-engine-compliant email signatures.
+The **Capte Email Signature System** provides employees across Los Angeles, Versailles, and Amsterdam with brand-accurate, accessible, Outlook Windows Word-engine-compliant email signatures, with optional centralized marketing banners powered by the Cloudflare edge router on `sig.capte.co`.
 
 ### Key Architectural Highlights
 - **Word-Engine Robustness**: 100% nested `<table>` layout with strict inline styling (`cellpadding="0" cellspacing="0" border="0"`), zero CSS classes, zero external stylesheets, and zero CSS custom properties in the final email signature payload.
+- **Dynamic Marketing Banners (`sig.capte.co`)**: Centrally managed marketing banners for the "New email" signature template (`tools/email-signature/signature-banner-row.html`). Powered by Cloudflare Worker `sig-capte` and Webflow CMS collection "Signature Campaigns".
 - **Strict Size Budget**: Entire HTML signature payload is under **3.5 KB** (far below the 15 KB Outlook threshold).
 - **1-Click Dual Clipboard Integration**: Copies both `text/html` and `text/plain` using modern `ClipboardItem` APIs, with robust fallback for older environments.
 - **Postal & Linguistic Compliance**: Encodes local postal conventions (French: `78000 Versailles` no comma; Dutch: `1014 BA Amsterdam` 4-digit space 2-letter uppercase postcode; US: street, city, state, zip).
 - **WCAG 2.2 AA Accessible**: Label text uses `#5C6470` providing a **6.0:1 contrast ratio** (surpassing the 4.5:1 AA requirement, avoiding `#7B8491` which fails at 3.8:1).
-- **Hosted Assets & Placeholders**: The logo URL (`{{LOGO_URL}}`) and legal/registration line (`{{LEGAL_LINE}}`) are preserved as placeholders for owner configuration. Never embeds base64 images (which Outlook converts to attachments or strips).
+- **Hosted Assets & Dynamic Fallbacks**: Uses CDN-hosted logos and fail-closed 1×1 transparent GIFs. Never embeds base64 images (which Outlook converts to attachments or strips).
 
 ---
 

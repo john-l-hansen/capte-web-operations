@@ -4,10 +4,26 @@
 **Author**: John Hansen, Lead Web/Print Designer & Web Operations ([john@capte.co](mailto:john@capte.co))  
 **Target Domain**: `sig.capte.co` (Cloudflare Workers) + `capte.co` (Webflow CMS)  
 **Related Documents**: [`docs/proposals/email-signature-system-proposal.md`](email-signature-system-proposal.md), [`tools/email-signature/`](../../tools/email-signature/)  
-**Status**: Architecture Feasibility & Execution Blueprint  
-**Date**: October 29, 2026  
+**Status**: Phase 1 Implemented & Deployed on `sig.capte.co` (2026-11-04); Phase 2 (M365 Add-in) Future Roadmap  
+**Date**: October 29, 2026 (Updated November 4, 2026)  
 
 ---
+
+> [!IMPORTANT]
+> **Production Status & Canonical Implementation (Deployed 2026-11-04)**:  
+> Phase 1 (Dynamic Marketing Banner Router) is fully operational on **`sig.capte.co`** with live Webflow CMS integration.  
+> The canonical production files are:
+> - **Worker Source**: [`workers/sig-router/worker.js`](../../workers/sig-router/worker.js)
+> - **Worker Setup & Rollback SOP**: [`workers/sig-router/README.md`](../../workers/sig-router/README.md)
+> - **Banner Row Snippet**: [`tools/email-signature/signature-banner-row.html`](../../tools/email-signature/signature-banner-row.html)
+> - **Marketing Guide & CMS Schema**: [`tools/email-signature/README.md`](../../tools/email-signature/README.md)
+>
+> **Production Deviations from Initial Draft**:
+> - **Endpoints**: Uses `GET /banner.png?o={code}` and `GET /go?o={code}` (avoiding `/api/banner.png` or `/r/banner`).
+> - **Display Size**: 600 × 160 px asset rendered at **300 × 80 px** (Retina 2x).
+> - **Caching**: In-memory + Cloudflare Edge Cache API (`caches.default`) with 5-minute fresh TTL and 24-hour stale fallback (eliminating KV namespace and webhook complexity).
+> - **Fallback Asset**: Serves HTTP `200` 1×1 transparent GIF (zero layout collapse).
+> - **Privacy**: Strictly office-level tracking (`utm_content=office-{code}`); per-sender `utm_term` tracking was excluded for data privacy.
 
 ## 1. Feasibility Confirmation & Technical Reality Check
 

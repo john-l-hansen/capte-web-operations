@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [1.3.0] - 2026-11-04
+
+### Added
+- **Dynamic Marketing Banner Row (`sig.capte.co`)**: Integrated dynamic marketing banner row into the "New email" signature template (`tools/email-signature/signature-banner-row.html`). Banners are edge-routed by Cloudflare Worker `sig-capte` and dynamically scheduled via Webflow CMS "Signature Campaigns".
+- **302 Redirect & Fallback Mechanics**: Automated `/banner.png?o={la|fr|nl}` 302 redirection to active Webflow CDN assets with a fail-closed 1×1 transparent GIF (`200 OK`) when no campaign is live, guaranteeing zero broken image boxes across Outlook and Apple Mail.
+- **Automated GA4 UTM Attribution (`/go?o=...`)**: Dynamic link tracking appending `utm_source=email-signature`, `utm_medium=email`, `utm_campaign`, and `utm_content=office-{code}`, secured with open-redirect host validation restricted to `capte.co` and `www.capte.co`.
+- **Office Alt-Text Localization**: Baked-in fixed alt text per office (`la`, `fr`, `nl`) ensuring accessible immediate rendering even when recipient email clients block remote images.
+
 ## [1.1.0] - 2026-10-16
 
 ### Changed
