@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signature banner test (LA)</title>
+<style>
+  :root { --blue:#001384; --ink:#0F0F11; --muted:#5C6470; --line:#DCEDFF; --bg:#FFFFFF; }
+  body { margin:0; padding:32px 16px; background:var(--bg); color:var(--ink); font:14px/1.5 Arial, sans-serif; }
+  .wrap { max-width:640px; margin:0 auto; }
+  h1 { font-size:18px; color:var(--blue); margin:0 0 4px; }
+  p { margin:0 0 16px; color:var(--muted); }
+  .box { border:1px solid var(--line); border-radius:8px; padding:24px 16px; margin:0 0 16px; }
+  button { font:600 14px Arial, sans-serif; color:#fff; background:var(--blue); border:0; border-radius:6px; padding:10px 16px; cursor:pointer; }
+  button:focus-visible { outline:3px solid #3C91E6; outline-offset:2px; }
+  #msg { margin-left:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Signature banner test: Los Angeles</h1>
+  <p>Copy the banner below, then paste it under your current signature in Outlook's signature editor.</p>
+
+  <div class="box">
+    <div id="banner"><table role="presentation" cellpadding="0" cellspacing="0" border="0" lang="en" style="border-collapse:collapse;">
+<tr>
+  <td style="padding:16px 0 0 0;">
+    <a href="https://sig.capte.co/go?o=la" target="_blank"><img src="https://sig.capte.co/banner.png?o=la" width="300" height="80" alt="Capte Technologies: latest news and events" style="display:block;border:0;width:300px;height:80px;"></a>
+  </td>
+</tr>
+</table></div>
+  </div>
+
+  <button type="button" id="copy">Copy banner</button><span id="msg" role="status"></span>
+</div>
+<script>
+  const btn = document.getElementById('copy');
+  const msg = document.getElementById('msg');
+  const banner = document.getElementById('banner');
+  btn.addEventListener('click', async () => {
+    const html = banner.innerHTML.trim();
+    try {
+      await navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob([html], { type: 'text/html' }),
+        'text/plain': new Blob(['https://sig.capte.co/go?o=la'], { type: 'text/plain' })
+      })]);
+      msg.textContent = 'Copied. Paste it into your signature.';
+    } catch (e) {
+      const range = document.createRange();
+      range.selectNodeContents(banner);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      const ok = document.execCommand && document.execCommand('copy');
+      msg.textContent = ok ? 'Copied. Paste it into your signature.' : 'Banner selected. Press Ctrl+C (or Cmd+C) to copy.';
+    }
+  });
+</script>
+</body>
+</html>

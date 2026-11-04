@@ -5,6 +5,15 @@ All notable changes to the `capte-web-components` repository (new components add
 ## [Unreleased]
 
 ### Added
+- Added **Dynamic Email Signature Banner Router & Webflow CMS Integration (`workers/sig-router/`, `tools/email-signature/`)**:
+  - Deployed Cloudflare Worker (`workers/sig-router/worker.js`) on custom domain `sig.capte.co` routing dynamic marketing banners for email signatures without requiring client reinstallations.
+  - Added `/banner.png?o={la|fr|nl}` endpoint serving 302 redirects to Webflow CDN assets based on live CMS schedules and office targeting, falling back gracefully to a 1×1 transparent GIF (`200 OK`).
+  - Added `/go?o={la|fr|nl}` redirector with automatic GA4 UTM campaign attribution (`utm_source=email-signature`, `utm_medium=email`, `utm_campaign={slug}`, `utm_content=office-{code}`) and open-redirect protection restricted to `capte.co`.
+  - Added `/status?o={code}` diagnostic endpoint reporting live CMS item count, cache timestamps, and current banner selection reason.
+  - Multi-tier edge caching with 5-minute fresh TTL, 24-hour stale-while-error resilience, 30-second failure back-off, and instant kill-switch rollback (`BANNERS_MODE=off`).
+  - Added signature banner row snippet (`tools/email-signature/signature-banner-row.html`) and Los Angeles testing harness (`tools/email-signature/signature-banner-test-la.html`).
+  - Authored complete setup and operational manuals in `workers/sig-router/README.md` and `tools/email-signature/README.md`.
+  - Updated Design & Web Operations Portal (`index.html`) and repository `README.md`.
 - Added **Capte Icon Explorer & Marketing Operations Tool (`tools/icon-explorer/`)**: Interactive Google Fonts / Material Symbols-style icon gallery and inspect drawer built on Capte's official 60-master icon system (`john-l-hansen/capte-icons`). Features real-time optical sizing (20, 24, 40, 48 dp), stroke weights (Thin/Medium/Heavy), grades (Dark/Normal/Emphasis), treatments (Outline/Filled/Duotone), theme palettes, custom hex color overrides, URL parameter deep-linking (`?icon=...`), and a complete asset export suite (Download SVG, Copy SVG, High-DPI PNG rasterization at 1x/2x/3x, and raw Inline SVG / Webflow embed snippets). Statically served via GitHub Pages.
 - Updated Design & Web Operations Portal (`index.html`) linking directly to the new Icon Explorer tool under Marketing & Ops Tools.
 - Scaffolded **Centralized Email Signature Edge Router (`workers/sig-router/`)**: Cloudflare Worker backend for `sig.capte.co` enabling centralized marketing campaign banner distribution managed in Webflow CMS, automated GA4 campaign attribution redirects (`/r/banner`), fail-closed transparent PNG fallback, and pre-filled employee generator onboarding (`/setup?user=...`).
