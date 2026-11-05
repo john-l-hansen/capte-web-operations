@@ -76,11 +76,12 @@ This ecosystem bridges visual design in **Figma**, version-controlled code in **
 
 ---
 
-### 4. Multi-Office Email Signature System & Generator
-* **Location**: `components/email-signature/` & `tools/email-signature/`
-* **Status**: **Active / Ready to Deploy**
-* **Purpose**: Brand-compliant, accessible, Word-engine-proof email signature generator for all Capte global employees.
+### 4. Multi-Office Email Signature System & Dynamic Banner Router
+* **Location**: `components/email-signature/`, `tools/email-signature/` & `workers/sig-router/`
+* **Status**: **Active / Operational (`sig.capte.co` + `v1.3.0`)**
+* **Purpose**: Brand-compliant, accessible, Word-engine-proof email signature generator with dynamic marketing campaign banners for all Capte global employees.
 * **Key Capabilities**:
+  * **Dynamic Marketing Banners (`sig.capte.co`)**: Centrally managed via Webflow CMS "Signature Campaigns" and routed via Cloudflare Worker with automated 302 redirects, GA4 UTM injection, and fail-closed transparent pixel fallback.
   * **Multi-Office Localization**: Instant configuration for **Los Angeles** (HQ), **Versailles** (France), and **Amsterdam** (Netherlands) with localized postal formats and dialing codes.
   * **Outlook Word-Engine Compliant**: Built strictly with nested HTML tables and inline CSS to eliminate layout collapsing in Outlook on Windows.
   * **1-Click Dual Clipboard Export**: Simultaneously copies rich HTML and plain text for effortless 30-second setup.

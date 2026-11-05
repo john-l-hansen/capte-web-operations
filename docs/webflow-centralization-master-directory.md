@@ -100,7 +100,7 @@ The projects deployed or prepared for Webflow are organized into four core pilla
 
 #### Project 2: Multi-Office Email Signature System & Centralized Edge Service
 * **Location**: `components/email-signature/`, `tools/email-signature/` & `workers/sig-router/`
-* **Status**: **Completed / Ready for Deployment & Edge Centralization**
+* **Status**: **Operational / Deployed (`sig.capte.co` + `v1.3.0`)**
 * **Proposal & Architecture**: [`docs/proposals/email-signature-system-proposal.md`](proposals/email-signature-system-proposal.md) & [`docs/proposals/centralized-email-signature-plan.md`](proposals/centralized-email-signature-plan.md)
 * **Purpose**: Provide all global employees with an on-brand, accessible, Outlook Word-engine-compliant email signature with 1-click installation and centralized marketing campaign control via `sig.capte.co`.
 * **Key Features & Implementation**:
