@@ -179,6 +179,10 @@
       margin-bottom: 36px;
     }
 
+    .grid-2x2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .card {
       background: var(--capte-surface);
       border-radius: var(--capte-radius-md);
@@ -369,7 +373,8 @@
       .header-actions {
         width: 100%;
       }
-      .grid {
+      .grid,
+      .grid-2x2 {
         grid-template-columns: 1fr;
       }
     }
@@ -396,7 +401,8 @@
       p.lead {
         font-size: 14.5px;
       }
-      .grid {
+      .grid,
+      .grid-2x2 {
         grid-template-columns: 1fr;
         gap: 16px;
         margin-bottom: 28px;
@@ -475,7 +481,7 @@
 
     <!-- Internal Marketing & Ops Tools -->
     <h2 class="section-title">Internal Marketing & Ops Tools</h2>
-    <div class="grid">
+    <div class="grid grid-2x2">
       <div class="card">
         <div>
           <div class="card-meta">
