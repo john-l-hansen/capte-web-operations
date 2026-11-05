@@ -50,6 +50,10 @@ export default declareComponent(EmailSignature, {
       options: ['new', 'reply'],
       defaultValue: 'new',
     }),
+    includeBanner: props.Boolean({
+      name: 'Include Dynamic Marketing Banner (sig.capte.co)',
+      defaultValue: true,
+    }),
     logoUrl: props.Text({
       name: 'Hosted Logo URL',
       defaultValue: '{{LOGO_URL}}',

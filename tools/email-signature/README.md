@@ -13,9 +13,10 @@ This tool suite provides cross-platform email signatures and dynamic, Webflow-co
 
 1. **Email Signature Generator (`email-signature-generator.html`)**:
    - Generates Word-engine-compliant HTML tables for Outlook (Windows/Mac/Web) and Apple Mail.
+   - **Unified Architecture with Banner Toggle Switch**: Includes an on-brand toggle control (`[x] Include Live Marketing Banner`) allowing any team member to choose between the **Dynamic Campaign Edition** (with live Webflow CMS banners via `sig.capte.co`) or the **Minimal Core Identity Edition** (clean contact block only) in a single application.
    - Provides two standard variants:
      - **New Email**: Full identity block (Name, Title, Department, Office Phone, Mobile, Address) with optional dynamic banner row.
-     - **Reply / Forward**: Compact identity block without marketing banner to minimize vertical clutter in email threads.
+     - **Reply / Forward**: Compact identity block without marketing banner to minimize vertical clutter in email threads (toggle automatically disables).
 2. **Dynamic Signature Banner Router (`sig.capte.co`)**:
    - Cloudflare Worker (`workers/sig-router/`) serving dynamic images via `/banner.png?o={office}` and click redirects via `/go?o={office}`.
    - Managed directly through Webflow CMS collection "Signature Campaigns".

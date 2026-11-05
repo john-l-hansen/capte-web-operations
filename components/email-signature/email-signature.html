@@ -364,6 +364,119 @@
       outline: 2px solid var(--capte-border-focus);
     }
 
+    /* Dynamic Marketing Banner Toggle */
+    .toggle-banner-box {
+      background: var(--capte-blue-subtle);
+      border: 1px solid #BAC9FC;
+      border-radius: var(--capte-radius-sm);
+      padding: 12px 14px;
+      margin-top: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      transition: border-color 0.15s ease, background-color 0.15s ease, opacity 0.2s ease;
+    }
+
+    .toggle-banner-box:hover:not(.disabled) {
+      border-color: var(--capte-blue);
+    }
+
+    .toggle-banner-box.disabled {
+      opacity: 0.55;
+      background: var(--capte-surface-muted);
+      border-color: var(--capte-border);
+      pointer-events: none;
+    }
+
+    .toggle-banner-info {
+      flex: 1;
+    }
+
+    .toggle-banner-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--capte-blue);
+      margin-bottom: 3px;
+      cursor: pointer;
+    }
+
+    .toggle-banner-badge {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--capte-blue);
+      background: var(--capte-surface);
+      border: 1px solid #BAC9FC;
+      border-radius: var(--capte-radius-full);
+      padding: 1px 7px;
+      letter-spacing: 0.05em;
+    }
+
+    .toggle-banner-desc {
+      font-size: 11.5px;
+      color: var(--capte-text-muted);
+      line-height: 1.35;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #DDE2EE;
+      border-radius: 24px;
+      transition: background-color 0.2s ease;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease;
+    }
+
+    .toggle-switch input:checked + .toggle-slider {
+      background-color: var(--capte-blue);
+    }
+
+    .toggle-switch input:focus-visible + .toggle-slider {
+      outline: 2px solid var(--capte-blue-hover);
+      outline-offset: 2px;
+    }
+
+    .toggle-switch input:checked + .toggle-slider:before {
+      transform: translateX(20px);
+    }
+
     /* Preview Box */
     .preview-container {
       background: #FFFFFF;
@@ -765,6 +878,23 @@
               <div class="hint-text">Appends a subtle text link next to capte.co</div>
             </div>
 
+            <!-- Dynamic Marketing Banner Toggle (sig.capte.co) -->
+            <div id="banner-toggle-container" class="toggle-banner-box">
+              <div class="toggle-banner-info">
+                <label for="toggle-banner" class="toggle-banner-title">
+                  Dynamic Marketing Banner
+                  <span class="toggle-banner-badge">sig.capte.co</span>
+                </label>
+                <div id="banner-toggle-desc" class="toggle-banner-desc">
+                  Displays live Webflow CMS campaign banners for your office with GA4 attribution.
+                </div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="toggle-banner" checked aria-describedby="banner-toggle-desc">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+
             <!-- Advanced Configuration (Placeholders) -->
             <details class="advanced-details">
               <summary>Advanced / Template Placeholders</summary>
@@ -948,6 +1078,10 @@
       const fieldLogoUrl = document.getElementById('field-logo-url');
       const fieldLegalLine = document.getElementById('field-legal-line');
       
+      const toggleBanner = document.getElementById('toggle-banner');
+      const bannerToggleContainer = document.getElementById('banner-toggle-container');
+      const bannerToggleDesc = document.getElementById('banner-toggle-desc');
+
       const mobileHint = document.getElementById('mobile-hint');
       const previewRenderTarget = document.getElementById('preview-render-target');
       const rawHtmlCode = document.getElementById('raw-html-code');
@@ -1134,13 +1268,28 @@
           legalLineHtml = `\n  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#5C6470;padding:8px 0 0 0;">${escapeHtml(legalLineVal)}</td></tr>`;
         }
 
+        // Dynamic Campaign Banner (sig.capte.co)
+        let bannerRowHtml = '';
+        const includeBanner = toggleBanner && toggleBanner.checked;
+        if (includeBanner && sigType !== 'reply') {
+          const bannerAltMap = {
+            la: "Capte Technologies: latest news and events",
+            fr: "Capte Technologies : actualités et événements",
+            nl: "Capte Technologies: nieuws en evenementen"
+          };
+          const bannerAlt = bannerAltMap[officeKey] || bannerAltMap.la;
+          bannerRowHtml = `\n  <tr><td style="padding:16px 0 0 0;">
+    <a href="https://sig.capte.co/go?o=${officeKey}" target="_blank"><img src="https://sig.capte.co/banner.png?o=${officeKey}" width="300" height="80" alt="${escapeHtml(bannerAlt)}" style="display:block;border:0;width:300px;height:80px;"></a>
+  </td></tr>`;
+        }
+
         return `<table role="presentation" lang="${langKey}" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:'Roboto',Arial,Helvetica,sans-serif;">
   <tr><td style="padding:0 0 14px 0;">
     <a href="${siteUrl}" style="text-decoration:none;"><img src="${logoUrl}" width="150" height="50" alt="Capte Technologies" style="display:block;border:0;outline:none;width:150px;height:50px;"></a>
   </td></tr>
   <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:16px;line-height:22px;font-weight:bold;color:#001384;padding:0;">${name}${pronounsSpan}</td></tr>
   <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#0F0F11;padding:0 0 10px 0;">${title}</td></tr>
-${rowsHtml}  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#5C6470;padding:10px 0 0 0;">${escapeHtml(office.line1)}<br>${escapeHtml(office.line2)}, ${escapeHtml(countryName)}</td></tr>${legalLineHtml}
+${rowsHtml}  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#5C6470;padding:10px 0 0 0;">${escapeHtml(office.line1)}<br>${escapeHtml(office.line2)}, ${escapeHtml(countryName)}</td></tr>${bannerRowHtml}${legalLineHtml}
 </table>`;
       }
 
@@ -1192,12 +1341,30 @@ ${rowsHtml}  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font
           lines.push(legalVal);
         }
 
+        const includeBanner = toggleBanner && toggleBanner.checked;
+        if (includeBanner && sigType !== 'reply') {
+          lines.push(`\nLatest news & events: https://sig.capte.co/go?o=${officeKey}`);
+        }
+
         return lines.join('\n');
+      }
+
+      // Update banner toggle UI based on signature variant
+      function updateBannerToggleState() {
+        const sigType = document.querySelector('input[name="sigType"]:checked').value;
+        if (sigType === 'reply') {
+          bannerToggleContainer.classList.add('disabled');
+          bannerToggleDesc.textContent = 'Banners are disabled for Reply signatures to avoid thread clutter.';
+        } else {
+          bannerToggleContainer.classList.remove('disabled');
+          bannerToggleDesc.textContent = 'Displays live Webflow CMS campaign banners for your office with GA4 attribution.';
+        }
       }
 
       // Update UI & Live Preview
       function updatePreview() {
         validateForm(false);
+        updateBannerToggleState();
         const previewHtml = generateSignatureHtml(true);
         const productionHtml = generateSignatureHtml(false);
         
@@ -1233,6 +1400,9 @@ ${rowsHtml}  <tr><td style="font-family:'Roboto',Arial,Helvetica,sans-serif;font
       // Form event listeners
       form.addEventListener('input', updatePreview);
       form.addEventListener('change', updatePreview);
+      if (toggleBanner) {
+        toggleBanner.addEventListener('change', updatePreview);
+      }
 
       // Validate individual fields on blur
       [fieldName, fieldTitle, fieldEmail, fieldMobile, fieldOfficePhone].forEach(field => {

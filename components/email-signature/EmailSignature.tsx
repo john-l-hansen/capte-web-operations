@@ -14,6 +14,7 @@ export interface EmailSignatureProps {
   sigType?: 'new' | 'reply';
   logoUrl?: string;
   legalLine?: string;
+  includeBanner?: boolean;
 }
 
 const OFFICE_DATA = {
@@ -65,6 +66,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
   sigType = 'new',
   logoUrl = '{{LOGO_URL}}',
   legalLine = '',
+  includeBanner = true,
 }) => {
   const [copiedStatus, setCopiedStatus] = useState<string | null>(null);
 
@@ -460,6 +462,37 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                   {selectedOffice.line2}, {countryName}
                 </td>
               </tr>
+              {/* Dynamic Marketing Banner (sig.capte.co) */}
+              {includeBanner ? (
+                <tr>
+                  <td style={{ padding: '16px 0 0 0' }}>
+                    <a
+                      href={`https://sig.capte.co/go?o=${office}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src={`https://sig.capte.co/banner.png?o=${office}`}
+                        width={300}
+                        height={80}
+                        alt={
+                          office === 'fr'
+                            ? 'Capte Technologies : actualités et événements'
+                            : office === 'nl'
+                            ? 'Capte Technologies: nieuws en evenementen'
+                            : 'Capte Technologies: latest news and events'
+                        }
+                        style={{
+                          display: 'block',
+                          border: 0,
+                          width: '300px',
+                          height: '80px',
+                        }}
+                      />
+                    </a>
+                  </td>
+                </tr>
+              ) : null}
               {/* Optional Legal Line */}
               {legalLine ? (
                 <tr>
