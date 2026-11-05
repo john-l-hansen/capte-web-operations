@@ -762,7 +762,12 @@
       <a href="../../index.html" class="back-link">
         &larr; Back to Web Operations Portal
       </a>
-      <span class="portal-tag">Internal Utility</span>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <a href="tutorial.html?manual=1" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--capte-blue); text-decoration: none; background: var(--capte-blue-light); padding: 5px 12px; border-radius: var(--capte-radius-full); transition: all 0.15s ease;" title="Replay the 30-second visual presentation">
+          30-Sec Visual Tutorial
+        </a>
+        <span class="portal-tag">Internal Utility</span>
+      </div>
     </nav>
 
     <header>
@@ -1040,6 +1045,16 @@
   <script>
     (function() {
       'use strict';
+
+      // First-time visitor onboarding redirect:
+      // If user hasn't completed or skipped the visual tutorial, guide them to tutorial.html first
+      (function checkTutorialRedirect() {
+        const params = new URLSearchParams(window.location.search);
+        const isManual = params.has('fromTutorial') || params.has('skipTutorial') || params.has('manual');
+        if (!isManual && !localStorage.getItem('capte_sig_tutorial_seen')) {
+          window.location.href = 'tutorial.html';
+        }
+      })();
 
       // Fallback office configuration if office-config.js is not loaded separately
       const config = (typeof OFFICE_CONFIG !== 'undefined') ? OFFICE_CONFIG : {

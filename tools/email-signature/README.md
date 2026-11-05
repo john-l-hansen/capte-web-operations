@@ -17,10 +17,13 @@ This tool suite provides cross-platform email signatures and dynamic, Webflow-co
    - Provides two standard variants:
      - **New Email**: Full identity block (Name, Title, Department, Office Phone, Mobile, Address) with optional dynamic banner row.
      - **Reply / Forward**: Compact identity block without marketing banner to minimize vertical clutter in email threads (toggle automatically disables).
-2. **Dynamic Signature Banner Router (`sig.capte.co`)**:
+2. **Interactive Onboarding Deck (`tutorial.html`)**:
+   - 4-slide visual onboarding walkthrough covering edge banner architecture, office localization rules, dynamic banner toggling, and Outlook installation steps.
+   - Includes progress tracking, keyboard navigation (`←`/`→`/`Space`), and a persistent "Don't show again" option (`capte_sig_tutorial_seen`).
+3. **Dynamic Signature Banner Router (`sig.capte.co`)**:
    - Cloudflare Worker (`workers/sig-router/`) serving dynamic images via `/banner.png?o={office}` and click redirects via `/go?o={office}`.
    - Managed directly through Webflow CMS collection "Signature Campaigns".
-3. **Banner Snippet & Test Harness**:
+4. **Banner Snippet & Test Harness**:
    - `signature-banner-row.html`: HTML table row template with placeholders for office code and localized alt text.
    - `signature-banner-test-la.html`: One-click copy harness for QA and manual installation into Outlook.
 

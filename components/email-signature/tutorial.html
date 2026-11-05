@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial — Capte Email Signature & Banner Router</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="capte-favicon.png">
+  <meta name="referrer" content="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --capte-blue: #001384;
+      --capte-blue-hover: #093AEC;
+      --capte-blue-light: #F2F4FC;
+      --capte-orange: #FC5522;
+      --capte-orange-hover: #DD3603;
+      --capte-orange-light: #FFF1ED;
+      --capte-surface: #FFFFFF;
+      --capte-surface-muted: #F8FAFD;
+      --capte-border: #DDE2EE;
+      --capte-text: #111523;
+      --capte-text-muted: #5A6474;
+      --capte-radius-sm: 4px;
+      --capte-radius-md: 8px;
+      --capte-radius-lg: 16px;
+      --capte-radius-full: 9999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #F4F6FB;
+      color: var(--capte-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      overflow-x: hidden;
+    }
+
+    /* Deck Container */
+    .deck-container {
+      width: 100%;
+      max-width: 880px;
+      background: var(--capte-surface);
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-lg);
+      box-shadow: 0 16px 40px rgba(0, 19, 132, 0.08), 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Progress bar */
+    .progress-bar-container {
+      width: 100%;
+      height: 4px;
+      background: #E8EEFA;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--capte-orange);
+      width: 25%;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Deck Header */
+    .deck-header {
+      padding: 16px 28px;
+      border-bottom: 1px solid var(--capte-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FAFCFE;
+    }
+
+    .brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+    }
+
+    .brand-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .slide-badge {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--capte-blue-light);
+      color: var(--capte-blue);
+      padding: 3px 8px;
+      border-radius: var(--capte-radius-full);
+      margin-left: 6px;
+    }
+
+    .skip-btn {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--capte-text-muted);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      border-radius: var(--capte-radius-sm);
+      transition: all 0.15s ease;
+    }
+
+    .skip-btn:hover {
+      color: var(--capte-orange);
+      background: var(--capte-orange-light);
+    }
+
+    /* Slide Viewport */
+    .slide-viewport {
+      position: relative;
+      min-height: 450px;
+      padding: 36px 36px 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--capte-orange);
+      margin-bottom: 8px;
+    }
+
+    .slide-heading {
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .slide-desc {
+      font-size: 14.5px;
+      color: var(--capte-text-muted);
+      line-height: 1.5;
+      max-width: 720px;
+      margin-bottom: 24px;
+    }
+
+    /* Slide Visual Container */
+    .slide-visual {
+      background: var(--capte-surface-muted);
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Slide 1 Visual: Edge Architecture Flow */
+    .edge-flow-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 14px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .flow-card {
+      background: #FFFFFF;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      text-align: center;
+    }
+
+    .flow-tag {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: var(--capte-blue-light);
+      color: var(--capte-blue);
+      padding: 2px 6px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .flow-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      margin-bottom: 4px;
+    }
+
+    .flow-card-sub {
+      font-size: 11px;
+      color: var(--capte-text-muted);
+      line-height: 1.4;
+    }
+
+    .flow-arrow {
+      font-size: 20px;
+      color: var(--capte-orange);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* Slide 2 Visual: Office Matrix */
+    .office-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+    }
+
+    .office-card {
+      background: #FFFFFF;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      border-top: 3px solid var(--capte-blue);
+    }
+
+    .office-city {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .office-code-pill {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      background: var(--capte-blue-light);
+      color: var(--capte-blue);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .office-detail {
+      font-size: 11.5px;
+      color: var(--capte-text);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .office-rule {
+      font-size: 10.5px;
+      color: var(--capte-orange);
+      font-weight: 600;
+      background: var(--capte-orange-light);
+      padding: 4px 6px;
+      border-radius: 3px;
+      line-height: 1.3;
+    }
+
+    /* Slide 3 Visual: Toggle Simulation */
+    .toggle-sim-wrap {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .toggle-ui-box {
+      background: var(--capte-blue-light);
+      border: 1px solid #BAC9FC;
+      border-radius: var(--capte-radius-md);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toggle-ui-label {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--capte-blue);
+    }
+
+    .toggle-ui-sub {
+      font-size: 11.5px;
+      color: var(--capte-text-muted);
+    }
+
+    .sim-switch {
+      width: 44px;
+      height: 24px;
+      background: var(--capte-blue);
+      border-radius: 24px;
+      position: relative;
+    }
+
+    .sim-slider-ball {
+      width: 18px;
+      height: 18px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .preview-card-sim {
+      background: #FFFFFF;
+      border: 1px solid var(--capte-border);
+      border-radius: 6px;
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .banner-preview-img-sim {
+      width: 300px;
+      height: 80px;
+      background: linear-gradient(135deg, #001384 0%, #093AEC 100%);
+      border-radius: 4px;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* Slide 4 Visual: Clipboard & Outlook Steps */
+    .install-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+    }
+
+    .step-card {
+      background: #FFFFFF;
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--capte-orange);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+    }
+
+    .step-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      margin-bottom: 6px;
+    }
+
+    .step-card-desc {
+      font-size: 11.5px;
+      color: var(--capte-text-muted);
+      line-height: 1.45;
+    }
+
+    /* Deck Footer */
+    .deck-footer {
+      padding: 16px 28px;
+      border-top: 1px solid var(--capte-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FAFCFE;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .dots-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot-btn {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #CCD5E4;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.2s ease;
+    }
+
+    .dot-btn.active {
+      background: var(--capte-blue);
+      transform: scale(1.25);
+    }
+
+    .key-hints {
+      font-size: 11px;
+      color: var(--capte-text-muted);
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .kbd {
+      background: #EAEEF5;
+      border: 1px solid #D5DCED;
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: var(--capte-text);
+      font-weight: 600;
+    }
+
+    .action-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-nav {
+      font-family: 'Roboto', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: var(--capte-radius-sm);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-prev {
+      background: #FFFFFF;
+      border-color: var(--capte-border);
+      color: var(--capte-text);
+    }
+
+    .btn-prev:hover:not(:disabled) {
+      background: #F1F4F9;
+    }
+
+    .btn-prev:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-next {
+      background: var(--capte-blue);
+      color: #FFFFFF;
+    }
+
+    .btn-next:hover {
+      background: var(--capte-blue-hover);
+    }
+
+    .btn-finish {
+      background: var(--capte-orange);
+      color: #FFFFFF;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(252, 85, 34, 0.25);
+    }
+
+    .btn-finish:hover {
+      background: var(--capte-orange-hover);
+    }
+
+    .pref-row {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--capte-text-muted);
+    }
+
+    .pref-row input {
+      accent-color: var(--capte-blue);
+      cursor: pointer;
+    }
+
+    @media (max-width: 680px) {
+      .deck-header, .slide-viewport, .deck-footer {
+        padding: 16px;
+      }
+      .slide-heading {
+        font-size: 20px;
+      }
+      .edge-flow-grid {
+        grid-template-columns: 1fr;
+      }
+      .flow-arrow {
+        transform: rotate(90deg);
+      }
+      .office-grid, .install-steps-grid {
+        grid-template-columns: 1fr;
+      }
+      .key-hints {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container">
+    <!-- Progress Indicator -->
+    <div class="progress-bar-container">
+      <div id="progress-bar" class="progress-bar-fill"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="deck-header">
+      <div class="brand-meta">
+        <img src="capte-favicon.png" alt="Capte Logo" class="brand-logo">
+        <span class="brand-title">Capte Web Ops</span>
+        <span id="slide-counter-badge" class="slide-badge">SLIDE 1 OF 4</span>
+      </div>
+      <button id="skip-deck-btn" class="skip-btn" title="Skip directly to the signature generator">
+        Skip Tutorial ➔
+      </button>
+    </header>
+
+    <!-- Slide Canvas -->
+    <main class="slide-viewport">
+      
+      <!-- Slide 1: Centralized Edge Architecture -->
+      <section class="slide active" data-slide="1">
+        <div class="slide-eyebrow">Zero Reinstallation</div>
+        <h1 class="slide-heading">Dynamic Banners, Updated at the Edge</h1>
+        <p class="slide-desc">
+          Instead of asking team members to manually reinstall signatures whenever marketing launches a trade show or campaign, signatures embed two fixed URLs routed by Cloudflare Edge Compute (<code style="font-family:'Roboto Mono'; font-size:12px; color:var(--capte-blue);">sig.capte.co</code>). Marketing schedules banners in Webflow CMS, and inboxes update automatically.
+        </p>
+        <div class="slide-visual">
+          <div class="edge-flow-grid">
+            <div class="flow-card">
+              <span class="flow-tag">1. Email Client</span>
+              <div class="flow-card-title">Fixed Signature</div>
+              <div class="flow-card-sub">&lt;img /banner.png&gt;<br>&lt;a /go&gt;</div>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flow-card">
+              <span class="flow-tag">2. Edge Worker</span>
+              <div class="flow-card-title">sig.capte.co</div>
+              <div class="flow-card-sub">Fast 302 redirect + GA4 attribution</div>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flow-card">
+              <span class="flow-tag">3. Webflow CMS</span>
+              <div class="flow-card-title">Live Campaigns</div>
+              <div class="flow-card-sub">Marketing schedules dates &amp; target offices</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: Multi-Office Localization -->
+      <section class="slide" data-slide="2">
+        <div class="slide-eyebrow">Triple Office Localization</div>
+        <h1 class="slide-heading">Tailored for LA, Versailles &amp; Amsterdam</h1>
+        <p class="slide-desc">
+          Capte operations span the US and Europe. The generator encodes local postal rules (US ZIP, French no-comma postal code, Dutch 4-digit space 2-letter uppercase postcode), dialing codes (+1, +33, +31), and localized labels in English, French, and Dutch.
+        </p>
+        <div class="slide-visual">
+          <div class="office-grid">
+            <div class="office-card">
+              <div class="office-city">Los Angeles <span class="office-code-pill">?o=la</span></div>
+              <div class="office-detail">
+                500 S Grand Ave, Suite 2060<br>
+                Los Angeles, CA 90071<br>
+                United States
+              </div>
+              <div class="office-rule">USPS • Dialing: +1 • English</div>
+            </div>
+            <div class="office-card">
+              <div class="office-city">Versailles <span class="office-code-pill">?o=fr</span></div>
+              <div class="office-detail">
+                7 rue des Chantiers<br>
+                78000 Versailles<br>
+                France
+              </div>
+              <div class="office-rule">La Poste (no comma) • Dial: +33</div>
+            </div>
+            <div class="office-card">
+              <div class="office-city">Amsterdam <span class="office-code-pill">?o=nl</span></div>
+              <div class="office-detail">
+                Kabelweg 57<br>
+                1014 BA Amsterdam<br>
+                Netherlands
+              </div>
+              <div class="office-rule">PostNL (4-digit 2-alpha) • Dial: +31</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Unified Banner Switcher -->
+      <section class="slide" data-slide="3">
+        <div class="slide-eyebrow">Smart Controls</div>
+        <h1 class="slide-heading">Campaign Edition vs. Minimal Identity in 1 Click</h1>
+        <p class="slide-desc">
+          Use the built-in toggle switch to choose between a full commercial signature (with live trade-show takeovers) and a clean, minimal contact card (&lt; 2.5 KB). Switching to "Replies &amp; Forwards" automatically disables banners to prevent thread clutter.
+        </p>
+        <div class="slide-visual">
+          <div class="toggle-sim-wrap">
+            <div class="toggle-ui-box">
+              <div>
+                <div class="toggle-ui-label">Dynamic Marketing Banner</div>
+                <div class="toggle-ui-sub">Displays live Webflow CMS campaign banners with GA4 UTM tags</div>
+              </div>
+              <div class="sim-switch">
+                <div class="sim-slider-ball"></div>
+              </div>
+            </div>
+            <div class="preview-card-sim">
+              <div style="font-size: 14px; font-weight: 700; color: var(--capte-blue);">Sarah Chen</div>
+              <div style="font-size: 12px; color: var(--capte-text-muted);">Lead Systems Engineer, Capte Technologies</div>
+              <div class="banner-preview-img-sim">
+                <span>APTA TRANSFORM EXPO 2026</span>
+                <span style="font-size: 10px; opacity: 0.85; font-weight: 400;">300 × 80 Retina Banner • sig.capte.co</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: 1-Click Installation -->
+      <section class="slide" data-slide="4">
+        <div class="slide-eyebrow">Word-Engine Robustness</div>
+        <h1 class="slide-heading">Copy Once, Paste Directly into Outlook</h1>
+        <p class="slide-desc">
+          Click "Copy signature" to write rich HTML and plain text simultaneously to your clipboard. Then paste the rendered HTML directly into your Outlook or Apple Mail signature settings.
+        </p>
+        <div class="slide-visual">
+          <div class="install-steps-grid">
+            <div class="step-card">
+              <div class="step-num">1</div>
+              <div class="step-card-title">Click "Copy signature"</div>
+              <div class="step-card-desc">Copies pre-rendered HTML tables with clean inline styling.</div>
+            </div>
+            <div class="step-card">
+              <div class="step-num">2</div>
+              <div class="step-card-title">Paste in Preferences</div>
+              <div class="step-card-desc">Open Outlook &rarr; Signatures &rarr; Paste with <kbd class="kbd">Cmd+V</kbd>.</div>
+            </div>
+            <div class="step-card">
+              <div class="step-num">3</div>
+              <div class="step-card-title">Never "Insert Picture"</div>
+              <div class="step-card-desc">Pasting rendered HTML keeps the banner live; inserting a picture freezes it.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Deck Footer -->
+    <footer class="deck-footer">
+      <div class="dots-nav" role="tablist" aria-label="Slide Dots Navigation">
+        <button class="dot-btn active" data-target="1" aria-label="Go to slide 1"></button>
+        <button class="dot-btn" data-target="2" aria-label="Go to slide 2"></button>
+        <button class="dot-btn" data-target="3" aria-label="Go to slide 3"></button>
+        <button class="dot-btn" data-target="4" aria-label="Go to slide 4"></button>
+      </div>
+
+      <div class="key-hints">
+        Use <span class="kbd">&larr;</span> <span class="kbd">&rarr;</span> arrows or <span class="kbd">Space</span> to navigate
+      </div>
+
+      <div class="action-nav">
+        <button id="btn-prev" class="btn-nav btn-prev" disabled>&larr; Back</button>
+        <button id="btn-next" class="btn-nav btn-next">Next &rarr;</button>
+        <button id="btn-finish" class="btn-nav btn-finish" style="display: none;">Launch Generator ➔</button>
+      </div>
+    </footer>
+  </div>
+
+  <div class="pref-row">
+    <input type="checkbox" id="dont-show-again-checkbox">
+    <label for="dont-show-again-checkbox">Don't show this walkthrough again on this device</label>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 4;
+
+    const slides = document.querySelectorAll('.slide');
+    const dotBtns = document.querySelectorAll('.dot-btn');
+    const progressBar = document.getElementById('progress-bar');
+    const slideCounterBadge = document.getElementById('slide-counter-badge');
+    const btnNext = document.getElementById('btn-next');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnFinish = document.getElementById('btn-finish');
+    const skipBtn = document.getElementById('skip-deck-btn');
+    const dontShowCheckbox = document.getElementById('dont-show-again-checkbox');
+
+    function updateDeckUI() {
+      // Toggle slides
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', (idx + 1) === currentSlide);
+      });
+
+      // Update dots
+      dotBtns.forEach((dot, idx) => {
+        dot.classList.toggle('active', (idx + 1) === currentSlide);
+      });
+
+      // Update progress bar
+      const progressPercent = (currentSlide / totalSlides) * 100;
+      progressBar.style.width = progressPercent + '%';
+
+      // Update badge
+      slideCounterBadge.textContent = `SLIDE ${currentSlide} OF ${totalSlides}`;
+
+      // Update buttons
+      btnPrev.disabled = currentSlide === 1;
+
+      if (currentSlide === totalSlides) {
+        btnNext.style.display = 'none';
+        btnFinish.style.display = 'inline-flex';
+      } else {
+        btnNext.style.display = 'inline-flex';
+        btnFinish.style.display = 'none';
+      }
+    }
+
+    function goToSlide(n) {
+      if (n >= 1 && n <= totalSlides) {
+        currentSlide = n;
+        updateDeckUI();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        goToSlide(currentSlide + 1);
+      } else {
+        exitToTool();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        goToSlide(currentSlide - 1);
+      }
+    }
+
+    function exitToTool() {
+      if (dontShowCheckbox.checked) {
+        localStorage.setItem('capte_sig_tutorial_seen', 'true');
+      }
+      window.location.href = 'email-signature-generator.html?fromTutorial=1';
+    }
+
+    // Button Listeners
+    btnNext.addEventListener('click', nextSlide);
+    btnPrev.addEventListener('click', prevSlide);
+    btnFinish.addEventListener('click', exitToTool);
+    skipBtn.addEventListener('click', exitToTool);
+
+    dotBtns.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const target = parseInt(dot.getAttribute('data-target'), 10);
+        goToSlide(target);
+      });
+    });
+
+    // Keyboard Navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        exitToTool();
+      }
+    });
+
+    // Initial render
+    updateDeckUI();
+  </script>
+</body>
+</html>
