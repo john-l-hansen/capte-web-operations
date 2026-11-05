@@ -108,8 +108,10 @@ The Worker is deployed as `sig-capte` under the Cloudflare account managing `cap
 - **Proxy Caching**: Client/proxy caching on `/banner.png` is limited to 5 minutes (`bannerMaxAge: 300`), ensuring rapid propagation of campaign swaps.
 
 ### WAF & Security Settings
-- Gmail and Outlook image proxies fetch signature banners via automated bots. Ensure Cloudflare **Bot Fight Mode** or WAF Managed Rules do not block or challenge requests on `sig.capte.co`. If necessary, add a WAF Skip rule for hostname `sig.capte.co`.
-- Under Worker **Observability**, keep **Workers Logs off** to preserve privacy.
+- **Hotlink Protection (Crucial Fix)**: Cloudflare's zone-level **Hotlink Protection** (under *Scrape Shield*) blocks any HTTP request for `.png` files that sends an external or local `Referer` (such as opening the generator via `file://`, `localhost`, or webmail like `outlook.office.com`), returning an HTTP **`403 (Error 1011)`**.  
+  **Action for Cloudflare Admin**: Go to **Rules** → **Configuration Rules** in the Cloudflare dashboard and create a rule for `Hostname eq "sig.capte.co"` setting **Hotlink Protection: Off**. In HTML payloads, `referrerpolicy="no-referrer"` is also set on the `<img>` tag and page `<head>` to prevent browsers from sending referrers.
+- **Bot Fight Mode & WAF**: Gmail and Outlook image proxies fetch signature banners via automated crawlers. Ensure Cloudflare **Bot Fight Mode** or WAF Managed Rules do not challenge requests on `sig.capte.co` (add a WAF Skip rule for hostname `sig.capte.co` if needed).
+- **Observability**: Under Worker **Observability**, keep **Workers Logs off** to preserve recipient privacy.
 
 ---
 

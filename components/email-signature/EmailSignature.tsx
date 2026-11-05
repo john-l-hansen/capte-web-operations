@@ -473,6 +473,7 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                     >
                       <img
                         src={`https://sig.capte.co/banner.png?o=${office}`}
+                        referrerPolicy="no-referrer"
                         width={300}
                         height={80}
                         alt={
