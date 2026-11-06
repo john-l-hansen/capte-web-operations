@@ -187,7 +187,6 @@
       background: var(--capte-surface);
       border-radius: var(--capte-radius-md);
       border: 1px solid var(--capte-border);
-      padding: 26px;
       box-shadow: var(--capte-shadow-sm);
       display: flex;
       flex-direction: column;
@@ -195,6 +194,8 @@
       transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
       min-width: 0;
       overflow-wrap: break-word;
+      overflow: hidden;
+      padding: 0;
     }
 
     .card:hover {
@@ -203,13 +204,34 @@
       border-color: #BAC9FC;
     }
 
+    .card.is-hidden {
+      display: none !important;
+    }
+
+    /* Solid Hero Header Section */
+    .card-hero {
+      background: var(--capte-blue);
+      color: #FFFFFF;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .card-meta {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
       flex-wrap: wrap;
       gap: 8px;
+    }
+
+    .card-tags-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
     .card-tag {
@@ -218,34 +240,77 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      padding: 3px 8px;
+      padding: 2.5px 8px;
       border-radius: 4px;
-      background: #EAF0FF;
-      color: var(--capte-blue);
+      background: rgba(255, 255, 255, 0.16);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.28);
     }
 
     .card-tag.tool {
-      background: #FFF2ED;
-      color: var(--capte-orange-dark);
+      background: rgba(252, 85, 34, 0.24);
+      color: #FFD2C4;
+      border-color: rgba(252, 85, 34, 0.5);
+    }
+
+    .card-channel {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2.5px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card-channel.print {
+      background: rgba(56, 189, 248, 0.2);
+      color: #BAE6FD;
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .card-channel.email {
+      background: rgba(167, 139, 250, 0.22);
+      color: #DDD6FE;
+      border-color: rgba(167, 139, 250, 0.45);
+    }
+
+    .card-channel.digital {
+      background: rgba(251, 191, 36, 0.22);
+      color: #FDE68A;
+      border-color: rgba(251, 191, 36, 0.45);
     }
 
     .card-version {
       font-family: 'Roboto Mono', monospace;
       font-size: 11px;
-      color: var(--capte-text-muted);
+      color: rgba(255, 255, 255, 0.72);
     }
 
-    .card h3 {
+    .card-hero h3 {
       font-size: 17px;
       font-weight: 700;
-      color: var(--capte-text);
-      margin-bottom: 8px;
+      color: #FFFFFF;
+      margin: 0;
       line-height: 1.35;
       overflow-wrap: break-word;
       word-break: break-word;
     }
 
-    .card p {
+    /* Card Body Section */
+    .card-body {
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+      background: var(--capte-surface);
+    }
+
+    .card-body p {
       font-size: 13.5px;
       color: var(--capte-text-muted);
       line-height: 1.55;
@@ -313,6 +378,96 @@
       background: var(--capte-surface-muted);
       border-color: var(--capte-blue);
       color: var(--capte-blue);
+    }
+
+    /* Application Type Filter Toolbar */
+    .filter-toolbar {
+      background: var(--capte-surface);
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-md);
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      box-shadow: var(--capte-shadow-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .filter-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .filter-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--capte-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .filter-sub {
+      font-size: 13px;
+      color: var(--capte-text-muted);
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: 'Roboto', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--capte-text);
+      background: var(--capte-surface-muted);
+      border: 1px solid var(--capte-border);
+      border-radius: var(--capte-radius-full);
+      padding: 6px 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+      outline: none;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--capte-blue);
+      color: var(--capte-blue);
+      background: #EAF0FF;
+    }
+
+    .filter-btn:focus-visible {
+      box-shadow: 0 0 0 3px rgba(0, 19, 132, 0.2);
+    }
+
+    .filter-btn.active {
+      background: var(--capte-blue);
+      border-color: var(--capte-blue);
+      color: #FFFFFF;
+    }
+
+    .filter-badge {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: var(--capte-radius-full);
+      background: rgba(0, 19, 132, 0.09);
+      color: var(--capte-blue);
+    }
+
+    .filter-btn.active .filter-badge {
+      background: rgba(255, 255, 255, 0.24);
+      color: #FFFFFF;
     }
 
     /* Design Tokens Box */
@@ -407,8 +562,20 @@
         gap: 16px;
         margin-bottom: 28px;
       }
-      .card {
-        padding: 20px 16px;
+      .filter-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px 16px;
+        gap: 12px;
+      }
+      .filter-group {
+        width: 100%;
+      }
+      .card-hero {
+        padding: 16px 18px;
+      }
+      .card-body {
+        padding: 18px 16px;
       }
       .tokens-preview {
         padding: 20px 16px;
@@ -443,8 +610,11 @@
         width: 100%;
         justify-content: center;
       }
-      .card {
-        padding: 18px 14px;
+      .card-hero {
+        padding: 14px 16px;
+      }
+      .card-body {
+        padding: 16px 14px;
       }
       .section-title {
         font-size: 16px;
@@ -479,93 +649,145 @@
       </div>
     </header>
 
+    <!-- Application Type Filter Toolbar -->
+    <div class="filter-toolbar">
+      <div class="filter-meta">
+        <span class="filter-title">Application Filter</span>
+        <span class="filter-sub">Filter utilities and web embeds by target delivery channel</span>
+      </div>
+      <div class="filter-group" role="tablist" aria-label="Filter cards by application type">
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+          All Channels <span class="filter-badge" id="count-all">5</span>
+        </button>
+        <button class="filter-btn" data-filter="print" role="tab" aria-selected="false">
+          Print <span class="filter-badge" id="count-print">2</span>
+        </button>
+        <button class="filter-btn" data-filter="email" role="tab" aria-selected="false">
+          Email <span class="filter-badge" id="count-email">1</span>
+        </button>
+        <button class="filter-btn" data-filter="digital" role="tab" aria-selected="false">
+          Digital &amp; Web <span class="filter-badge" id="count-digital">4</span>
+        </button>
+      </div>
+    </div>
+
     <!-- Internal Marketing & Ops Tools -->
-    <h2 class="section-title">Internal Marketing & Ops Tools</h2>
-    <div class="grid grid-2x2">
-      <div class="card">
-        <div>
+    <h2 class="section-title" id="tools-section-title">Internal Marketing &amp; Ops Tools</h2>
+    <div class="grid grid-2x2" id="tools-grid">
+      <div class="card" data-app-type="print digital">
+        <div class="card-hero">
           <div class="card-meta">
-            <span class="card-tag tool">Marketing Utility</span>
+            <div class="card-tags-group">
+              <span class="card-tag tool">Marketing Utility</span>
+              <span class="card-channel print">Print</span>
+              <span class="card-channel digital">Digital</span>
+            </div>
             <span class="card-version">v1.0.0</span>
           </div>
-          <h3>Campaign Link & QR Generator</h3>
-          <p>Print-safe, zero-attribution-loss marketing QR generator with built-in Webflow 301 vanity redirects, forced UTM builder, and high-contrast Vector SVG / 300-DPI PNG exports.</p>
+          <h3>Campaign Link &amp; QR Generator</h3>
         </div>
-        <div class="card-actions">
-          <a class="btn-card-primary" href="tools/campaign-qr-generator/campaign-qr-generator.html">Launch Generator App</a>
-          <div class="card-actions-sub">
-            <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/tools/campaign-qr-generator" target="_blank">Documentation</a>
+        <div class="card-body">
+          <p>Print-safe, zero-attribution-loss marketing QR generator with built-in Webflow 301 vanity redirects, forced UTM builder, and high-contrast Vector SVG / 300-DPI PNG exports.</p>
+          <div class="card-actions">
+            <div class="card-actions-sub">
+              <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/tools/campaign-qr-generator" target="_blank">Documentation</a>
+            </div>
+            <a class="btn-card-primary" href="tools/campaign-qr-generator/campaign-qr-generator.html">Launch Generator App</a>
           </div>
         </div>
       </div>
-      <div class="card">
-        <div>
+      <div class="card" data-app-type="digital">
+        <div class="card-hero">
           <div class="card-meta">
-            <span class="card-tag tool">Marketing Utility</span>
+            <div class="card-tags-group">
+              <span class="card-tag tool">Marketing Utility</span>
+              <span class="card-channel digital">Digital</span>
+            </div>
             <span class="card-version">v1.2.3</span>
           </div>
-          <h3>Blog Section-Anchor Extractor & Shortener</h3>
-          <p>Extracts section deep links from any published article on capte.co in 1 click and automatically generates compact, branded shortlinks (TinyURL Pro / go.capte.co with zero-config fallback) to repurpose long-form content into targeted social shares.</p>
+          <h3>Blog Section-Anchor Extractor &amp; Shortener</h3>
         </div>
-        <div class="card-actions">
-          <a class="btn-card-primary" href="tools/blog-section-anchors/bookmarklet.html">Launch Bookmarklet Tool</a>
-          <div class="card-actions-sub">
-            <a class="btn-card-secondary" style="flex:1;" href="tools/blog-section-anchors/tutorial.html?manual=1">30s Tutorial</a>
-            <a class="btn-card-secondary" style="flex:1;" href="tools/blog-section-anchors/README.md">Docs</a>
+        <div class="card-body">
+          <p>Extracts section deep links from any published article on capte.co in 1 click and automatically generates compact, branded shortlinks (TinyURL Pro / go.capte.co with zero-config fallback) to repurpose long-form content into targeted social shares.</p>
+          <div class="card-actions">
+            <div class="card-actions-sub">
+              <a class="btn-card-secondary" style="flex:1;" href="tools/blog-section-anchors/tutorial.html?manual=1">30s Tutorial</a>
+              <a class="btn-card-secondary" style="flex:1;" href="tools/blog-section-anchors/README.md">Docs</a>
+            </div>
+            <a class="btn-card-primary" href="tools/blog-section-anchors/bookmarklet.html">Launch Bookmarklet Tool</a>
           </div>
         </div>
       </div>
-      <div class="card">
-        <div>
+      <div class="card" data-app-type="email digital">
+        <div class="card-hero">
           <div class="card-meta">
-            <span class="card-tag tool">Internal Utility</span>
+            <div class="card-tags-group">
+              <span class="card-tag tool">Internal Utility</span>
+              <span class="card-channel email">Email</span>
+              <span class="card-channel digital">Digital</span>
+            </div>
             <span class="card-version">v1.3.0</span>
           </div>
-          <h3>Email Signature System & Banner Router</h3>
-          <p>Unified Outlook and Apple Mail signature generator with toggleable dynamic marketing banners routed by Cloudflare Worker (<code style="font-family:'Roboto Mono'; font-size:11px; color:var(--capte-blue);">sig.capte.co</code>) and scheduled via Webflow CMS with automated GA4 attribution.</p>
+          <h3>Email Signature System &amp; Banner Router</h3>
         </div>
-        <div class="card-actions">
-          <a class="btn-card-primary" href="tools/email-signature/email-signature-generator.html">Launch Generator App</a>
-          <div class="card-actions-sub">
-            <a class="btn-card-secondary" style="flex:1;" href="tools/email-signature/tutorial.html?manual=1">30s Tutorial</a>
-            <a class="btn-card-secondary" style="flex:1;" href="tools/email-signature/README.md">Docs</a>
-            <a class="btn-card-secondary" style="flex:1;" href="workers/sig-router/README.md">Worker Setup</a>
+        <div class="card-body">
+          <p>Unified Outlook and Apple Mail signature generator with toggleable dynamic marketing banners routed by Cloudflare Worker (<code style="font-family:'Roboto Mono'; font-size:11px; color:var(--capte-blue);">sig.capte.co</code>) and scheduled via Webflow CMS with automated GA4 attribution.</p>
+          <div class="card-actions">
+            <div class="card-actions-sub">
+              <a class="btn-card-secondary" style="flex:1;" href="tools/email-signature/tutorial.html?manual=1">30s Tutorial</a>
+              <a class="btn-card-secondary" style="flex:1;" href="tools/email-signature/README.md">Docs</a>
+              <a class="btn-card-secondary" style="flex:1;" href="workers/sig-router/README.md">Worker Setup</a>
+            </div>
+            <a class="btn-card-primary" href="tools/email-signature/email-signature-generator.html">Launch Generator App</a>
           </div>
         </div>
       </div>
-      <div class="card">
-        <div>
+      <div class="card" data-app-type="digital print">
+        <div class="card-hero">
           <div class="card-meta">
-            <span class="card-tag tool">Design & Marketing Tool</span>
+            <div class="card-tags-group">
+              <span class="card-tag tool">Design &amp; Marketing Tool</span>
+              <span class="card-channel digital">Digital</span>
+              <span class="card-channel print">Print</span>
+            </div>
             <span class="card-version">v1.0.0</span>
           </div>
-          <h3>Capte Icon Explorer & Figma System</h3>
-          <p>Interactive Google Fonts-style web explorer and Figma plugin for Capte's 60-icon system. Features real-time optical sizing (20–48 dp), stroke weights, grades, deep-link sharing, and one-click SVG, PNG (1x/2x/3x), and raw code exports.</p>
+          <h3>Capte Icon Explorer &amp; Figma System</h3>
         </div>
-        <div class="card-actions">
-          <a class="btn-card-primary" href="tools/icon-explorer/index.html">Launch Icon Explorer</a>
-          <div class="card-actions-sub">
-            <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-icons/releases" target="_blank">Figma Plugin</a>
-            <a class="btn-card-secondary" style="flex:1;" href="tools/icon-explorer/README.md">Docs</a>
+        <div class="card-body">
+          <p>Interactive Google Fonts-style web explorer and Figma plugin for Capte's 60-icon system. Features real-time optical sizing (20–48 dp), stroke weights, grades, deep-link sharing, and one-click SVG, PNG (1x/2x/3x), and raw code exports.</p>
+          <div class="card-actions">
+            <div class="card-actions-sub">
+              <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-icons/releases" target="_blank">Figma Plugin</a>
+              <a class="btn-card-secondary" style="flex:1;" href="tools/icon-explorer/README.md">Docs</a>
+            </div>
+            <a class="btn-card-primary" href="tools/icon-explorer/index.html">Launch Icon Explorer</a>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Active Web Components -->
-    <h2 class="section-title">Active Web Components (Webflow Embeds)</h2>
-    <div class="grid">
-      <div class="card">
-        <div>
+    <h2 class="section-title" id="components-section-title">Active Web Components (Webflow Embeds)</h2>
+    <div class="grid" id="components-grid">
+      <div class="card" data-app-type="digital">
+        <div class="card-hero">
           <div class="card-meta">
-            <span class="card-tag">Embed Component</span>
+            <div class="card-tags-group">
+              <span class="card-tag">Embed Component</span>
+              <span class="card-channel digital">Digital</span>
+            </div>
             <span class="card-version">v1.0.0</span>
           </div>
           <h3>Promo Card</h3>
-          <p>Region-gated and campaign-driven floating card (desktop) / bottom bar (mobile) built for event promotions (APTA, trade expos) with zero third-party tracking APIs.</p>
         </div>
-        <div class="card-actions">
-          <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/components/promo-card" target="_blank">View Embed Code & Documentation</a>
+        <div class="card-body">
+          <p>Region-gated and campaign-driven floating card (desktop) / bottom bar (mobile) built for event promotions (APTA, trade expos) with zero third-party tracking APIs.</p>
+          <div class="card-actions">
+            <div class="card-actions-sub">
+              <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/tree/main/components/promo-card" target="_blank">View Embed Code &amp; Documentation</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -590,42 +812,64 @@
     </div>
 
     <!-- Governance & Standards -->
-    <h2 class="section-title">Standards & Multi-Agent Architecture</h2>
+    <h2 class="section-title">Standards &amp; Multi-Agent Architecture</h2>
     <div class="grid">
       <div class="card">
-        <div>
-          <h3>Constitution & Rules</h3>
-          <p>Supreme governance laws ensuring fail-closed robustness, strict CSS scoping, and zero client secrets.</p>
+        <div class="card-hero">
+          <div class="card-meta">
+            <span class="card-tag">Governance</span>
+            <span class="card-version">Supreme Laws</span>
+          </div>
+          <h3>Constitution &amp; Rules</h3>
         </div>
-        <div class="card-actions">
-          <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/blob/main/CONSTITUTION.md" target="_blank">Read Constitution</a>
+        <div class="card-body">
+          <p>Supreme governance laws ensuring fail-closed robustness, strict CSS scoping, and zero client secrets.</p>
+          <div class="card-actions">
+            <div class="card-actions-sub">
+              <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/blob/main/CONSTITUTION.md" target="_blank">Read Constitution</a>
+            </div>
+          </div>
         </div>
       </div>
       <div class="card">
-        <div>
+        <div class="card-hero">
+          <div class="card-meta">
+            <span class="card-tag">Standards</span>
+            <span class="card-version">Client-First</span>
+          </div>
           <h3>AI Designer Manual</h3>
-          <p>Client-First class naming conventions, spacing rules, and Webflow implementation specs.</p>
         </div>
-        <div class="card-actions">
-          <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/blob/main/DESIGN.md" target="_blank">Read Design Specs</a>
+        <div class="card-body">
+          <p>Client-First class naming conventions, spacing rules, and Webflow implementation specs.</p>
+          <div class="card-actions">
+            <div class="card-actions-sub">
+              <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/blob/main/DESIGN.md" target="_blank">Read Design Specs</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Reporting Issues & Support -->
-    <h2 class="section-title">Reporting Issues & Support</h2>
+    <h2 class="section-title">Reporting Issues &amp; Support</h2>
     <div class="card" style="margin-bottom: 36px;">
-      <div class="card-meta">
-        <span class="card-tag">Support & Escalations</span>
-        <span class="card-version">john@capte.co</span>
+      <div class="card-hero">
+        <div class="card-meta">
+          <span class="card-tag">Support &amp; Escalations</span>
+          <span class="card-version">john@capte.co</span>
+        </div>
+        <h3>Report Bugs, Token Discrepancies &amp; Security Flags</h3>
       </div>
-      <h3>Report Bugs, Token Discrepancies & Security Flags</h3>
-      <p>
-        For issues with custom code embeds, Figma design token discrepancies, security disclosures, or web ops inquiries, contact John Hansen directly or file an issue on GitHub.
-      </p>
-      <div class="card-actions" style="margin-top: 12px;">
-        <a class="btn-card-primary" href="mailto:john@capte.co?subject=%5BCapte%20Web%20Ops%5D%20Issue%20Report">Email john@capte.co</a>
-        <a class="btn-card-secondary" href="https://github.com/john-l-hansen/capte-web-operations/issues" target="_blank">Open GitHub Issue</a>
+      <div class="card-body">
+        <p>
+          For issues with custom code embeds, Figma design token discrepancies, security disclosures, or web ops inquiries, contact John Hansen directly or file an issue on GitHub.
+        </p>
+        <div class="card-actions" style="margin-top: 12px;">
+          <div class="card-actions-sub">
+            <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/issues" target="_blank">Open GitHub Issue</a>
+          </div>
+          <a class="btn-card-primary" href="mailto:john@capte.co?subject=%5BCapte%20Web%20Ops%5D%20Issue%20Report">Email john@capte.co</a>
+        </div>
       </div>
     </div>
 
@@ -633,6 +877,64 @@
       <p>Capte Technologies Inc. &bull; Digital Design & Web Operations &bull; Los Angeles, CA &bull; Contact: <a href="mailto:john@capte.co" style="color:var(--capte-blue); text-decoration:none; font-weight:500;">john@capte.co</a></p>
     </footer>
   </div>
+
+  <script>
+    (function() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.card[data-app-type]');
+      const sections = [
+        { title: document.querySelector('#tools-section-title'), grid: document.querySelector('#tools-grid') },
+        { title: document.querySelector('#components-section-title'), grid: document.querySelector('#components-grid') }
+      ];
+
+      function applyFilter(filter) {
+        filterBtns.forEach(btn => {
+          const isActive = btn.getAttribute('data-filter') === filter;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        cards.forEach(card => {
+          const types = (card.getAttribute('data-app-type') || '').toLowerCase().split(/\s+/);
+          const matches = filter === 'all' || types.includes(filter);
+          card.classList.toggle('is-hidden', !matches);
+        });
+
+        sections.forEach(sec => {
+          if (sec.title && sec.grid) {
+            const visibleCards = sec.grid.querySelectorAll('.card:not(.is-hidden)');
+            const hasVisible = visibleCards.length > 0;
+            sec.title.style.display = hasVisible ? '' : 'none';
+            sec.grid.style.display = hasVisible ? '' : 'none';
+          }
+        });
+      }
+
+      function initCounts() {
+        const counts = { all: cards.length, print: 0, email: 0, digital: 0 };
+        cards.forEach(card => {
+          const types = (card.getAttribute('data-app-type') || '').toLowerCase().split(/\s+/);
+          types.forEach(t => {
+            if (counts[t] !== undefined) counts[t]++;
+          });
+        });
+
+        for (const [key, val] of Object.entries(counts)) {
+          const el = document.getElementById('count-' + key);
+          if (el) el.textContent = val;
+        }
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter');
+          applyFilter(filter);
+        });
+      });
+
+      initCounts();
+    })();
+  </script>
 
 </body>
 </html>
