@@ -14,7 +14,7 @@ Capte's public marketing website is hosted on Webflow. While Webflow provides vi
 - **GitHub is our version-controlled source of truth.** Code pasted directly into Webflow lacks version history, PR reviews, and historical diffing. This repository houses the canonical source code, design token baselines, and campaign release history.
 
 ### The Multi-Agent Operating Model
-We operate across specialized AI agents (Claude, ChatGPT / Codex, Antigravity) with **John Hansen** as the lead designer, web ops owner, and final authority.
+We operate across specialized AI agents (Claude, ChatGPT / Codex, Antigravity).
 - **Single Source of Truth**: Because agents do not share a live chat socket, the local repository and git commits act as the shared brain.
 - **Domain Authority Matrix**:
   - 📄 **Google Drive**: Strategic requirements, sales copy, approved business decisions.
