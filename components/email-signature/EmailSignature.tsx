@@ -478,10 +478,10 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                         height={80}
                         alt={
                           office === 'fr'
-                            ? 'Capte Technologies : actualités et événements'
+                            ? 'Capte Technologies : en savoir plus sur capte.co'
                             : office === 'nl'
-                            ? 'Capte Technologies: nieuws en evenementen'
-                            : 'Capte Technologies: latest news and events'
+                            ? 'Capte Technologies: meer informatie op capte.co'
+                            : 'Capte Technologies: learn more at capte.co'
                         }
                         style={{
                           display: 'block',

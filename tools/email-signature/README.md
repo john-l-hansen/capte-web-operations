@@ -49,9 +49,9 @@ The banner row sits directly beneath the contact block in the **New email** temp
 
 | Office Code (`{{OFFICE}}`) | Office Location | Fixed Alt Text (`{{BANNER_ALT}}`) |
 | :--- | :--- | :--- |
-| `la` | Los Angeles (US) | `Capte Technologies: latest news and events` |
-| `fr` | Versailles (FR) | `Capte Technologies : actualités et événements` |
-| `nl` | Amsterdam (NL) | `Capte Technologies: nieuws en evenementen` |
+| `la` | Los Angeles (US) | `Capte Technologies: learn more at capte.co` |
+| `fr` | Versailles (FR) | `Capte Technologies : en savoir plus sur capte.co` |
+| `nl` | Amsterdam (NL) | `Capte Technologies: meer informatie op capte.co` |
 
 *Note: Alt text is baked into the signature HTML so it displays immediately if image loading is blocked by an email client.*
 

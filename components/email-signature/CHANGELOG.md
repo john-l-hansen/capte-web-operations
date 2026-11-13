@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [1.3.1] - 2026-11-13
+
+### Changed
+- **Updated Banner Alt Text**: Updated fixed fallback alt text for dynamic marketing banners across English (`Capte Technologies: learn more at capte.co`), French (`Capte Technologies : en savoir plus sur capte.co`), and Dutch (`Capte Technologies: meer informatie op capte.co`).
+
 ## [1.3.0] - 2026-11-04
 
 ### Added
