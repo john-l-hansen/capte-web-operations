@@ -1,0 +1,4 @@
+# Disallow indexing and crawling across all search engine robots
+# This repository serves as an internal web operations portal, component registry, and tool suite.
+User-agent: *
+Disallow: /

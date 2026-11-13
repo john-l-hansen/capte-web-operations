@@ -74,6 +74,16 @@
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;'
   }[c] || c));
 
+  const isValidHexColor = (hex) => typeof hex === 'string' && /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(hex.trim());
+
+  const sanitizeColor = (color) => {
+    if (!color) return '#000000';
+    const trimmed = String(color).trim();
+    if (trimmed === 'currentColor' || trimmed === 'none') return trimmed;
+    if (isValidHexColor(trimmed)) return trimmed;
+    return '#000000';
+  };
+
   const num = (n) => Number(Number(n).toFixed(6));
 
   const colorHex = (color) => {
@@ -109,23 +119,24 @@
 
       // Custom color override
       if (colorOverride && colorOverride !== 'palette') {
+        const safeColor = sanitizeColor(colorOverride);
         if (typeof p === 'string') {
-          if (p === 'stroke' || p === 'signal') return colorOverride;
+          if (p === 'stroke' || p === 'signal') return safeColor;
           if (p === 'fill' || p === 'container') {
             if (options.style === 'duotone') {
               // Soft tint for duotone container
-              return colorOverride === 'currentColor' ? 'currentColor' : colorOverride;
+              return safeColor === 'currentColor' ? 'currentColor' : safeColor;
             }
-            return colorOverride;
+            return safeColor;
           }
           if (p === 'surface') {
-            if (typeof colorOverride === 'string' && colorOverride.toLowerCase() === '#ffffff') {
+            if (safeColor.toLowerCase() === '#ffffff') {
               return '#001384'; // Match Primary Blue tile background for surface cutouts
             }
             return options.theme === 'dark' ? '#111523' : '#FFFFFF';
           }
         }
-        return colorOverride;
+        return safeColor;
       }
 
       // Default catalog palette
@@ -139,8 +150,8 @@
     const shapes = template.parts.map(part => {
       const t = part.transform || [[1, 0, 0], [0, 1, 0]];
       const matrix = [t[0][0], t[1][0], t[0][1], t[1][1], t[0][2], t[1][2]].map(num).join(' ');
-      const strokeVal = resolvePaint(part.stroke);
-      const fillVal = resolvePaint(part.fill);
+      const strokeVal = escapeXml(resolvePaint(part.stroke));
+      const fillVal = escapeXml(resolvePaint(part.fill));
       const sw = num(strokeWidth(options, part.detail));
       const cap = part.cap === 'ROUND' ? 'round' : part.cap === 'SQUARE' ? 'square' : 'butt';
       const join = (part.join || 'round').toLowerCase();
@@ -272,9 +283,9 @@
     }
     if (params.has('color')) {
       const c = params.get('color');
-      if (c === 'palette' || c === 'currentColor' || c.startsWith('#')) {
+      if (c === 'palette' || c === 'currentColor' || isValidHexColor(c)) {
         activeState.colorMode = c;
-        if (c.startsWith('#')) activeState.customHex = c;
+        if (isValidHexColor(c)) activeState.customHex = c.trim();
       }
     }
     if (params.has('category')) {
