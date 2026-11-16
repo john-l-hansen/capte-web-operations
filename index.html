@@ -479,11 +479,36 @@
 
     footer {
       text-align: center;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--capte-text-muted);
-      margin-top: 40px;
-      padding-top: 24px;
+      margin-top: 48px;
+      padding-top: 28px;
       border-top: 1px solid var(--capte-border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+    }
+
+    footer p {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    footer .footer-support {
+      font-size: 12.5px;
+    }
+
+    footer a {
+      color: var(--capte-blue);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    footer a:hover {
+      color: var(--capte-blue-hover);
+      text-decoration: underline;
     }
 
     @media (max-width: 960px) {
@@ -805,31 +830,9 @@
       </div>
     </div>
 
-    <!-- Reporting Issues & Support -->
-    <h2 class="section-title">Reporting Issues &amp; Support</h2>
-    <div class="card" style="margin-bottom: 36px;">
-      <div class="card-hero">
-        <div class="card-meta">
-          <span class="card-tag support">Support &amp; Escalations</span>
-          <span class="card-version">john@capte.co</span>
-        </div>
-        <h3>Report Bugs, Token Discrepancies &amp; Security Flags</h3>
-      </div>
-      <div class="card-body">
-        <p>
-          For issues with custom code embeds, Figma design token discrepancies, security disclosures, or web ops inquiries, contact John Hansen directly or file an issue on GitHub.
-        </p>
-        <div class="card-actions" style="margin-top: 12px;">
-          <div class="card-actions-sub">
-            <a class="btn-card-secondary" style="flex:1;" href="https://github.com/john-l-hansen/capte-web-operations/issues" target="_blank">Open GitHub Issue</a>
-          </div>
-          <a class="btn-card-primary" href="mailto:john@capte.co?subject=%5BCapte%20Web%20Ops%5D%20Issue%20Report">Email john@capte.co</a>
-        </div>
-      </div>
-    </div>
-
     <footer>
-      <p>Capte Technologies Inc. &bull; Digital Design & Web Operations &bull; Los Angeles, CA &bull; Contact: <a href="mailto:john@capte.co" style="color:var(--capte-blue); text-decoration:none; font-weight:500;">john@capte.co</a></p>
+      <p>Capte Technologies Inc. &bull; Digital Design &amp; Web Operations &bull; Los Angeles, CA</p>
+      <p class="footer-support">Found a bug or token discrepancy? <a href="https://github.com/john-l-hansen/capte-web-operations/issues" target="_blank">Open a GitHub Issue</a> &bull; <a href="mailto:john@capte.co?subject=%5BCapte%20Web%20Ops%5D%20Issue%20Report">Email john@capte.co</a></p>
     </footer>
   </div>
 
