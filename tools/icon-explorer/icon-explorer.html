@@ -223,19 +223,20 @@
             </button>
           </div>
 
-          <!-- PNG Export with Scale Selector -->
+          <!-- PNG Export with Segmented Scale Selector & Full-Width Button -->
           <div class="png-export-card">
-            <div class="png-scale-wrap">
-              <label for="png-scale-select">Resolution:</label>
-              <select id="png-scale-select" class="png-scale-select">
-                <option value="1">1x (Standard)</option>
-                <option value="2" selected>2x (Retina)</option>
-                <option value="3">3x (300 DPI Print)</option>
-              </select>
+            <div class="png-header-wrap">
+              <span class="control-label" style="font-size: 11px;">PNG Resolution</span>
+              <span id="png-output-dims" class="png-dims-badge">48 × 48 px</span>
             </div>
-            <button type="button" id="btn-download-png" class="btn-secondary-action" style="padding: 7px 12px; font-size: 12.5px;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              Download PNG
+            <div class="segment-group" id="png-scale-segments" role="group" aria-label="PNG Resolution">
+              <button type="button" class="seg-btn" data-value="1">1x Std</button>
+              <button type="button" class="seg-btn active" data-value="2">2x Retina</button>
+              <button type="button" class="seg-btn" data-value="3">3x Print</button>
+            </div>
+            <button type="button" id="btn-download-png" class="btn-secondary-action btn-download-png-full">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              <span id="btn-download-png-label">Download PNG (48 × 48 px)</span>
             </button>
           </div>
 

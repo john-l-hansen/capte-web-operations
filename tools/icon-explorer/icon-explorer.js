@@ -500,6 +500,10 @@
     updateSegmentButtons(el.gradeSegments, activeState.grade);
     updateSegmentButtons(el.styleSegments, activeState.style);
     updateSegmentButtons(el.themeSegments, activeState.theme);
+    updateSegmentButtons(el.pngScaleSegments, String(activeState.pngScale));
+
+    // Update PNG output dimensions and button label
+    updatePngOutputInfo();
 
     // Update Color Swatch selection
     updateColorSwatches();
@@ -541,6 +545,16 @@
     const currentColorVal = getActiveColorValue();
     const code = generateCodeSnippet(activeState, activeState.codeFormat, currentColorVal);
     el.codeOutput.textContent = code;
+  }
+
+  function updatePngOutputInfo() {
+    const pixelSize = activeState.size * activeState.pngScale;
+    if (el.pngOutputDims) {
+      el.pngOutputDims.textContent = `${pixelSize} × ${pixelSize} px`;
+    }
+    if (el.btnDownloadPngLabel) {
+      el.btnDownloadPngLabel.textContent = `Download PNG (${pixelSize} × ${pixelSize} px)`;
+    }
   }
 
   /**
@@ -697,9 +711,10 @@
       }
     });
 
-    // PNG Scale selector
-    el.pngScaleSelect.addEventListener('change', (e) => {
-      activeState.pngScale = parseInt(e.target.value, 10);
+    // PNG Scale segmented selector
+    setupSegmentGroup(el.pngScaleSegments, (val) => {
+      activeState.pngScale = parseInt(val, 10);
+      updatePngOutputInfo();
     });
 
     // Code Format toggle (SVG vs Webflow)
@@ -796,7 +811,9 @@
     el.btnDownloadSvg = document.getElementById('btn-download-svg');
     el.btnCopySvg = document.getElementById('btn-copy-svg');
     el.btnDownloadPng = document.getElementById('btn-download-png');
-    el.pngScaleSelect = document.getElementById('png-scale-select');
+    el.pngScaleSegments = document.getElementById('png-scale-segments');
+    el.pngOutputDims = document.getElementById('png-output-dims');
+    el.btnDownloadPngLabel = document.getElementById('btn-download-png-label');
     el.codeFormatTabs = document.getElementById('code-format-tabs');
     el.codeOutput = document.getElementById('code-output');
     el.btnCopyCode = document.getElementById('btn-copy-code');

@@ -771,35 +771,38 @@ body.drawer-open .workspace-wrapper {
   background: var(--capte-surface-muted);
   border: 1px solid var(--capte-border);
   border-radius: var(--capte-radius-md);
-  padding: 12px;
+  padding: 14px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 10px;
 }
 
-.png-scale-wrap {
+.png-header-wrap {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
 }
 
-.png-scale-wrap label {
-  font-size: 12px;
+.png-dims-badge {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
   font-weight: 600;
   color: var(--capte-text-muted);
+  background: #FFFFFF;
+  border: 1px solid var(--capte-border);
+  padding: 2px 7px;
+  border-radius: var(--capte-radius-sm);
 }
 
-.png-scale-select {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 12px;
+.btn-download-png-full {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  font-size: 13px;
   font-weight: 600;
-  padding: 5px 8px;
-  border-radius: var(--capte-radius-sm);
-  border: 1px solid var(--capte-border);
-  background: #FFFFFF;
-  color: var(--capte-text);
-  outline: none;
 }
 
 /* Code Snippet Box */
