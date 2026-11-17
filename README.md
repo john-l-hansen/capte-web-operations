@@ -93,7 +93,7 @@ components/
 ## 📚 Agent Guidance & Governance
 
 - **[CONSTITUTION.md](CONSTITUTION.md)** — Supreme, non-negotiable laws governing all human & AI collaboration across Capte web ops.
-- **[DESIGN.md](DESIGN.md)** — AI Designer Manual with Client-First rules, token tables, and Webflow styling conventions.
+- **[DESIGN.md](DESIGN.md)** — Class Naming & Design System Manual with Client-First rules, token tables, and Webflow styling conventions for people and AI.
 - **[design-system/](design-system/README.md)** — Codified design tokens, CSS variables (`tokens.css`), JSON tokens (`tokens.json`), and Figma specs.
 - **[AGENTS.md](AGENTS.md)** — Canonical shared contract, brand tokens, and standards.
 - **[docs/agent-workflow.md](docs/agent-workflow.md)** — Multi-agent operating model, startup/handoff protocols, and conflict resolution.

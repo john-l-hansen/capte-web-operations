@@ -34,6 +34,11 @@ All notable changes to the `capte-web-components` repository (new components add
 - Codified the **Webflow Migration & Convergence Mandate** across `CONSTITUTION.md` (Article VII.4), `AGENTS.md` (Section 1 & 5.7), `README.md`, `DESIGN.md`, `docs/agent-workflow.md`, and the portal dashboard (`index.html`) declaring that all repository components, utilities, and digital experiences are engineered with the architectural intent to migrate natively into the primary Webflow site (`capte.co`) when able.
 
 ### Changed
+- Re-architected **`DESIGN.md` (Client-First Design System & Class Naming Manual)** from an AI-centric ruleset into the canonical class naming and design token strategy for both people and AI agents:
+  - Updated preamble and purpose statement to establish a single shared vocabulary and technical standard across human designers, developers, and AI agents.
+  - Re-framed Section 1 into "Core Principles & Universal Guardrails" emphasizing Finsweet Client-First conventions (`page_wrapper`, `main-wrapper`, `section_[name]`, `[component]_[element]`), zero arbitrary hex/pixel values, and token binding (`var(--capte-...)`).
+  - Updated Design & Web Operations Portal dashboard card (`index.html`) from "AI Designer Manual" to "Class Naming & Design System Manual", reflecting universal guidance for human and AI co-authorship.
+  - Updated repository `README.md` references.
 - Updated Design & Web Operations Portal (`index.html`):
   - Removed directional arrows from all button labels across primary and secondary controls.
   - Converted secondary buttons (`.btn-card-secondary`) to an outlined, transparent-background appearance matching Figma design system specifications (Node 1357:44).
