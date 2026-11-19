@@ -363,8 +363,11 @@
     }
 
     .banner-preview-img-sim {
-      width: 300px;
-      height: 80px;
+      width: 100%;
+      max-width: 600px;
+      aspect-ratio: 3 / 1;
+      height: auto;
+      min-height: 80px;
       background: linear-gradient(135deg, #001384 0%, #093AEC 100%);
       border-radius: 4px;
       color: #FFFFFF;
@@ -373,7 +376,9 @@
       align-items: center;
       justify-content: center;
       margin-top: 12px;
-      font-size: 12px;
+      padding: 12px;
+      box-sizing: border-box;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.02em;
     }
@@ -679,7 +684,7 @@
               <div style="font-size: 12px; color: var(--capte-text-muted);">Lead Systems Engineer, Capte Technologies</div>
               <div class="banner-preview-img-sim">
                 <span>APTA TRANSFORM EXPO 2026</span>
-                <span style="font-size: 10px; opacity: 0.85; font-weight: 400;">300 × 80 Retina Banner • sig.capte.co</span>
+                <span style="font-size: 10px; opacity: 0.85; font-weight: 400;">600 × 200 Retina Banner (1200 × 400 @2x) • sig.capte.co</span>
               </div>
             </div>
           </div>

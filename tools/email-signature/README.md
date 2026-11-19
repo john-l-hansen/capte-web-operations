@@ -38,8 +38,8 @@ The banner row sits directly beneath the contact block in the **New email** temp
 <tr>
   <td style="padding:16px 0 0 0;">
     <a href="https://sig.capte.co/go?o={{OFFICE}}" target="_blank">
-      <img src="https://sig.capte.co/banner.png?o={{OFFICE}}" width="300" height="80"
-           alt="{{BANNER_ALT}}" style="display:block;border:0;width:300px;height:80px;">
+      <img src="https://sig.capte.co/banner.png?o={{OFFICE}}" width="600" height="200"
+           alt="{{BANNER_ALT}}" style="display:block;border:0;width:600px;max-width:100%;height:auto;">
     </a>
   </td>
 </tr>
@@ -64,7 +64,7 @@ Campaigns are managed in Webflow CMS without code changes or staff re-installati
 1. In Webflow Designer/Editor, navigate to CMS Collection **Signature Campaigns** (`6ae3d41f97ff9b75333f6dfa`).
 2. Click **+ New Signature Campaign** and populate the fields:
    - **Name**: Internal descriptive campaign title (e.g. `APTA TRANSform Expo 2026`).
-   - **Banner Image (2x Retina)**: Exactly **600 × 160 px** (rendered at 300 × 80 px). Max 60 KB, PNG or JPG, solid opaque background.
+   - **Banner Image (2x Retina)**: Exactly **1200 × 400 px** (rendered at 600 × 200 px). Under 100 KB, PNG or JPG, solid opaque background.
    - **Destination URL**: Target page on `https://www.capte.co/` or `https://capte.co/`. **Do not include UTM tags**—the Worker injects them automatically.
    - **Target Office**: Select `All Offices`, `Los Angeles (US)`, `Versailles (FR)`, or `Amsterdam (NL)`.
    - **UTM Campaign Slug**: Clean hyphenated slug (e.g. `apta-expo-2026`). Injected as `utm_campaign`.

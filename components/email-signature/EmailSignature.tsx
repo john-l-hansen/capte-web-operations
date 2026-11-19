@@ -474,8 +474,8 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                       <img
                         src={`https://sig.capte.co/banner.png?o=${office}`}
                         referrerPolicy="no-referrer"
-                        width={300}
-                        height={80}
+                        width={600}
+                        height={200}
                         alt={
                           office === 'fr'
                             ? 'Capte Technologies : en savoir plus sur capte.co'
@@ -486,8 +486,9 @@ export const EmailSignature: React.FC<EmailSignatureProps> = ({
                         style={{
                           display: 'block',
                           border: 0,
-                          width: '300px',
-                          height: '80px',
+                          width: '600px',
+                          maxWidth: '100%',
+                          height: 'auto',
                         }}
                       />
                     </a>

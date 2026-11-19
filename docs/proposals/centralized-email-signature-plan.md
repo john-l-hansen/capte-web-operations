@@ -20,7 +20,7 @@
 >
 > **Production Deviations from Initial Draft**:
 > - **Endpoints**: Uses `GET /banner.png?o={code}` and `GET /go?o={code}` (avoiding `/api/banner.png` or `/r/banner`).
-> - **Display Size**: 600 × 160 px asset rendered at **300 × 80 px** (Retina 2x).
+> - **Display Size**: 1200 × 400 px asset rendered at **600 × 200 px** (Retina 2x).
 > - **Caching**: In-memory + Cloudflare Edge Cache API (`caches.default`) with 5-minute fresh TTL and 24-hour stale fallback (eliminating KV namespace and webhook complexity).
 > - **Fallback Asset**: Serves HTTP `200` 1×1 transparent GIF (zero layout collapse).
 > - **Privacy**: Strictly office-level tracking (`utm_content=office-{code}`); per-sender `utm_term` tracking was excluded for data privacy.
@@ -104,7 +104,7 @@ Collection Name: `Signature Campaigns` (Internal)
 | **Status** | `status` | Option | `Draft`, `Active`, `Scheduled`, `Archived` |
 | **Start Date** | `start-date` | Date/Time | Automated scheduling kickoff |
 | **End Date** | `end-date` | Date/Time | Automated expiration fallback |
-| **Banner Image (2x Retina)**| `banner-image` | Image | Exactly 600×160px PNG/JPG (displays at 300×80px) |
+| **Banner Image (2x Retina)**| `banner-image` | Image | Exactly 1200×400px PNG/JPG (displays at 600×200px, under 100 KB) |
 | **Destination URL** | `destination-url` | Link | e.g. `https://www.capte.co/solutions/transit` |
 | **UTM Campaign Tag** | `utm-campaign` | Plain Text | e.g. `apta-expo-2026` |
 | **Alt Text** | `alt-text` | Plain Text | Screen reader description |
@@ -143,7 +143,7 @@ Hosted on Cloudflare's free edge tier (100,000 requests/day, $0/month cost).
 | :--- | :--- | :--- |
 | **Image Caching in Gmail** | Google Image Proxy caches image URLs aggressively. | Cloudflare Worker sets `ETag` and short `max-age=3600` with Webhook purge. Banner URL uses query cache-buster versioning (e.g. `?v=20261029`). |
 | **Images Blocked by Default** | Outlook desktop blocks remote images until user clicks "Download Pictures". | 1. Core signature text (name, title, contacts) remains **pure HTML table text**, never baked into an image.<br>2. Banner `<td>` has fixed explicit width/height and descriptive `alt` text so layout does not collapse if images are blocked. |
-| **Retina / HiDPI Scaling** | High-DPI screens blur 1x raster images; Outlook Word engine ignores CSS `max-width`. | Banner is authored at `600 × 160px` (2x) but coded strictly with HTML attributes: `width="300" height="80"` and inline `style="width:300px;height:80px;display:block;border:0;"`. |
+| **Retina / HiDPI Scaling** | High-DPI screens blur 1x raster images; Outlook Word engine ignores CSS `max-width`. | Banner is authored at `1200 × 400px` (2x) but coded strictly with HTML attributes: `width="600" height="200"` and inline `style="display:block;border:0;width:600px;max-width:100%;height:auto;"`. |
 | **Dark Mode Inversion** | Modern Outlook and Apple Mail invert white backgrounds and dark text. | Use brand-compliant `#001384` and `#0F0F11` which retain 6.0:1+ contrast against inverted backgrounds; transparent PNGs with clean anti-aliasing. |
 
 ---

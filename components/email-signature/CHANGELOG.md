@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [1.4.0] - 2026-11-19
+
+### Changed
+- **Adopted Marketing 600×200 Banner Standard**: Upgraded email signature dynamic marketing banner specifications from `300 × 80 px` (`600 × 160 px` @2x) to `600 × 200 px` (`1200 × 400 px` @2x PNG asset under 100 KB, aspect ratio 3:1).
+- **Responsive Hybrid Email Styling**: Implemented explicit HTML integer attributes `width="600" height="200"` for Classic Outlook (Word engine) alongside inline `style="display:block;border:0;width:600px;max-width:100%;height:auto;"` for fluid responsive downscaling on mobile email viewports (iOS Mail, Gmail mobile).
+- **Synchronized System Documentation**: Updated generator apps (`email-signature-generator.html`, `email-signature.html`), React component (`EmailSignature.tsx`), standalone banner rows (`signature-banner-row.html`, `signature-banner-test-la.html`), tutorial slides (`tutorial.html`), documentation guides, CMS schemas, and SVG architecture diagrams.
+
 ## [1.3.1] - 2026-11-13
 
 ### Changed

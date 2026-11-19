@@ -16,7 +16,7 @@ Email Signature (Installed in Outlook / Apple Mail)
   │
   ├── 1. Image Request: <img src="https://sig.capte.co/banner.png?o={office}">
   │      └── sig.capte.co Worker (In-memory / Cloudflare Cache)
-  │             ├── Active Campaign ──(302 Redirect)──> Webflow CDN Asset (600×160)
+  │             ├── Active Campaign ──(302 Redirect)──> Webflow CDN Asset (1200×400 @2x)
   │             └── No Active Item  ──(200 OK)────────> 1×1 Transparent GIF
   │
   └── 2. Click Request: <a href="https://sig.capte.co/go?o={office}">
@@ -81,7 +81,7 @@ The Worker queries the live items of the Webflow CMS collection "Signature Campa
 | Field Slug | Type | Description |
 | :--- | :--- | :--- |
 | `name` | Plain text | Campaign title (internal reference) |
-| `banner-image-2x-retina` | Image | Exactly 600 × 160 px (rendered at 300 × 80 px in email). Max 60 KB, solid background. |
+| `banner-image-2x-retina` | Image | Exactly 1200 × 400 px (rendered at 600 × 200 px in email). Under 100 KB, solid background. |
 | `destination-url` | Link | Target page on `capte.co`. Do not add UTM parameters manually (the Worker injects them). |
 | `target-office` | Option | - All Offices: `d29a9e4f2adc4a8d35be002ac81a9fe8`<br>- Los Angeles (US): `037d99e414133da1aa46ad93c666d80c`<br>- Versailles (FR): `317372782c4c8652929541cacccac261`<br>- Amsterdam (NL): `82901895adad04d1c6ab18052b921120` |
 | `utm-campaign-slug` | Plain text | URL slug (e.g. `apta-2026`). Appended as `utm_campaign`. |
